@@ -54,18 +54,6 @@ class MediaPoolItem:
         information. "customData" is optional and helps to attach user specific data
         to the marker.
 
-        Parameters
-        ----------
-        frame_id
-        color
-        name
-        note
-        duration
-        custom_data
-
-        Returns
-        -------
-
         """
         ...
 
