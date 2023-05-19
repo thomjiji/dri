@@ -9,6 +9,7 @@ packages = [{include = "resolve_type"}]
 
 [tool.poetry.dependencies]
 python = "^3.10"
+multipledispatch = "^0.6.0"
 
 [tool.poetry.group.dev.dependencies]
 jupyter = "^1.0.0"
