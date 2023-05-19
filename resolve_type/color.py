@@ -45,4 +45,19 @@ class FlagColor:
 
 @dataclass
 class ClipColor:
-    pass
+    Orange: str
+    Apricot: str
+    Yellow: str
+    Lime: str
+    Olive: str
+    Green: str
+    Teal: str
+    Navy: str
+    Blue: str
+    Purple: str
+    Violet: str
+    Pink: str
+    Tan: str
+    Beige: str
+    Brown: str
+    Chocolate: str

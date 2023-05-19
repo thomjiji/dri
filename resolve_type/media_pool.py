@@ -7,4 +7,4 @@ class MediaPool:
         Returns root Folder of Media Pool
 
         """
-        pass
+        ...
