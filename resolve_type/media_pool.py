@@ -12,13 +12,13 @@ class ClipInfo:
     mediaPoolItem: MediaPoolItem
     startFrame: int
     endFrame: int
-    mediaType: int
+    mediaType: int  # 1 - Video only, 2 - Audio only
 
 
 class MediaPool:
     def GetRootFolder(self) -> Folder:
         """
-        Returns root Folder of Media Pool
+        Returns root Folder of Media Pool.
 
         """
         ...
@@ -53,24 +53,25 @@ class MediaPool:
         """
         ...
 
-    @dispatch(list[MediaPoolItem])
+    @dispatch(list[MediaPoolItem | ClipInfo])
     def AppendToTimeline(self, clips) -> list[TimelineItem]:
         """
+        Notes
+        -----
+
+        - if input is list of *MediaPoolItem*:
+
         Appends specified MediaPoolItem objects in the current timeline. Returns the
         list of appended timelineItems.
 
-        """
-        ...
+        - if input is list of *ClipInfos*:
 
-    def AppendToTimeline(self, clips: list[ClipInfo]) -> list[TimelineItem]:
-        """
         Appends list of clipInfos specified as dict of "mediaPoolItem", "startFrame"
         (int), "endFrame" (int), (optional) "mediaType" (int; 1 - Video only,
         2 - Audio only). Returns the list of appended timelineItems.
 
-        Parameters
-        ----------
-        clips
+        - Even if it needs to accept a list as an argument, but you pass it an item,
+        it will work fine.
 
         """
         ...

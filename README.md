@@ -1,0 +1,1 @@
+- DaVinci Resolve object (MediaPoolItem, TimelineItem, etc.) type annotation
