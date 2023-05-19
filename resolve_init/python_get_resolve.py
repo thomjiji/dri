@@ -16,18 +16,22 @@ def GetResolve():
         from resolve_init import DaVinciResolveScript as bmd
     except ImportError:
         if sys.platform.startswith("darwin"):
-            expected_path = "/Library/Application Support/Blackmagic Design/DaVinci Resolve/Developer/Scripting/Modules/"
+            expected_path = (
+                "/Library/Application Support/Blackmagic Design/DaVinci "
+                "Resolve/Developer/Scripting/Modules/"
+            )
         elif sys.platform.startswith("win") or sys.platform.startswith("cygwin"):
             expected_path = (
-                os.getenv("PROGRAMDATA")
-                + "\\Blackmagic Design\\DaVinci Resolve\\Support\\Developer\\Scripting\\Modules\\"
+                os.getenv("PROGRAMDATA") + "\\Blackmagic Design\\DaVinci "
+                "Resolve\\Support\\Developer\\Scripting\\Modules\\"
             )
         elif sys.platform.startswith("linux"):
             expected_path = "/opt/resolve/libs/Fusion/Modules/"
 
         # check if the default path has it...
         print(
-            "Unable to find module DaVinciResolveScript from $PYTHONPATH - trying default locations"
+            "Unable to find module DaVinciResolveScript from $PYTHONPATH - trying "
+            "default locations"
         )
         try:
             spec = importlib.util.spec_from_file_location(
@@ -37,12 +41,12 @@ def GetResolve():
         except ImportError:
             # No fallbacks ... report error:
             print(
-                "Unable to find module DaVinciResolveScript - please ensure that the module DaVinciResolveScript is "
-                "discoverable by python"
+                "Unable to find module DaVinciResolveScript - please ensure that the "
+                "module DaVinciResolveScript is discoverable by python"
             )
             print(
-                "For a default DaVinci Resolve installation, the module is expected to be located in: "
-                + expected_path
+                f"For a default DaVinci Resolve installation, the module is expected "
+                f"to be located in: {expected_path}"
             )
             sys.exit()
 
