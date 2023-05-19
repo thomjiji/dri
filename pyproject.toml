@@ -11,10 +11,10 @@ packages = [{include = "resolve_type"}]
 python = "^3.10"
 
 [tool.poetry.group.dev.dependencies]
-black = "^23.3.0"
 jupyter = "^1.0.0"
 notebook = "^6.5.4"
 ruff = "^0.0.269"
+black = {extras = ["d"], version = "^23.3.0"}
 
 [build-system]
 requires = ["poetry-core"]
