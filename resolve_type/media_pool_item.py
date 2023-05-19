@@ -1,4 +1,4 @@
-from .marker_color import MarkerColor
+from .color import MarkerColor, FlagColor
 
 
 class MediaPoolItem:
@@ -117,6 +117,71 @@ class MediaPoolItem:
         'note': '',
         'name': 'Marker 5',
         'customData': 'Hi'}
+
+        """
+        pass
+
+    def UpdateMarkerCustomData(self, frame_id: int, custom_data: str) -> bool:
+        """
+        Updates the customData (string) for the marker at given frameId position.
+
+        """
+        pass
+
+    def GetMarkerCustomData(self, frame_id: int) -> str:
+        """
+        Returns customData string for the marker at given frameId position.
+
+        """
+        pass
+
+    def DeleteMarkersByColor(self, color: MarkerColor) -> bool:
+        """
+        Delete all markers of the specified color from the media pool item. *"All"* as
+        argument deletes all markers.
+
+        """
+        pass
+
+    def DeleteMarkerAtFrame(self, frame_num: int) -> bool:
+        """
+        Delete marker at frame number from the media pool item.
+
+        """
+        pass
+
+    def DeleteMarkerByCustomData(self, custom_data: str) -> bool:
+        """
+        Delete first matching marker with specified customData.
+
+        """
+        pass
+
+    def AddFlag(self, color: FlagColor) -> bool:
+        """
+        Adds a flag with given color (string).
+
+        """
+        pass
+
+    def GetFlagList(self) -> list[FlagColor]:
+        """
+        Returns a list of flag colors assigned to the item.
+
+        """
+        pass
+
+    def ClearFlags(self, color: FlagColor) -> bool:
+        """
+        Clears the flag of the given color if one exists. An *"All"* argument is
+        supported and clears all flags.
+
+        """
+        pass
+
+    def GetClipColor(self) -> str:
+        """
+        Returns the item color as a string.
 
         """
         pass
