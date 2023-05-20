@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from multipledispatch import dispatch
+from typing import TypedDict, Literal, Optional
 
 from .media_pool_item import MediaPoolItem
 from .timeline import Timeline
@@ -9,10 +10,28 @@ from .folder import Folder
 
 @dataclass
 class ClipInfo:
+    """
+    Information about a clip for API usage as argument.
+
+    Attributes
+    ----------
+    mediaPoolItem : MediaPoolItem
+        The media pool item associated with the clip.
+    startFrame : int
+        The starting frame of the clip.
+    endFrame : int
+        The ending frame of the clip.
+    mediaType : Optional[Literal[1, 2]]
+        The type of media for the clip.
+        - 1: Video only
+        - 2: Audio only
+
+    """
+
     mediaPoolItem: MediaPoolItem
     startFrame: int
     endFrame: int
-    mediaType: int  # 1 - Video only, 2 - Audio only
+    mediaType: Literal[1, 2] = None  # 1 - Video only, 2 - Audio only
 
 
 class MediaPool:
