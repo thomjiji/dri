@@ -18,7 +18,8 @@ class MediaPoolItem:
 
         Notes
         -----
-        - You can access all the items in DaVinci Resolve Metadata tab through this API.
+        -   You can access all the items in DaVinci Resolve Metadata tab through this
+        API.
 
         """
         ...
@@ -30,7 +31,7 @@ class MediaPoolItem:
 
         Notes
         -----
-        - You can set all the items in DaVinci Resolve Metadata tab through this API.
+        -   You can set all the items in DaVinci Resolve Metadata tab through this API.
 
         """
         ...
@@ -43,7 +44,7 @@ class MediaPoolItem:
 
         Notes
         -----
-        - You can set all the items in DaVinci Resolve Metadata tab through this API.
+        -   You can set all the items in DaVinci Resolve Metadata tab through this API.
 
         """
         ...
@@ -297,10 +298,12 @@ class MediaPoolItem:
 
         Notes
         -----
-        - Proxy files must have identical timecode to the source file.
-        - Proxy files must have the same file name as the source file (excluding extensions).
-        - Proxy files must have the same frame rate as the source file.
-        - The format and codec used for proxy files must be supported in DaVinci Resolve.
+        -   Proxy files must have identical timecode to the source file.
+        -   Proxy files must have the same file name as the source file (excluding
+        extensions).
+        -   Proxy files must have the same frame rate as the source file.
+        -   The format and codec used for proxy files must be supported in DaVinci
+        Resolve.
 
         """
         ...
