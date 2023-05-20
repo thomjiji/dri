@@ -1,6 +1,4 @@
-from multipledispatch import dispatch
-
-from .color import MarkerColor, FlagColor, ClipColor
+from resolve_type.color import MarkerColor, FlagColor, ClipColor
 
 
 class MediaPoolItem:
