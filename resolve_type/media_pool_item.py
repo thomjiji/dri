@@ -1,4 +1,5 @@
 from .color import MarkerColor, FlagColor, ClipColor
+from multipledispatch import dispatch
 
 
 class MediaPoolItem:
@@ -14,21 +15,34 @@ class MediaPoolItem:
         Returns the metadata value for the key "metadataType". If no argument is
         specified, a dict of all set metadata properties is returned.
 
+        Notes
+        -----
+        - You can access all the items in DaVinci Resolve Metadata tab through this API.
+
         """
         ...
 
+    @dispatch(str, str)
     def SetMetadata(self, metadata_type: str, metadata_value: str) -> bool:
         """
         Sets the given metadata to metadataValue (string). Returns True if successfully.
 
+        Notes
+        -----
+        - You can set all the items in DaVinci Resolve Metadata tab through this API.
+
         """
         ...
 
-    # TODO add overload
+    @dispatch(dict)
     def SetMetadata(self, metadata: dict) -> bool:
         """
         Sets the item metadata with specified "metadata" dict. Returns True if
         successful.
+
+        Notes
+        -----
+        - You can set all the items in DaVinci Resolve Metadata tab through this API.
 
         """
         ...
