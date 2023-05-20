@@ -97,7 +97,9 @@ class MediaPool:
         ...
 
     @dispatch(MediaPoolItem, MediaPoolItem)
-    def AppendToTimeline(self, clip, *args) -> list[TimelineItem]:
+    def AppendToTimeline(
+        self, clip: MediaPoolItem, *clips: MediaPoolItem
+    ) -> list[TimelineItem]:
         """
         Appends specified MediaPoolItem objects in the current timeline. Returns the
         list of appended timelineItems.
@@ -106,7 +108,9 @@ class MediaPool:
         ...
 
     @dispatch(list[MediaPoolItem | ClipInfo])
-    def AppendToTimeline(self, clips) -> list[TimelineItem]:
+    def AppendToTimeline(
+        self, clips: list[MediaPoolItem | ClipInfo]
+    ) -> list[TimelineItem]:
         """
         Notes
         -----
@@ -126,7 +130,9 @@ class MediaPool:
         ...
 
     @dispatch(str, MediaPoolItem)
-    def CreateTimelineFromClips(self, timeline_name, *clips) -> Timeline:
+    def CreateTimelineFromClips(
+        self, timeline_name: str, *clips: MediaPoolItem
+    ) -> Timeline:
         """
         Creates new timeline with specified name, and appends the specified
         MediaPoolItem objects.
