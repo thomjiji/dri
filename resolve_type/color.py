@@ -1,63 +1,60 @@
-from dataclasses import dataclass
+from enum import Enum
 
 
-@dataclass
-class MarkerColor:
-    All: str
-    Blue: str
-    Cyan: str
-    Green: str
-    Yellow: str
-    Red: str
-    Pink: str
-    Purple: str
-    Fuchsia: str
-    Rose: str
-    Lavender: str
-    Sky: str
-    Mint: str
-    Lemon: str
-    Sand: str
-    Cocoa: str
-    Cream: str
+class MarkerColor(Enum):
+    All = "All"
+    Blue = "Blue"
+    Cyan = "Cyan"
+    Green = "Green"
+    Yellow = "Yellow"
+    Red = "Red"
+    Pink = "Pink"
+    Purple = "Purple"
+    Fuchsia = "Fuchsia"
+    Rose = "Rose"
+    Lavender = "Lavender"
+    Sky = "Sky"
+    Mint = "Mint"
+    Lemon = "Lemon"
+    Sand = "Sand"
+    Cocoa = "Cocoa"
+    Cream = "Cream"
 
 
-@dataclass
-class FlagColor:
-    All: str
-    Blue: str
-    Cyan: str
-    Green: str
-    Yellow: str
-    Red: str
-    Pink: str
-    Purple: str
-    Fuchsia: str
-    Rose: str
-    Lavender: str
-    Sky: str
-    Mint: str
-    Lemon: str
-    Sand: str
-    Cocoa: str
-    Cream: str
+class FlagColor(Enum):
+    All = "All"
+    Blue = "Blue"
+    Cyan = "Cyan"
+    Green = "Green"
+    Yellow = "Yellow"
+    Red = "Red"
+    Pink = "Pink"
+    Purple = "Purple"
+    Fuchsia = "Fuchsia"
+    Rose = "Rose"
+    Lavender = "Lavender"
+    Sky = "Sky"
+    Mint = "Mint"
+    Lemon = "Lemon"
+    Sand = "Sand"
+    Cocoa = "Cocoa"
+    Cream = "Cream"
 
 
-@dataclass
-class ClipColor:
-    Orange: str
-    Apricot: str
-    Yellow: str
-    Lime: str
-    Olive: str
-    Green: str
-    Teal: str
-    Navy: str
-    Blue: str
-    Purple: str
-    Violet: str
-    Pink: str
-    Tan: str
-    Beige: str
-    Brown: str
-    Chocolate: str
+class ClipColor(Enum):
+    Orange = "Orange"
+    Apricot = "Apricot"
+    Yellow = "Yellow"
+    Lime = "Lime"
+    Olive = "Olive"
+    Green = "Green"
+    Teal = "Teal"
+    Navy = "Navy"
+    Blue = "Blue"
+    Purple = "Purple"
+    Violet = "Violet"
+    Pink = "Pink"
+    Tan = "Tan"
+    Beige = "Beige"
+    Brown = "Brown"
+    Chocolate = "Chocolate"
