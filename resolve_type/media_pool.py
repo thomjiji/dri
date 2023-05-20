@@ -1,8 +1,6 @@
 from dataclasses import dataclass
 from typing import Literal
 
-from multipledispatch import dispatch
-
 from .folder import Folder
 from .media_pool_item import MediaPoolItem
 from .timeline import Timeline
@@ -26,6 +24,15 @@ class ClipInfo:
         The type of media for the clip. Optional.
         - 1: Video only
         - 2: Audio only
+
+    Examples
+    --------
+    >>> clip_info = {
+    ...     "mediaPoolItem": MediaPoolItem,
+    ...     "startFrame": 0,
+    ...     "endFrame": 12,
+    ...     "mediaType": 1
+    ... }
 
     """
 
@@ -96,7 +103,6 @@ class MediaPool:
         """
         ...
 
-    @dispatch(MediaPoolItem, MediaPoolItem)
     def AppendToTimeline(
         self, clip: MediaPoolItem, *clips: MediaPoolItem
     ) -> list[TimelineItem]:
@@ -107,7 +113,6 @@ class MediaPool:
         """
         ...
 
-    @dispatch(list[MediaPoolItem | ClipInfo])
     def AppendToTimeline(
         self, clips: list[MediaPoolItem | ClipInfo]
     ) -> list[TimelineItem]:
@@ -129,7 +134,6 @@ class MediaPool:
         """
         ...
 
-    @dispatch(str, MediaPoolItem)
     def CreateTimelineFromClips(
         self, timeline_name: str, *clips: MediaPoolItem
     ) -> Timeline:
@@ -140,21 +144,21 @@ class MediaPool:
         """
         ...
 
-    @dispatch(str, list[MediaPoolItem | ClipInfo])
-    def CreateTimelineFromClips(self, timeline_name, clips) -> Timeline:
+    def CreateTimelineFromClips(
+        self, timeline_name: str, clips: list[MediaPoolItem | ClipInfo]
+    ) -> Timeline:
         """
         Notes
         -----
 
         -   If input is list of *MediaPoolItem*:
-
-        Creates new timeline with specified name, and appends the specified
-        MediaPoolItem objects.
+            Creates new timeline with specified name, and appends the specified
+            MediaPoolItem objects.
 
         -   If input is list of *ClipInfos*:
-
-        Creates new timeline with specified name, appending the list of clipInfos
-        specified as a dict of "mediaPoolItem", "startFrame" (int), "endFrame" (int).
+            Creates new timeline with specified name, appending the list of clipInfos
+            specified as a dict of "mediaPoolItem", "startFrame" (int), "endFrame"
+            (int).
 
         """
         ...
@@ -168,21 +172,21 @@ class MediaPool:
         the keys:
 
         -   timelineName: string, specifies the name of the timeline to be created. Not
-        valid for DRT import.
+            valid for DRT import.
 
         -   importSourceClips: Bool, specifies whether source clips should be imported.
-        True by default. Not valid for DRT import.
+            True by default. Not valid for DRT import.
 
         -   sourceClipsPath: string, Specifies a filesystem path to search for source
-        clips if the media is inaccessible in their original path and if
-        "importSourceClips" is True.
+            clips if the media is inaccessible in their original path and if
+            "importSourceClips" is True.
 
         -   sourceClipsFolders: List of Media Pool folder objects to search for source
-        clips if the media is not present in the current folder and if
-        "importSourceClips" is False. Not valid for DRT import.
+            clips if the media is not present in the current folder and if
+            "importSourceClips" is False. Not valid for DRT import.
 
         -   interlaceProcessing: Bool, specifies whether to enable interlace processing
-        on the imported timeline being created. Valid only for AAF import.
+            on the imported timeline being created. Valid only for AAF import.
 
         """
         ...

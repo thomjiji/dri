@@ -24,7 +24,6 @@ class MediaPoolItem:
         """
         ...
 
-    @dispatch(str, str)
     def SetMetadata(self, metadata_type: str, metadata_value: str) -> bool:
         """
         Sets the given metadata to metadataValue (string). Returns True if successfully.
@@ -36,7 +35,6 @@ class MediaPoolItem:
         """
         ...
 
-    @dispatch(dict)
     def SetMetadata(self, metadata: dict) -> bool:
         """
         Sets the item metadata with specified "metadata" dict. Returns True if
