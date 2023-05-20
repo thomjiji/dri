@@ -190,3 +190,54 @@ class MediaPool:
 
         """
         ...
+
+    def DeleteTimelines(self, timeline: Timeline | list[Timeline]) -> bool:
+        """
+        Deletes specified timelines in the media pool.
+
+        """
+        ...
+
+    def GetCurrentFolder(self) -> Folder:
+        """
+        Returns currently selected Folder.
+
+        """
+        ...
+
+    def SetCurentFolder(self, folder: Folder) -> bool:
+        """
+        Sets current folder by given Folder
+
+        """
+        ...
+
+    def DeleteClips(self, clips: MediaPoolItem | list[MediaPoolItem]) -> bool:
+        """
+        Deletes specified clips or timeline mattes in the media pool.
+
+        """
+        ...
+
+    def ImportFolderFromFile(self, file_path: str, source_clips_path: str = "") -> bool:
+        """
+        Returns true if import from given DRB filePath is successful, false otherwise.
+
+        Parameters
+        ----------
+        file_path
+            DRB file path.
+        source_clips_path
+            sourceClipsPath is a string that specifies a filesystem path to search for
+            source clips if the media is inaccessible in their original path, empty by
+            default.
+
+        """
+        ...
+
+    def DeleteFolders(self, subfolders: Folder | list[Folder]) -> bool:
+        """
+        Deletes specified subfolders in the media pool.
+
+        """
+        ...
