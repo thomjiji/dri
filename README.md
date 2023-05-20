@@ -1,1 +1,2 @@
 - DaVinci Resolve object (MediaPoolItem, TimelineItem, etc.) type annotation
+- API 的 calling 方式与原始完全一样，该接受一个 str 作为 arg 就接受 str。
