@@ -1,4 +1,28 @@
+from dataclasses import dataclass
+from typing import TypedDict
+
 from resolve_type.color import MarkerColor, FlagColor, ClipColor
+
+
+# TODO
+@dataclass
+class Metadata(TypedDict):
+    """
+    For SetMetadata() and GetMetadata() use.
+
+    """
+
+    Description: str
+    Comments: str
+    Keywords: str
+    People: str
+    ClipColor: ClipColor
+    Shot: str
+    Scene: str
+    Take: str
+    Angle: str
+    Move: str
+    Day_Night: str  # Day / Night: str
 
 
 class MediaPoolItem:
@@ -9,7 +33,7 @@ class MediaPoolItem:
         """
         ...
 
-    def GetMetadata(self, metadata_type=None) -> str | dict[str, str]:
+    def GetMetadata(self, metadata_type=None) -> str | Metadata:
         """
         Returns the metadata value for the key "metadataType". If no argument is
         specified, a dict of all set metadata properties is returned.
@@ -33,7 +57,7 @@ class MediaPoolItem:
         """
         ...
 
-    def SetMetadata(self, metadata: dict) -> bool:
+    def SetMetadata(self, metadata: Metadata) -> bool:
         """
         Sets the item metadata with specified "metadata" dict. Returns True if
         successful.
