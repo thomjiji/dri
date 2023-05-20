@@ -121,15 +121,13 @@ class MediaPool:
         -----
 
         -   If input is list of *MediaPoolItem*:
-
-        Appends specified MediaPoolItem objects in the current timeline. Returns the
-        list of appended timelineItems.
+            Appends specified MediaPoolItem objects in the current timeline. Returns the
+            list of appended timelineItems.
 
         -   If input is list of *ClipInfos*:
-
-        Appends list of clipInfos specified as dict of "mediaPoolItem", "startFrame"
-        (int), "endFrame" (int), (optional) "mediaType" (int; 1 - Video only,
-        2 - Audio only). Returns the list of appended timelineItems.
+            Appends list of clipInfos specified as dict of "mediaPoolItem", "startFrame"
+            (int), "endFrame" (int), (optional) "mediaType" (int; 1 - Video only,
+            2 - Audio only). Returns the list of appended timelineItems.
 
         """
         ...
@@ -226,7 +224,7 @@ class MediaPool:
         Parameters
         ----------
         file_path
-            DRB file path.
+            DRB (DaVinci Resolve Bin file) file path.
         source_clips_path
             sourceClipsPath is a string that specifies a filesystem path to search for
             source clips if the media is inaccessible in their original path, empty by
@@ -238,6 +236,46 @@ class MediaPool:
     def DeleteFolders(self, subfolders: Folder | list[Folder]) -> bool:
         """
         Deletes specified subfolders in the media pool.
+
+        """
+        ...
+
+    def MoveClips(self, clips: list[MediaPoolItem], target_folder: Folder) -> bool:
+        """
+        Move specified clips to target folder.
+
+        Parameters
+        ----------
+        clips
+            Clips to be moved. This method don't accept one MediaPoolItem, it only
+            accepts a list of MediaPoolItem.
+        target_folder
+            Moving destination.
+
+        Returns
+        -------
+        bool
+            True if successful, false otherwise.
+
+        """
+        ...
+
+    def MoveFolders(self, folders: list[Folder], target_folder: Folder) -> bool:
+        """
+        Moves specified folders to target folder.
+
+        Parameters
+        ----------
+        folders
+            Folders to be moved. This method don't accept one Folder, it only accepts a
+            list of Folder.
+        target_folder
+            Moving destination.
+
+        Returns
+        -------
+        bool
+            True if successful, false otherwise.
 
         """
         ...
