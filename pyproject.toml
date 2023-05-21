@@ -1,21 +1,18 @@
 [tool.poetry]
-name = "Dri"
-version = "0.1.0"
-description = "DaVinci Resolve API type system for development convenience"
+name = "dri"
+version = "0.0.1"
+description = "DaVinci Resolve API type system for script development"
 authors = ["thomjiji <hxy449999@gmail.com>"]
 license = "MIT"
 readme = "README.md"
-packages = [{include = "resolve_type"}]
 
 [tool.poetry.dependencies]
 python = "^3.10"
-multipledispatch = "^0.6.0"
 
 [tool.poetry.group.dev.dependencies]
+black = {extras = ["d"], version = "^23.3.0"}
 jupyter = "^1.0.0"
 notebook = "^6.5.4"
-ruff = "^0.0.269"
-black = {extras = ["d"], version = "^23.3.0"}
 
 [build-system]
 requires = ["poetry-core"]
