@@ -1,10 +1,10 @@
 from dataclasses import dataclass
 from typing import Literal
 
-from resolve_type.folder import Folder
-from resolve_type.media_pool_item import MediaPoolItem
-from resolve_type.timeline import Timeline
-from resolve_type.timeline_item import TimelineItem
+from dri.folder import Folder
+from dri.media_pool_item import MediaPoolItem
+from dri.timeline import Timeline
+from dri.timeline_item import TimelineItem
 
 
 @dataclass

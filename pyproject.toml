@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "resolve-type"
+name = "Dri"
 version = "0.1.0"
 description = "DaVinci Resolve API type system for development convenience"
 authors = ["thomjiji <hxy449999@gmail.com>"]

@@ -1,4 +1,4 @@
-from resolve_type.media_pool_item import MediaPoolItem
+from dri.media_pool_item import MediaPoolItem
 
 
 class Folder:

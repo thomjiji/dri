@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from typing import TypedDict
 
-from resolve_type.color import MarkerColor, FlagColor, ClipColor
+from dri.color import MarkerColor, FlagColor, ClipColor
 
 
 # TODO
