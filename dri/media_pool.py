@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from pathlib import Path
 from typing import Literal
 
 from dri.folder import Folder
@@ -276,6 +277,119 @@ class MediaPool:
         -------
         bool
             True if successful, false otherwise.
+
+        """
+        ...
+
+    def GetClipMatteList(self, media_pool_item: MediaPoolItem) -> list[Path]:
+        """
+        Get mattes for specified MediaPoolItem, as a list of paths to the matte files.
+
+        Parameters
+        ----------
+        media_pool_item
+
+        Returns
+        -------
+        list[Path]
+            a list of paths to the matte files.
+
+        """
+        ...
+
+    def GetTimelineMatteList(self, folder: Folder) -> list[MediaPoolItem]:
+        """
+        Get mattes in specified Folder, as list of MediaPoolItems.
+
+        Parameters
+        ----------
+        folder
+            Where to get mattes.
+
+        Returns
+        -------
+        list[MediaPoolItem]
+            Get mattes as list of MediaPoolItems.
+
+        """
+        ...
+
+    def DeleteClipMattes(
+        self, media_pool_item: MediaPoolItem, paths: list[str]
+    ) -> bool:
+        """
+        Delete mattes based on their file paths, for specified MediaPoolItem. Returns
+        True on success.
+
+        Parameters
+        ----------
+        media_pool_item
+            Target
+        paths
+            Paths of mattes to be deleted
+
+        Returns
+        -------
+        bool
+            True if delete successfully, False otherwise.
+
+        """
+        ...
+
+    def RelinkClips(self, clips: list[MediaPoolItem], folder_path: str) -> bool:
+        """
+        Update the folder location of specified media pool clips with the specified
+        folder path.
+
+        Parameters
+        ----------
+        clips
+            Clips to be relinked. Don't accept one clip (MediaPoolItem) as argument, it
+            only accepts a list of clips (MediaPoolItem).
+        folder_path
+            The new path to which clips will be relinked.
+
+        Returns
+        -------
+        bool
+            True if successful, False otherwise.
+
+        """
+        ...
+
+    def UnlinkClips(self, clips: list[MediaPoolItem]) -> bool:
+        """
+        Unlink specified media pool clips.
+
+        Parameters
+        ----------
+        clips
+            Clips to be unlinked.
+
+        Returns
+        -------
+        bool
+            True if unlink successful, False otherwise.
+
+        """
+        ...
+
+    def ImportMedia(self, paths: list[str]) -> list[MediaPoolItem]:
+        """
+        Imports specified file/folder paths into current Media Pool folder. Input is
+        an array of file/folder paths. Returns a list of the MediaPoolItems created.
+
+        Parameters
+        ----------
+        paths
+            file or folder paths to be imported.
+
+        Returns
+        -------
+        list[MediaPoolItem]
+            Returns a list of MediaPoolItems created. After importing, a list of
+            MediaPoolItems will be created.
+
 
         """
         ...
