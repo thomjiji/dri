@@ -166,8 +166,8 @@ class MediaPool:
         self, file_path: str, import_option: ImportOption
     ) -> Timeline:
         """
-        Creates timeline based on parameters within given file (
-        AAF/EDL/XML/FCPXML/DRT/ADL) and optional importOptions dict, with support for
+        Creates timeline based on parameters within given file
+        (AAF/EDL/XML/FCPXML/DRT/ADL) and optional importOptions dict, with support for
         the keys:
 
         -   timelineName: string, specifies the name of the timeline to be created. Not
