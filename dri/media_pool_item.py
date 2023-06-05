@@ -105,8 +105,8 @@ class MediaPoolItem:
 
         >>> from resolve_init import GetResolve
         >>> resolve = GetResolve()
-        >>> project_manager = resolve.GetProjectManager()
-        >>> project = project_manager.GetCurrentProject()
+        >>> project_manager.py = resolve.GetProjectManager()
+        >>> project = project_manager.py.GetCurrentProject()
         >>> media_pool = project.GetMediaPool()
         >>> root_folder = media_pool.GetRootFolder()
         >>> for clip in root_folder.GetClipList():
@@ -126,8 +126,8 @@ class MediaPoolItem:
         --------
         >>> from resolve_init import GetResolve
         >>> resolve = GetResolve()
-        >>> project_manager = resolve.GetProjectManager()
-        >>> project = project_manager.GetCurrentProject()
+        >>> project_manager.py = resolve.GetProjectManager()
+        >>> project = project_manager.py.GetCurrentProject()
         >>> media_pool = project.GetMediaPool()
         >>> root_folder = media_pool.GetRootFolder()
         >>> for clip in root_folder.GetClipList():
@@ -230,8 +230,8 @@ class MediaPoolItem:
         --------
         >>> from resolve_init import GetResolve
         >>> resolve = GetResolve()
-        >>> project_manager = resolve.GetProjectManager()
-        >>> project = project_manager.GetCurrentProject()
+        >>> project_manager.py = resolve.GetProjectManager()
+        >>> project = project_manager.py.GetCurrentProject()
         >>> media_pool = project.GetMediaPool
         >>> root_folder = media_pool.GetRootFolder()
         >>> root_folder.GetClipList()[0].GetClipProperty()
