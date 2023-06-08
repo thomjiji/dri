@@ -1,2 +1,4 @@
 class MediaStorage:
-    pass
+    # TODO: complete return type
+    def GetMountedVolumeList(self) -> list:
+        ...

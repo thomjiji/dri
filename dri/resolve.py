@@ -15,15 +15,13 @@ def load_dynamic_lib():
 
 
 class Resolve:
-    IP_ADDRESS = "127.0.0.1"
-    APP_NAME = "Resolve"
+    def __init__(self):
+        self.resolve = self.resolve_init()
 
-    def __init__(self, resolve_ip=IP_ADDRESS):
-        self.resolve = self.resolve_init(resolve_ip)
-
-    def resolve_init(self, ip):
+    @staticmethod
+    def resolve_init():
         bmd_module = load_dynamic_lib()
-        resolve = bmd_module.scriptapp(self.APP_NAME, ip)
+        resolve = bmd_module.scriptapp("Resolve")
         return resolve
 
     def Fusion(self):
@@ -31,10 +29,13 @@ class Resolve:
         Returns the Fusion object. Starting point for Fusion scripts.
 
         """
+        # return self.resolve.Fusion()
         ...
 
     def GetProjectManager(self) -> ProjectManager:
         ...
+        # return ProjectManager(self.resolve)
 
     def GetMediaStorage(self) -> MediaStorage:
+        # return self.resolve.GetMediaStorage()
         ...
