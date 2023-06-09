@@ -1,6 +1,48 @@
+from dataclasses import dataclass
+from typing import Literal, TypedDict
+
 from dri.gallery import Gallery
-from dri.timeline import Timeline
 from dri.media_pool import MediaPool
+from dri.timeline import Timeline
+
+
+@dataclass
+class RenderSetting(TypedDict):
+    SelectAllFrames: bool
+    MarkIn: int
+    MarkOut: int
+    TargetDir: str
+    CustomName: str
+    UniqueFilenameStyle: Literal[0, 1]  # 0 - Prefix, 1 - Suffix
+    ExportVideo: bool
+    ExportAudio: bool
+    FormatWidth: int
+    FormatHeight: int
+    FrameRate: float  # Example: 23.976, 24
+
+    # For SD resolution: "16_9" or "4_3", other resolution: "square" or "cinemascope"
+    PixelAspectRatio: str
+
+    # "VideoQuality" possible values for current codec (if applicable):
+    #  -    0 (int) - will set quality to automatic
+    #  -    [1 -> MAX] (int) - will set input bit rate
+    #  -    ["Least", "Low", "Medium", "High", "Best"] (string) - will set input
+    #       quality level
+    VideoQuality: int | str
+
+    AudioCodec: str  # Example: "aac"
+    AudioBitDepth: int
+    AudioSampleRate: int
+    ColorSpaceTag: str  # Example: "Same as Project", "AstroDesign"
+    GammaTag: str  # Example: "Same as Project", "ACEScct"
+    ExportAlpha: bool
+    EncodingProfile: str  # Example: "Main10". Can only be set for H.264 and H.265.
+    MultiPassEncode: bool  # Can only be set for H.264.
+
+    # 0 - Premultiplied, 1 - Straight. Can only be set for H.264 and H.265.
+    AlphaMode: Literal[0, 1]
+
+    NetworkOptimization: bool  # Only supported by QuickTime and MP4 formats.
 
 
 class Project:
@@ -242,6 +284,71 @@ class Project:
     def StopRendering(self):
         """
         Stops any current render processes.
+
+        """
+        ...
+
+    def IsRenderingInProgress(self) -> bool:
+        """
+        Returns True if rendering is in progress.
+
+        Returns
+        -------
+        bool
+            True if rendering is in progress, False otherwise.
+
+        """
+        ...
+
+    def LoadRenderPreset(self, preset_name: str) -> bool:
+        """
+        Sets a preset as current preset for rendering if presetName (string) exists.
+
+        Parameters
+        ----------
+        preset_name
+            The preset name.
+
+        Returns
+        -------
+        bool
+            True if load successful, False otherwise.
+
+        """
+        ...
+
+    def SaveAsNewRenderPreset(self, preset_name: str) -> bool:
+        """
+        Creates new render preset by given name if presetName (string) is unique.
+
+        Parameters
+        ----------
+        preset_name
+            The preset name.
+
+        Returns
+        -------
+        bool
+            True if successful, False otherwise.
+
+        """
+        ...
+
+    def SetRenderSettings(
+        self, settings: RenderSetting | dict[str, int | float | str | bool]
+    ) -> bool:
+        """
+        Sets given settings for rendering. Settings is a dict, with support for the
+        keys: Refer to "Looking up render settings" section for information for
+        supported settings.
+
+        Parameters
+        ----------
+        settings
+            A dict with settings.
+
+        Returns
+        -------
 
         """
         ...
