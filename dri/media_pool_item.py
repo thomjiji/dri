@@ -4,7 +4,7 @@ from typing import TypedDict
 from dri.color import MarkerColor, FlagColor, ClipColor
 
 
-# TODO
+# TODO This Metadata class is incomplete
 @dataclass
 class Metadata(TypedDict):
     """
@@ -16,7 +16,7 @@ class Metadata(TypedDict):
     Comments: str
     Keywords: str
     People: str
-    ClipColor: ClipColor
+    # ClipColor: ClipColor
     Shot: str
     Scene: str
     Take: str
@@ -41,7 +41,8 @@ class MediaPoolItem:
         Notes
         -----
         -   You can access all the items in DaVinci Resolve Metadata tab through this
-        API.
+            API, except for "Clip Color" (see "GetClipColor()"), "Flags" (see
+            "AddFlag(color)") and items that cannot be modified in the UI.
 
         """
         ...
@@ -52,19 +53,23 @@ class MediaPoolItem:
 
         Notes
         -----
-        -   You can set all the items in DaVinci Resolve Metadata tab through this API.
+        -   You can set all the items in DaVinci Resolve Metadata tab through this
+            API, except for "Clip Color" (see "GetClipColor()"), "Flags" (see
+            "AddFlag(color)") and items that cannot be modified in the UI.
 
         """
         ...
 
-    def SetMetadata(self, metadata: Metadata) -> bool:
+    def SetMetadata(self, metadata: Metadata | dict[str, str | ClipColor]) -> bool:
         """
         Sets the item metadata with specified "metadata" dict. Returns True if
         successful.
 
         Notes
         -----
-        -   You can set all the items in DaVinci Resolve Metadata tab through this API.
+        -   You can set all the items in DaVinci Resolve Metadata tab through this
+            API, except for "Clip Color" (see "GetClipColor()"), "Flags" (see
+            "AddFlag(color)") and items that cannot be modified in the UI.
 
         """
         ...
