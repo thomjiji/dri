@@ -345,10 +345,151 @@ class Project:
         Parameters
         ----------
         settings
-            A dict with settings.
+            A dict with settings (specified in RenderSetting class).
 
         Returns
         -------
+        bool
+            True if successful, False otherwise.
+
+        """
+        ...
+
+    def GetRenderJobStatus(self, job_id: str) -> dict[str, str | int]:
+        """
+        Returns a dict with job status and completion percentage of the job by given
+        jobId (string).
+
+        Parameters
+        ----------
+        job_id
+            Render job's ID (string).
+
+        Returns
+        -------
+        dict[str, str | int]
+            A dict with job status and completion percentage of the job by given
+            jobId (string).
+
+        """
+        ...
+
+    def GetSetting(self, setting_name: str = None) -> str | dict[str, str | float]:
+        """
+        Returns value of project setting (indicated by settingName, string). Check
+        the section below for more information.
+
+        Parameters
+        ----------
+        setting_name
+            Project setting name. Could be None. If not specified, return all
+            settings and their value (string).
+
+        Returns
+        -------
+        str | dict[str, str | float]
+            Value of project setting (indicated by settingName, string). If settingName
+            is not specified, will return dict[str, str | float]. "timelineFrameRate"
+            could be of float, see example below.
+
+        Examples
+        --------
+        >>> project.GetSetting("timelineFrameRate")
+        "24.0"
+
+
+        """
+        ...
+
+    def SetSetting(self, setting_name: str, setting_value: str) -> bool:
+        """
+        Sets the project setting (indicated by settingName, string) to the value (
+        settingValue, string). Check the section below for more information.
+
+        Parameters
+        ----------
+        setting_name
+            Project setting name.
+        setting_value
+            Project setting value.
+
+        Returns
+        -------
+        bool
+            True if set successful, False otherwise.
+
+        """
+        ...
+
+    def GetRenderFormats(self) -> dict[str, str]:
+        """
+        Returns a dict (format -> file extension) of available render formats.
+
+        Returns
+        -------
+        dict
+            A dict (format -> file extension) of available render formats.
+
+        Examples
+        --------
+        >>> project.GetRenderFormats()
+        {'AVI': 'avi',
+         'BRAW': 'braw',
+         'Cineon': 'cin',
+         'DCP': 'dcp',
+         'DPX': 'dpx',
+         'EXR': 'exr',
+         'GIF': 'gif',
+         'HLS': 'm3u8',
+         'IMF': 'imf',
+         'JPEG 2000': 'j2c',
+         'MJ2': 'mj2',
+         'MKV': 'mkv',
+         'MP4': 'mp4',
+         'MTS': 'mts',
+         'MXF OP-Atom': 'mxf',
+         'MXF OP1A': 'mxf_op1a',
+         'Panasonic AVC': 'pavc',
+         'QuickTime': 'mov',
+         'TIFF': 'tif',
+         'Wave': 'wav'}
+
+        """
+        ...
+
+    def GetRenderCodecs(self, render_format: str) -> dict[str, str]:
+        """
+        Returns a dict (codec description -> codec name) of available codecs for
+        given render format (string).
+
+        Parameters
+        ----------
+        render_format
+            Render format (string). Such as "MP4", "mp4", "MKV", "mov" (cannot use
+            "QuickTime" to retrieve the codec, only mov in this case).
+
+        Returns
+        -------
+        dict
+            A dict (codec description -> codec name) of available codecs for
+            given render format (string).
+
+        """
+        ...
+
+    def GetCurrentRenderFormatAndCodec(self) -> dict[str, str]:
+        """
+        Returns a dict with currently selected format 'format' and render codec 'codec'.
+
+        Returns
+        -------
+        dict[str, str]
+            A dict with currently selected format and codec.
+
+        Examples
+        --------
+        >>> project.GetCurrentRenderFormatAndCodec()
+        {'format': 'mov', 'codec': 'H265'}
 
         """
         ...
