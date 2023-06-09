@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import TypedDict
+from typing import TypedDict, Literal
 
 from dri.color import MarkerColor, FlagColor, ClipColor
 
@@ -22,7 +22,12 @@ class Metadata(TypedDict):
     Take: str
     Angle: str
     Move: str
-    Day_Night: str  # Day / Night: str
+
+    # In order to access this field, use "Day / Night" instead of "Day_Night"
+    Day_Night: str
+
+    # In order to access this field, use "Good Take" instead of "Good_Take"
+    Good_Take: Literal["true", "false"]
 
 
 class MediaPoolItem:
@@ -60,7 +65,7 @@ class MediaPoolItem:
         """
         ...
 
-    def SetMetadata(self, metadata: Metadata | dict[str, str | ClipColor]) -> bool:
+    def SetMetadata(self, metadata: Metadata | dict[str, str]) -> bool:
         """
         Sets the item metadata with specified "metadata" dict. Returns True if
         successful.
@@ -211,7 +216,7 @@ class MediaPoolItem:
         """
         ...
 
-    def SetClipColor(self, color_name: ClipColor) -> bool:
+    def SetClipColor(self, color_name: ClipColor | str) -> bool:
         """
         Sets the item color based on the colorName (string).
 
