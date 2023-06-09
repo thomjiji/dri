@@ -171,6 +171,18 @@ class Project:
         """
         ...
 
+    def DeleteAllRenderJobs(self) -> bool:
+        """
+        Deletes all render jobs in the queue.
+
+        Returns
+        -------
+        bool
+            True if successful, False otherwise.
+
+        """
+        ...
+
     def GetRenderJobList(self) -> list[dict[str | int | float]]:
         """
         Returns a list of render jobs and their information.
@@ -179,6 +191,57 @@ class Project:
         -------
         list[dict[str | int | float]]
             List of render jobs and their information.
+
+        """
+        ...
+
+    def StartRendering(self, *job_ids: str, is_interactive_mode: bool = False) -> bool:
+        """
+        Starts rendering jobs indicated by the input job ids. If not specified,
+        it will start all queued jobs one by one. The optional "isInteractiveMode",
+        when set, enables error feedback in the UI during rendering.
+
+        Parameters
+        ----------
+        job_ids
+            Render job's ID (string). Can be empty.
+        is_interactive_mode
+            When set, enables error feedback in the UI during rendering.
+
+        Returns
+        -------
+        bool
+            True if successful, False otherwise.
+
+        """
+        ...
+
+    def StartRendering(
+        self, job_ids: list[str], is_interactive_mode: bool = False
+    ) -> bool:
+        """
+        Starts rendering jobs indicated by the input job ids. The optional
+        "isInteractiveMode", when set, enables error feedback in the UI during
+        rendering.
+
+        Parameters
+        ----------
+        job_ids
+            A list of job ids to start rendering.
+        is_interactive_mode
+            When set, enables error feedback in the UI during rendering.
+
+        Returns
+        -------
+        bool
+            True if successful, False otherwise.
+
+        """
+        ...
+
+    def StopRendering(self):
+        """
+        Stops any current render processes.
 
         """
         ...
