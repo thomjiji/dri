@@ -304,3 +304,53 @@ class ProjectManager:
 
         """
         ...
+
+    def GetCurrentDatabase(self) -> dict[str, str]:
+        """
+        Returns a dictionary (with keys 'DbType', 'DbName' and optional 'IpAddress')
+        corresponding to the current database connection.
+
+        Returns
+        -------
+        dict[str, str]
+            Dictionary with keys 'DbType', 'DbName' and optional 'IpAddress'.
+
+        """
+        ...
+
+    def GetDatabaseList(self) -> list[dict[str, str]]:
+        """
+        Returns a list of dictionary items (with keys 'DbType', 'DbName' and optional
+        'IpAddress') corresponding to all the databases added to Resolve.
+
+        Returns
+        -------
+        list[dict[str, str]]
+            List of dictionary items (with keys 'DbType', 'DbName' and optional
+        'IpAddress').
+
+        """
+        ...
+
+    def SetCurrentDatabase(self, db_info: dict) -> bool:
+        """
+        Switches current database connection to the database specified by the keys
+        below, and closes any open project.
+
+        -   'DbType': 'Disk' or 'PostgreSQL' (string)
+        -   'DbName': database name (string)
+        -   'IpAddress': IP address of the PostgreSQL server (string, optional key -
+            defaults to '127.0.0.1')
+
+        Parameters
+        ----------
+        db_info
+            Database info as specified above.
+
+        Returns
+        -------
+        bool
+            True if successful, False otherwise.
+
+        """
+        ...
