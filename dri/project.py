@@ -47,6 +47,15 @@ class RenderSetting(TypedDict):
 
 class Project:
     def GetMediaPool(self) -> MediaPool:
+        """
+        Returns the Media Pool object.
+
+        Returns
+        -------
+        :class:`dri.MediaPool`
+            The Media Pool object.
+
+        """
         ...
 
     def GetTimelineCount(self) -> int:
@@ -68,10 +77,12 @@ class Project:
         Parameters
         ----------
         idx
-            Index of the timeline to get.
+            The index of Timeline that's going to return.
 
         Returns
         -------
+        :class:`dri.Timeline`
+            The Timeline object at the give index.
 
         """
         ...
@@ -82,7 +93,7 @@ class Project:
 
         Returns
         -------
-        Timeline
+        :class:`Timeline`
             The currently loaded timeline.
 
         """
@@ -225,7 +236,7 @@ class Project:
         """
         ...
 
-    def GetRenderJobList(self) -> list[dict[str | int | float]]:
+    def GetRenderJobList(self) -> list[dict[str, str | int | float | bool]]:
         """
         Returns a list of render jobs and their information.
 
@@ -465,8 +476,9 @@ class Project:
         Parameters
         ----------
         render_format
-            Render format (string). Such as "MP4", "mp4", "MKV", "mov" (cannot use
-            "QuickTime" to retrieve the codec, only mov in this case).
+            Render format (string). Such as "MP4", "mp4", "MKV", "mov",
+            case-insensitive. Also note that you cannot use "QuickTime" to retrieve the
+            codec, only "mov" in this case.
 
         Returns
         -------
@@ -494,5 +506,150 @@ class Project:
         """
         ...
 
-    def GetCurrentTimeline(self) -> Timeline:
+    def SetCurrentRenderFormatAndCodec(self, render_format: str, codec: str) -> bool:
+        """
+        Sets given render format (string) and render codec (string) as options for
+        rendering.
+
+        Parameters
+        ----------
+        render_format
+            Render format (string). Such as "mov", "mp4", "mkv". You can use
+            *GetRenderFormats()* to retrieve all available formats. Note that you can
+            only use the **file extension** ("mov", "mp4", not "QuickTime", "MP4") as
+            arg passed to *SetCurrentRenderFormatAndCodec()*.
+        codec
+            Render codec (string). Such as "H265". You can use *GetRenderCodecs(
+            render_format: str)* to retrieve all available codecs under the given
+            render formats. Note that you can only use the **codec name** not the
+            **codec description** as arg passed to *SetCurrentRenderFormatAndCodec()*.
+
+        Returns
+        -------
+        bool
+            True if set successful, False otherwise.
+
+        """
+        ...
+
+    def GetCurrentRenderMode(self) -> int:
+        """
+        Returns the render mode: 0 - Individual clips, 1 - Single clip.
+
+        Returns
+        -------
+        int
+            Render mode (0 - Individual clips, 1 - Single clip).
+
+        """
+        ...
+
+    def SetCurrentRenderMode(self, render_mode: int) -> bool:
+        """
+        Sets the render mode. Specify renderMode = 0 for Individual clips,
+        1 for Single clip.
+
+        Parameters
+        ----------
+        render_mode
+            0 for Individual Clips, 1 for Single Clip.
+
+        Returns
+        -------
+        bool
+            True if set successful, False otherwise.
+
+        """
+        ...
+
+    def GetRenderResolutions(
+        self, render_format: str, codec: str
+    ) -> list[dict[str, int]]:
+        """
+        Returns list of resolutions applicable for the given render format (string)
+        and render codec (string). Returns full list of resolutions if no argument is
+        provided. Each element in the list is a dictionary with 2 keys "Width" and
+        "Height".
+
+        Parameters
+        ----------
+        render_format
+            Render format (string).
+        codec
+            Render codec (string).
+
+        Returns
+        -------
+        list[dict[str, int]]
+            List of resolutions applicable for the given render format (string)
+            and render codec (string).
+
+        """
+        ...
+
+    def RefreshLUTList(self) -> bool:
+        """
+        Refreshes LUT list.
+
+        Returns
+        -------
+        bool
+            True if successful, False otherwise.
+
+        """
+        ...
+
+    def GetUniqueId(self) -> str:
+        """
+        Returns a unique ID for the project item.
+
+        Returns
+        -------
+        str
+            A unique ID for the project item.
+
+        """
+        ...
+
+    def InsertAudioToCurrentTrackAtPlayhead(
+        self, media_path: str, start_offset_in_samples: int, duration_in_samples: int
+    ) -> bool:
+        """
+        Inserts the media specified by mediaPath (string) with startOffsetInSamples (
+        int) and durationInSamples (int) at the playhead on a selected track on the
+        Fairlight page. Returns True if successful, otherwise False.
+
+        Parameters
+        ----------
+        media_path
+            Path to the media file (string) that's going to be inserted.
+        start_offset_in_samples
+            Start offset
+        duration_in_samples
+            Duration
+
+        Returns
+        -------
+        bool
+            True if successful, False otherwise.
+
+        """
+        ...
+
+    def LoadBurnInPreset(self, preset_name: str) -> bool:
+        """
+        Loads user defined data burn in preset for project when supplied presetName (
+        string). Returns true if successful.
+
+        Parameters
+        ----------
+        preset_name
+            Burn-in preset name
+
+        Returns
+        -------
+        bool
+            True if load successful, False otherwise.
+
+        """
         ...
