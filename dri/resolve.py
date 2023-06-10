@@ -19,7 +19,7 @@ class Resolve:
         self.resolve = self.resolve_init()
 
     @staticmethod
-    def resolve_init():
+    def resolve_init() -> "Resolve":
         bmd_module = load_dynamic_lib()
         resolve = bmd_module.scriptapp("Resolve")
         return resolve
