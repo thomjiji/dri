@@ -15,7 +15,7 @@ It has the following characteristics:
 
 - It completely replicates the signature of the original API, and strictly follows the original parameters, function
   overloading, return type, etc. as stated in the DaVinci Resolve API README.
-- All docstrings are based on the latest DaVinci Resolve 18.5 Beta 1 README. I will update it regularly.
+- All docstrings are based on the latest DaVinci Resolve 18.5 Beta 3 README. I will update it regularly.
 - It's just a dev dependency, or you can think of it as an interface. When you're done with the dev, you can delete it
   and the code will work fine in DaVinci Resolve. Because it uses the exact same signature as the original API.
 
