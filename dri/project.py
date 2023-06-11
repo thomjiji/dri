@@ -6,7 +6,6 @@ from dri.media_pool import MediaPool
 from dri.timeline import Timeline
 
 
-@dataclass
 class RenderSetting(TypedDict):
     SelectAllFrames: bool
     MarkIn: int

@@ -5,7 +5,6 @@ from dri.color import MarkerColor, FlagColor, ClipColor
 
 
 # TODO This Metadata class is incomplete
-@dataclass
 class Metadata(TypedDict):
     """
     For SetMetadata() and GetMetadata() use.
