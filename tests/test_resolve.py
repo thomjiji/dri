@@ -1,16 +1,7 @@
 import unittest
 
 from dri import load_dynamic_lib, Resolve
-
-
-def skip_if_resolve_none(func):
-    def wrapper(self, *args, **kwargs):
-        if self.resolve is None:
-            self.skipTest("resolve object is None, skipping test.")
-        else:
-            return func(self, *args, **kwargs)
-
-    return wrapper
+from tests import skip_if_resolve_none
 
 
 class TestLoadDynamicLib(unittest.TestCase):

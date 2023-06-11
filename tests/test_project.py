@@ -1,7 +1,7 @@
 import unittest
 
 from dri import Resolve
-from tests.test_resolve import skip_if_resolve_none
+from tests import skip_if_resolve_none
 
 
 class TestProject(unittest.TestCase):
