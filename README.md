@@ -13,11 +13,12 @@ over the function (API) to see well formatted docstring and type hints.
 
 It has the following characteristics:
 
-- It completely replicates the signature of the original API, and strictly follows the original parameters, function
-  overloading, return type, etc. as stated in the DaVinci Resolve API README.
-- All docstrings are based on the latest DaVinci Resolve 18.5 Beta 3 README. I will update it regularly.
-- It's just a dev dependency, or you can think of it as an interface. When you're done with the dev, you can delete it
-  and the code will work fine in DaVinci Resolve. Because it uses the exact same signature as the original API.
+- It faithfully duplicates the signature of the original API, adhering strictly to the original parameters, function
+  overloading, return type, and other specifications outlined in the DaVinci Resolve API README.
+- All docstrings are derived from the most recent DaVinci Resolve 18.5 Beta 3 README and will be consistently updated.
+- It serves solely as a development dependency or an interface. Once development is complete, you are free to remove it,
+  and the code will continue to function seamlessly in DaVinci Resolve since it employs the identical
+  signature as the original API.
 
 # Similar Project
 
