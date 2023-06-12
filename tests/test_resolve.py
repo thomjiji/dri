@@ -1,7 +1,27 @@
+import atexit
+import os.path
 import unittest
+import subprocess
+import time
 
 from dri import load_dynamic_lib, Resolve
 from tests import skip_if_resolve_none
+
+
+def close_delete_project_and_quit(r):
+    pm = r.GetProjectManager()
+    cp = pm.GetCurrentProject()
+    print(f"current project is {cp.GetName()}")
+    if project_manager.CloseProject(cp):
+        print("CloseProject is called")
+    if project_manager.DeleteProject("Dri_Tests_Project"):
+        print("DeleteProject is called")
+    resolve.Quit()
+
+
+def start_davinci_resolve_app():
+    subprocess.run(["open", "-a", "DaVinci Resolve"])
+    time.sleep(10)
 
 
 class TestLoadDynamicLib(unittest.TestCase):
@@ -96,6 +116,78 @@ class TestResolve(unittest.TestCase):
         # Back to the initial state
         self.resolve.DeleteLayoutPreset("test_LoadLayoutPreset")
 
+    @skip_if_resolve_none
+    def test_UpdateLayoutPreset(self):
+        pass
+
+    @skip_if_resolve_none
+    def test_ExportLayoutPreset(self):
+        # Precondition and configuration
+        self.resolve.SaveLayoutPreset("test_ExportLayoutPreset")
+        output_file = "/Users/thom/Desktop/test_ExportLayoutPreset"
+
+        # The actual testing
+        result = self.resolve.ExportLayoutPreset(
+            "test_ExportLayoutPreset", "/Users/thom/Desktop/test_ExportLayoutPreset"
+        )
+        self.assertTrue(result)
+
+        # Cleanup
+        self.resolve.DeleteLayoutPreset("test_ExportLayoutPreset")
+        if os.path.exists(output_file):
+            os.remove(output_file)
+
+    @skip_if_resolve_none
+    def test_DeleteLayoutPreset(self):
+        # Precondition and configuration
+        self.resolve.SaveLayoutPreset("test_DeleteLayoutPreset")
+
+        # Testing
+        result = self.resolve.DeleteLayoutPreset("test_DeleteLayoutPreset")
+        self.assertTrue(result)
+
+    @skip_if_resolve_none
+    def test_SaveLayoutPreset(self):
+        self.resolve.SaveLayoutPreset("test_SaveLayoutPreset")
+
+        # Cleanup
+        self.resolve.DeleteLayoutPreset("test_SaveLayoutPreset")
+
+    @skip_if_resolve_none
+    def test_ImportLayoutPreset(self):
+        # Precondition and configuration
+        self.resolve.SaveLayoutPreset("test_ImportLayoutPreset_EXPORTS")
+        self.resolve.ExportLayoutPreset(
+            "test_ImportLayoutPreset_EXPORTS",
+            "/Users/thom/Desktop/test_ImportLayoutPreset_EXPORTS",
+        )
+
+        # Testing
+        result = self.resolve.ImportLayoutPreset(
+            "/Users/thom/Desktop/test_ImportLayoutPreset_EXPORTS",
+            "test_ImportLayoutPreset_IMPORTS",
+        )
+        self.assertTrue(result)
+
+        # Cleanup
+        self.resolve.DeleteLayoutPreset("test_ImportLayoutPreset_EXPORTS")
+        self.resolve.DeleteLayoutPreset("test_ImportLayoutPreset_IMPORTS")
+        os.remove("/Users/thom/Desktop/test_ImportLayoutPreset_EXPORTS")
+
+    # @skip_if_resolve_none
+    # def test_Quit(self):
+    #     result = self.resolve.Quit()
+    #     self.assertIsNone(result)
+
 
 if __name__ == "__main__":
+    start_davinci_resolve_app()
+
+    resolve = Resolve.resolve_init()
+    project_manager = resolve.GetProjectManager()
+    if project_manager.CreateProject("Dri_Tests_Project"):
+        print("Created Dri_test_project")
+
+    atexit.register(close_delete_project_and_quit, resolve)
+
     unittest.main()
