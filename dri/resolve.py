@@ -169,12 +169,15 @@ class Resolve:
         preset_name
             The name of the preset to export.
         preset_file_path
-            The path to the preset file to export.
+            The path to the preset file to export. For example:
+            "/Users/thom/Desktop/my_preset". You should specify the name of the
+            preset that you want to export in the preset_file_path argument.
 
         Returns
         -------
         bool
-            True if export successful, False otherwise.
+            True if export successful, False otherwise. If the file exists, it will
+            also return True.
 
         """
         ...
