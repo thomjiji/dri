@@ -31,9 +31,27 @@ class TestLoadDynamicLib(unittest.TestCase):
 
 
 class TestResolve(unittest.TestCase):
+    resolve = None
+
     @classmethod
     def setUpClass(cls) -> None:
-        cls.resolve = Resolve.resolve_init()
+        start_davinci_resolve_app()
+        resolve = Resolve.resolve_init()
+        project_manager = resolve.GetProjectManager()
+        if project_manager.CreateProject("Dri_Tests_Project"):
+            log.info("Created Dri_test_project")
+        cls.resolve = resolve
+
+    @classmethod
+    def tearDownClass(cls) -> None:
+        # r = Resolve.resolve_init()
+        pm = cls.resolve.GetProjectManager()
+        cp = pm.GetCurrentProject()
+        if pm.CloseProject(cp):
+            log.info("CloseProject is called")
+        if pm.DeleteProject("Dri_Tests_Project"):
+            log.info("DeleteProject is called")
+        cls.resolve.Quit()
 
     def test_resolve_init(self):
         self.assertIsNotNone(self.resolve)
@@ -181,13 +199,4 @@ class TestResolve(unittest.TestCase):
 
 
 if __name__ == "__main__":
-    start_davinci_resolve_app()
-
-    resolve = Resolve.resolve_init()
-    project_manager = resolve.GetProjectManager()
-    if project_manager.CreateProject("Dri_Tests_Project"):
-        print("Created Dri_test_project")
-
-    atexit.register(close_delete_project_and_quit, resolve)
-
     unittest.main()
