@@ -54,7 +54,6 @@ class TestResolve(unittest.TestCase):
 
     @classmethod
     def tearDownClass(cls) -> None:
-        # r = Resolve.resolve_init()
         pm = cls.resolve.GetProjectManager()
         cp = pm.GetCurrentProject()
         if pm.CloseProject(cp):
@@ -83,7 +82,7 @@ class TestResolve(unittest.TestCase):
 
     @skip_if_resolve_none
     def test_OpenPage(self):
-        # Precondition and configuration
+        # Configuration
         current_page = self.resolve.GetCurrentPage()
 
         # The actual testing
@@ -135,7 +134,7 @@ class TestResolve(unittest.TestCase):
 
     @skip_if_resolve_none
     def test_LoadLayoutPreset(self):
-        # Precondition and configuration
+        # Configuration
         self.resolve.SaveLayoutPreset("test_LoadLayoutPreset")
 
         result = self.resolve.LoadLayoutPreset("test_LoadLayoutPreset")
@@ -150,7 +149,7 @@ class TestResolve(unittest.TestCase):
 
     @skip_if_resolve_none
     def test_ExportLayoutPreset(self):
-        # Precondition and configuration
+        # Configuration
         self.resolve.SaveLayoutPreset("test_ExportLayoutPreset")
         output_file = Path.home() / "Desktop" / "test_ExportLayoutPreset"
 
@@ -167,7 +166,7 @@ class TestResolve(unittest.TestCase):
 
     @skip_if_resolve_none
     def test_DeleteLayoutPreset(self):
-        # Precondition and configuration
+        # Configuration
         self.resolve.SaveLayoutPreset("test_DeleteLayoutPreset")
 
         # Testing
@@ -183,7 +182,7 @@ class TestResolve(unittest.TestCase):
 
     @skip_if_resolve_none
     def test_ImportLayoutPreset(self):
-        # Precondition and configuration
+        # Configuration
         self.resolve.SaveLayoutPreset("test_ImportLayoutPreset_EXPORTS")
         self.resolve.ExportLayoutPreset(
             "test_ImportLayoutPreset_EXPORTS",
