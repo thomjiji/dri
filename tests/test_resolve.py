@@ -31,7 +31,7 @@ log.addHandler(ch)
 
 def start_davinci_resolve_app():
     subprocess.run(["open", "-a", "DaVinci Resolve"])
-    time.sleep(10)
+    time.sleep(7)
 
 
 class TestLoadDynamicLib(unittest.TestCase):
