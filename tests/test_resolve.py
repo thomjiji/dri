@@ -3,6 +3,7 @@ import os.path
 import unittest
 import subprocess
 import time
+from pathlib import Path
 
 from dri import load_dynamic_lib, Resolve
 from tests import skip_if_resolve_none
@@ -151,11 +152,11 @@ class TestResolve(unittest.TestCase):
     def test_ExportLayoutPreset(self):
         # Precondition and configuration
         self.resolve.SaveLayoutPreset("test_ExportLayoutPreset")
-        output_file = "/Users/thom/Desktop/test_ExportLayoutPreset"
+        output_file = Path.home() / "Desktop" / "test_ExportLayoutPreset"
 
         # The actual testing
         result = self.resolve.ExportLayoutPreset(
-            "test_ExportLayoutPreset", "/Users/thom/Desktop/test_ExportLayoutPreset"
+            "test_ExportLayoutPreset", f"{output_file}"
         )
         self.assertTrue(result)
 
@@ -186,20 +187,20 @@ class TestResolve(unittest.TestCase):
         self.resolve.SaveLayoutPreset("test_ImportLayoutPreset_EXPORTS")
         self.resolve.ExportLayoutPreset(
             "test_ImportLayoutPreset_EXPORTS",
-            "/Users/thom/Desktop/test_ImportLayoutPreset_EXPORTS",
+            f"{Path.home()}/Desktop/test_ImportLayoutPreset_EXPORTS",
         )
 
         # Testing
         result = self.resolve.ImportLayoutPreset(
-            "/Users/thom/Desktop/test_ImportLayoutPreset_EXPORTS",
-            "test_ImportLayoutPreset_IMPORTS",
+            f"{Path.home()}/Desktop/test_ImportLayoutPreset_EXPORTS",
+            "test_ImportLayoutPreset_EXPORTS_ImportBack",
         )
         self.assertTrue(result)
 
         # Cleanup
         self.resolve.DeleteLayoutPreset("test_ImportLayoutPreset_EXPORTS")
-        self.resolve.DeleteLayoutPreset("test_ImportLayoutPreset_IMPORTS")
-        os.remove("/Users/thom/Desktop/test_ImportLayoutPreset_EXPORTS")
+        self.resolve.DeleteLayoutPreset("test_ImportLayoutPreset_EXPORTS_ImportBack")
+        os.remove(f"{Path.home()}/Desktop/test_ImportLayoutPreset_EXPORTS")
 
     # @skip_if_resolve_none
     # def test_Quit(self):
