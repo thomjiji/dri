@@ -40,4 +40,17 @@ class TestProject(unittest.TestCase):
 
 
 if __name__ == "__main__":
-    unittest.main()
+    # unittest.main()
+    # Create test loader to load tests
+    loader = unittest.TestLoader()
+    # Create test suite to group tests (In this test module, It's not necessary to)
+    suite = unittest.TestSuite()
+
+    # Add tests to test suite
+    suite.addTest(loader.loadTestsFromTestCase(TestProject))
+
+    # Create a test runner
+    runner = unittest.TextTestRunner(verbosity=2)
+
+    # Run the tests using the test runner and suite
+    result = runner.run(suite)
