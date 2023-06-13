@@ -1,4 +1,4 @@
-import atexit
+import logging
 import os.path
 import unittest
 import subprocess
@@ -7,16 +7,25 @@ import time
 from dri import load_dynamic_lib, Resolve
 from tests import skip_if_resolve_none
 
+# Set up logger
+log = logging.getLogger(__name__)
+log.setLevel(logging.DEBUG)
 
-def close_delete_project_and_quit(r):
-    pm = r.GetProjectManager()
-    cp = pm.GetCurrentProject()
-    print(f"current project is {cp.GetName()}")
-    if project_manager.CloseProject(cp):
-        print("CloseProject is called")
-    if project_manager.DeleteProject("Dri_Tests_Project"):
-        print("DeleteProject is called")
-    resolve.Quit()
+# Create console handler and set level to debug
+ch = logging.StreamHandler()
+ch.setLevel(logging.DEBUG)
+
+# Create formatter
+formatter = logging.Formatter(
+    "[%(levelname)s] %(name)s %(asctime)s at line %(lineno)s: %(message)s",
+    datefmt="%H:%M:%S",
+)
+
+# Add formatter to ch
+ch.setFormatter(formatter)
+
+# Add ch to logger
+log.addHandler(ch)
 
 
 def start_davinci_resolve_app():
