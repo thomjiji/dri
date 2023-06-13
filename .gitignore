@@ -1,7 +1,6 @@
 /.idea
 **/.DS_Store
 **/__pycache__
-*.ipynb
-test.*
 /.venv
 /.ipynb_checkpoints
+/tmp
