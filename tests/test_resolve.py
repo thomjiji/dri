@@ -1,37 +1,29 @@
-import logging
 import os.path
 import unittest
-import subprocess
-import time
 from pathlib import Path
 
 from dri import load_dynamic_lib, Resolve
-from tests import skip_if_resolve_none
-
-# Set up logger
-log = logging.getLogger(__name__)
-log.setLevel(logging.DEBUG)
-
-# Create console handler and set level to debug
-ch = logging.StreamHandler()
-ch.setLevel(logging.DEBUG)
-
-# Create formatter
-formatter = logging.Formatter(
-    "[%(levelname)s] %(name)s %(asctime)s at line %(lineno)s: %(message)s",
-    datefmt="%H:%M:%S",
-)
-
-# Add formatter to ch
-ch.setFormatter(formatter)
-
-# Add ch to logger
-log.addHandler(ch)
+from tests import skip_if_resolve_none, log, start_davinci_resolve_app
 
 
-def start_davinci_resolve_app():
-    subprocess.run(["open", "-a", "DaVinci Resolve"])
-    time.sleep(7)
+def setUpModule():
+    if start_davinci_resolve_app():
+        log.info("Successfully launched the Resolve app")
+    resolve = Resolve.resolve_init()
+    project_manager = resolve.GetProjectManager()
+    if project_manager.CreateProject("Dri_Tests_Project"):
+        log.info("Created Dri_test_project (from setUpModule)")
+
+
+def tearDownModule():
+    resolve = Resolve.resolve_init()
+    pm = resolve.GetProjectManager()
+    cp = pm.GetCurrentProject()
+    if pm.CloseProject(cp):
+        log.info("Closed project (from tearDownModule)")
+    if pm.DeleteProject("Dri_Tests_Project"):
+        log.info("Deleted project (from tearDownModule)")
+    resolve.Quit()
 
 
 class TestLoadDynamicLib(unittest.TestCase):
@@ -41,26 +33,10 @@ class TestLoadDynamicLib(unittest.TestCase):
 
 
 class TestResolve(unittest.TestCase):
-    resolve = None
-
     @classmethod
     def setUpClass(cls) -> None:
-        start_davinci_resolve_app()
-        resolve = Resolve.resolve_init()
-        project_manager = resolve.GetProjectManager()
-        if project_manager.CreateProject("Dri_Tests_Project"):
-            log.info("Created Dri_test_project")
-        cls.resolve = resolve
-
-    @classmethod
-    def tearDownClass(cls) -> None:
-        pm = cls.resolve.GetProjectManager()
-        cp = pm.GetCurrentProject()
-        if pm.CloseProject(cp):
-            log.info("CloseProject is called")
-        if pm.DeleteProject("Dri_Tests_Project"):
-            log.info("DeleteProject is called")
-        cls.resolve.Quit()
+        cls.resolve = Resolve.resolve_init()
+        log.info("TestResolve additional setUp")
 
     def test_resolve_init(self):
         self.assertIsNotNone(self.resolve)
