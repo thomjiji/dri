@@ -8,6 +8,7 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.11"
+pytest = "^7.3.2"
 
 [tool.poetry.group.dev.dependencies]
 black = {extras = ["d"], version = "^23.3.0"}
