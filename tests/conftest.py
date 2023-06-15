@@ -11,6 +11,14 @@ def resolve():
     yield r
 
 
+@pytest.fixture(scope="class")
+def project(resolve):
+    pm = resolve.GetProjectManager()
+    cp = pm.GetCurrentProject()
+    log.info(f"Current project: {cp.GetName()}")
+    yield cp
+
+
 @pytest.fixture(scope="session", autouse=True)
 def setup_teardown_session():
     if start_davinci_resolve_app():
