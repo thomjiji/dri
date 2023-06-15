@@ -144,7 +144,3 @@ class TestResolve:
         resolve.DeleteLayoutPreset("test_ImportLayoutPreset_EXPORTS")
         resolve.DeleteLayoutPreset("test_ImportLayoutPreset_EXPORTS_ImportBack")
         os.remove(f"{Path.home()}/Desktop/test_ImportLayoutPreset_EXPORTS")
-
-    # def test_Quit(self, resolve):
-    #     result = self.resolve.Quit()
-    #     self.assertIsNone(result)

@@ -1,4 +1,3 @@
-from dataclasses import dataclass
 from typing import Literal, TypedDict
 
 from dri.gallery import Gallery
