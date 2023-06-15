@@ -28,17 +28,16 @@ class TestResolve:
 
     def test_OpenPage(self, resolve):
         # Configuration
-
         current_page = resolve.GetCurrentPage()
 
-        # The actual testing
+        # Testing
         pages = ["media", "cut", "edit", "fusion", "color", "fairlight", "deliver"]
         result = []
         for page in pages:
             result.append(resolve.OpenPage(page))
         assert all(result) is True
 
-        # Back to the initial state
+        # Cleanup
         resolve.OpenPage(current_page)
 
     def test_GetCurrentPage(self, resolve):
@@ -78,21 +77,30 @@ class TestResolve:
         # Configuration
         resolve.SaveLayoutPreset("test_LoadLayoutPreset")
 
+        # Testing
         result = resolve.LoadLayoutPreset("test_LoadLayoutPreset")
         assert result
 
-        # Back to the initial state
+        # Cleanup
         resolve.DeleteLayoutPreset("test_LoadLayoutPreset")
 
     def test_UpdateLayoutPreset(self, resolve):
-        pass
+        # Configuration
+        resolve.SaveLayoutPreset("test_UpdateLayoutPreset")
+
+        # Testing
+        result = resolve.UpdateLayoutPreset("test_UpdateLayoutPreset")
+        assert result
+
+        # Cleanup
+        resolve.DeleteLayoutPreset("test_UpdateLayoutPreset")
 
     def test_ExportLayoutPreset(self, resolve):
         # Configuration
         resolve.SaveLayoutPreset("test_ExportLayoutPreset")
         output_file = Path.home() / "Desktop" / "test_ExportLayoutPreset"
 
-        # The actual testing
+        # Testing
         result = resolve.ExportLayoutPreset("test_ExportLayoutPreset", f"{output_file}")
         assert result
 
@@ -110,7 +118,9 @@ class TestResolve:
         assert result
 
     def test_SaveLayoutPreset(self, resolve):
-        resolve.SaveLayoutPreset("test_SaveLayoutPreset")
+        # Testing
+        result = resolve.SaveLayoutPreset("test_SaveLayoutPreset")
+        assert result
 
         # Cleanup
         resolve.DeleteLayoutPreset("test_SaveLayoutPreset")
