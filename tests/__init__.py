@@ -47,28 +47,3 @@ def start_davinci_resolve_app() -> bool:
         return result.returncode == 0
     except subprocess.CalledProcessError:
         return False
-
-
-# class TestSuiteSetup(unittest.TestCase):
-#     resolve = None
-#
-#     @classmethod
-#     def setUpClass(cls):
-#         # Code to run before all test cases in the suite
-#         start_davinci_resolve_app()
-#         resolve = Resolve.resolve_init()
-#         project_manager = resolve.GetProjectManager()
-#         if project_manager.CreateProject("Dri_Tests_Project"):
-#             log.info("Created Dri_test_project")
-#         cls.resolve = resolve
-#
-#     @classmethod
-#     def tearDownClass(cls):
-#         # Code to run after all test cases in the suite
-#         pm = cls.resolve.GetProjectManager()
-#         cp = pm.GetCurrentProject()
-#         if pm.CloseProject(cp):
-#             log.info("CloseProject is called")
-#         if pm.DeleteProject("Dri_Tests_Project"):
-#             log.info("DeleteProject is called")
-#         cls.resolve.Quit()
