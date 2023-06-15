@@ -1,8 +1,6 @@
 import os
 from pathlib import Path
 
-import pytest
-
 from dri import load_dynamic_lib
 
 
@@ -12,29 +10,25 @@ class TestLoadDynamicLib:
         assert bmd_module is not None
 
 
-@pytest.mark.usefixtures("resolve_init")
 class TestResolve:
-    def test_resolve_init(self):
-        assert self.resolve is not None
+    def test_resolve_init(self, resolve):
+        assert resolve is not None
 
-    def test_Fusion(self, resolve_init):
-        resolve = resolve_init
+    def test_Fusion(self, resolve):
         fusion = resolve.Fusion()
         assert fusion is not None
 
-    def test_GetMediaStorage(self, resolve_init):
-        resolve = resolve_init
+    def test_GetMediaStorage(self, resolve):
         media_storage = resolve.GetMediaStorage()
         assert media_storage is not None
 
-    def test_GetProjectManager(self, resolve_init):
-        resolve = resolve_init
+    def test_GetProjectManager(self, resolve):
         project_manager = resolve.GetProjectManager()
         assert project_manager is not None
 
-    def test_OpenPage(self, resolve_init):
+    def test_OpenPage(self, resolve):
         # Configuration
-        resolve = resolve_init
+
         current_page = resolve.GetCurrentPage()
 
         # The actual testing
@@ -47,19 +41,15 @@ class TestResolve:
         # Back to the initial state
         resolve.OpenPage(current_page)
 
-    def test_GetCurrentPage(self, resolve_init):
-        resolve = resolve_init
+    def test_GetCurrentPage(self, resolve):
         pages = ["media", "cut", "edit", "fusion", "color", "fairlight", "deliver"]
         assert resolve.GetCurrentPage() in pages
 
-    def test_GetProductName(self, resolve_init):
-        resolve = resolve_init
+    def test_GetProductName(self, resolve):
         product_names = ["DaVinci Resolve Studio", "DaVinci Resolve"]
         assert resolve.GetProductName() in product_names
 
-    def test_GetVersion(self, resolve_init):
-        resolve = resolve_init
-
+    def test_GetVersion(self, resolve):
         version = resolve.GetVersion()
         major = version[0]
         minor = version[1]
@@ -80,14 +70,11 @@ class TestResolve:
         assert isinstance(build, int), "Build version should be an integer"
         assert isinstance(suffix, str), "Suffix should be a string"
 
-    def test_GetVersionString(self, resolve_init):
-        resolve = resolve_init
+    def test_GetVersionString(self, resolve):
         version = resolve.GetVersionString()
         assert isinstance(version, str)
 
-    def test_LoadLayoutPreset(self, resolve_init):
-        resolve = resolve_init
-
+    def test_LoadLayoutPreset(self, resolve):
         # Configuration
         resolve.SaveLayoutPreset("test_LoadLayoutPreset")
 
@@ -97,12 +84,10 @@ class TestResolve:
         # Back to the initial state
         resolve.DeleteLayoutPreset("test_LoadLayoutPreset")
 
-    def test_UpdateLayoutPreset(self, resolve_init):
+    def test_UpdateLayoutPreset(self, resolve):
         pass
 
-    def test_ExportLayoutPreset(self, resolve_init):
-        resolve = resolve_init
-
+    def test_ExportLayoutPreset(self, resolve):
         # Configuration
         resolve.SaveLayoutPreset("test_ExportLayoutPreset")
         output_file = Path.home() / "Desktop" / "test_ExportLayoutPreset"
@@ -116,9 +101,7 @@ class TestResolve:
         if os.path.exists(output_file):
             os.remove(output_file)
 
-    def test_DeleteLayoutPreset(self, resolve_init):
-        resolve = resolve_init
-
+    def test_DeleteLayoutPreset(self, resolve):
         # Configuration
         resolve.SaveLayoutPreset("test_DeleteLayoutPreset")
 
@@ -126,15 +109,13 @@ class TestResolve:
         result = resolve.DeleteLayoutPreset("test_DeleteLayoutPreset")
         assert result
 
-    def test_SaveLayoutPreset(self, resolve_init):
-        resolve = resolve_init
+    def test_SaveLayoutPreset(self, resolve):
         resolve.SaveLayoutPreset("test_SaveLayoutPreset")
 
         # Cleanup
         resolve.DeleteLayoutPreset("test_SaveLayoutPreset")
 
-    def test_ImportLayoutPreset(self, resolve_init):
-        resolve = resolve_init
+    def test_ImportLayoutPreset(self, resolve):
         # Configuration
         resolve.SaveLayoutPreset("test_ImportLayoutPreset_EXPORTS")
         resolve.ExportLayoutPreset(
@@ -154,6 +135,6 @@ class TestResolve:
         resolve.DeleteLayoutPreset("test_ImportLayoutPreset_EXPORTS_ImportBack")
         os.remove(f"{Path.home()}/Desktop/test_ImportLayoutPreset_EXPORTS")
 
-    # def test_Quit(self, resolve_init):
+    # def test_Quit(self, resolve):
     #     result = self.resolve.Quit()
     #     self.assertIsNone(result)

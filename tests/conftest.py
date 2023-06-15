@@ -4,29 +4,27 @@ from dri import Resolve
 from tests import log, start_davinci_resolve_app
 
 
-@pytest.fixture(scope="class")
-def resolve_init(request):
-    resolve = Resolve.resolve_init()
+@pytest.fixture(scope="module")
+def resolve():
+    r = Resolve.resolve_init()
     log.info("resolve object initialized")
-    request.cls.resolve = resolve
-    yield resolve
+    yield r
 
 
 @pytest.fixture(scope="session", autouse=True)
 def setup_teardown_session():
     if start_davinci_resolve_app():
-        log.info("Successfully launched the Resolve app")
-    resolve = Resolve.resolve_init()
-    project_manager = resolve.GetProjectManager()
-    if project_manager.CreateProject("Dri_Tests_Project"):
-        log.info("Created Dri_test_project (from setUpModule)")
+        log.info("Successfully launched the Resolve app (from setUp)")
+    r = Resolve.resolve_init()
+    pm = r.GetProjectManager()
+    if pm.CreateProject("Dri_Tests_Project"):
+        log.info("Created Dri_test_project (from setUp)")
 
-    yield resolve, project_manager  # Execute the tests
+    yield r, pm  # Execute the tests
 
-    pm = resolve.GetProjectManager()
     cp = pm.GetCurrentProject()
     if pm.CloseProject(cp):
-        log.info("Closed project (from tearDownModule)")
+        log.info("Closed project (from tearDown)")
     if pm.DeleteProject("Dri_Tests_Project"):
-        log.info("Deleted project (from tearDownModule)")
-    resolve.Quit()
+        log.info("Deleted project (from tearDown)")
+    r.Quit()
