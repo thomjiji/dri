@@ -14,9 +14,18 @@ def setup_logger() -> logging.Logger:
 
     # Create formatter
     formatter = logging.Formatter(
-        "[%(levelname)s] %(name)s %(asctime)s at line %(lineno)s: %(message)s",
+        "[%(levelname)s] %(name)s %(filename)s %(funcName)s %(asctime)s at line %("
+        "lineno)s: %(message)s",
         datefmt="%H:%M:%S",
     )
+
+    # # Create formatter (as a sentence)
+    # formatter = logging.Formatter(
+    #     "[%(levelname)s] Log record emitted by logger '%(name)s' in file '%("
+    #     "filename)s' at function '%(funcName)s' at %(asctime)s, line %(lineno)s: %("
+    #     "message)s",
+    #     datefmt="%H:%M:%S",
+    # )
 
     # Add formatter to ch
     ch.setFormatter(formatter)
