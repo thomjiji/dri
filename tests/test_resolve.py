@@ -1,19 +1,21 @@
 import os
 from pathlib import Path
 
+import pytest
+
 from dri import load_dynamic_lib
 
 
 class TestLoadDynamicLib:
-    def test_load_dynamic_lib(self, resolve_init):
+    def test_load_dynamic_lib(self):
         bmd_module = load_dynamic_lib()
         assert bmd_module is not None
 
 
+@pytest.mark.usefixtures("resolve_init")
 class TestResolve:
-    def test_resolve_init(self, resolve_init):
-        resolve = resolve_init
-        assert resolve is not None
+    def test_resolve_init(self):
+        assert self.resolve is not None
 
     def test_Fusion(self, resolve_init):
         resolve = resolve_init

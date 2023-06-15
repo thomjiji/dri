@@ -4,10 +4,11 @@ from dri import Resolve
 from tests import log, start_davinci_resolve_app
 
 
-@pytest.fixture(scope="module")
-def resolve_init():
+@pytest.fixture(scope="class")
+def resolve_init(request):
     resolve = Resolve.resolve_init()
     log.info("resolve object initialized")
+    request.cls.resolve = resolve
     yield resolve
 
 
