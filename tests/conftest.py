@@ -19,6 +19,12 @@ def project(resolve):
     yield cp
 
 
+@pytest.fixture(scope="class")
+def media_pool(resolve, project):
+    mp = project.GetMediaPool()
+    yield mp
+
+
 @pytest.fixture(scope="session", autouse=True)
 def setup_teardown_session():
     if start_davinci_resolve_app():

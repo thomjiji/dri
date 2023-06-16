@@ -7,22 +7,32 @@ class TestProject:
         timeline_count = project.GetTimelineCount()
         assert isinstance(timeline_count, int)
 
-    def test_GetTimelineByIndex(self, project):
+    def test_GetTimelineByIndex(self, project, media_pool):
         # Configuration
         timeline_count = project.GetTimelineCount()
 
         # If there is no timeline yet, create it.
         if timeline_count == 0:
-            media_pool = project.GetMediaPool()
             media_pool.CreateEmptyTimeline("test_GetTimelineByIndex")
 
-        # Testing
-        tl = project.GetTimelineByIndex(project.GetTimelineCount())
-        result = tl.SetStartTimecode("01:00:00:01")
-        assert result
+        timeline = None
+        try:
+            # Testing
+            timeline = project.GetTimelineByIndex(project.GetTimelineCount())
+            assert timeline
+        finally:
+            # Cleanup
+            media_pool.DeleteTimelines(timeline)
 
-        # Cleanup
-        tl.SetStartTimecode("01:00:00:00")
+    def test_GetCurrentTimeline(self, project, media_pool):
+        if not project.GetCurrentTimeline():
+            media_pool.CreateEmptyTimeline("test_GetCurrentTimeline")
 
-    def test_GetCurrentTimeline(self, project):
-        assert project.GetCurrentTimeline()
+        current_timeline = None
+        try:
+            # Testing
+            current_timeline = project.GetCurrentTimeline()
+            assert current_timeline
+        finally:
+            # Cleanup
+            media_pool.DeleteTimelines(current_timeline)
