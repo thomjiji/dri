@@ -36,3 +36,60 @@ class TestProject:
         finally:
             # Cleanup
             media_pool.DeleteTimelines(current_timeline)
+
+    def test_SetCurrentTimeline(self, project, media_pool):
+        timeline_1 = media_pool.CreateEmptyTimeline("test_SetCurrentTimeline_1")
+        timeline_2 = media_pool.CreateEmptyTimeline("test_SetCurrentTimeline_2")
+
+        try:
+            result = project.SetCurrentTimeline(timeline_1)
+            assert result
+        finally:
+            media_pool.DeleteTimelines([timeline_1, timeline_2])
+
+    def test_GetGallery(self, project):
+        result = project.GetGallery()
+        assert result
+
+    def test_GetName(self, project):
+        result = project.GetName()
+        assert isinstance(result, str)
+
+    def test_SetName(self, project):
+        try:
+            # If the new name differs from the old name, the project is renamed
+            # successfully. It will return True.
+            result = project.SetName("Dri_Tests_Project_renamedBy_SetName")
+            assert result is True
+
+            # If the new name is the same as the old name, it will return False.
+            result = project.SetName("Dri_Tests_Project_renamedBy_SetName")
+            assert result is False
+        finally:
+            project.SetName("Dri_Tests_Project")
+
+    def test_GetPresetList(self, project):
+        preset_list = project.GetPresetList()
+        # Preset list need to be a list
+        assert isinstance(preset_list, list)
+
+        for preset in preset_list:
+            # Inside preset list, there are dictionaries
+            assert isinstance(preset, dict)
+            for k, v in preset.items():
+                # The key of the dictionaries is str, the value of the dictionaries
+                # is str or int
+                assert isinstance(k, str)
+                assert isinstance(v, str | int)
+
+    def test_SetPreset(self, project):
+        # Now really sure how to handle this setting
+        pass
+
+    def test_AddRenderJob(self, project):
+        job_id = None
+        try:
+            job_id = project.AddRenderJob()
+            assert isinstance(job_id, str)
+        finally:
+            project.DeleteRenderJob(job_id)
