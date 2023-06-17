@@ -18,13 +18,23 @@ class ClipInfo:
     mediaPoolItem : MediaPoolItem
         The media pool item associated with the clip.
     startFrame : int
-        The starting frame of the clip.
+        The starting frame of the clip. Optional. If not specified, using 0.
     endFrame : int
-        The ending frame of the clip.
+        The ending frame of the clip. Optional. If no specified, using the last frame.
     mediaType : Literal[1, 2]
         The type of media for the clip. Optional.
-        - 1: Video only
-        - 2: Audio only
+        -   1: Video only
+        -   2: Audio only
+    trackIndex : int
+        Indicates which track of the timeline the clip will be inserted into. Optional.
+        -   If there is only one video track in the timeline: V1, then if trackIndex is
+            set to 2, which means the clip will be inserted into the timeline's video
+            track V2, then the API will automatically add video track V2 and insert the
+            clip into V2.
+        -   However, the API does not work if the trackIndex is set to 3 or more when
+            only one video track V1 exists. The clip will stil be inserted into V1.
+    recordFrame: int
+        Indicates where in the timeline the clip will be inserted, in Frames. Optional.
 
     Examples
     --------
@@ -33,14 +43,18 @@ class ClipInfo:
     ...     "startFrame": 0,
     ...     "endFrame": 12,
     ...     "mediaType": 1
+    ...     "trackIndex": 2,
+    ...     "recordFrame": 86400,
     ... }
 
     """
 
     mediaPoolItem: MediaPoolItem
-    startFrame: int
-    endFrame: int
+    startFrame: int = None
+    endFrame: int = None
     mediaType: Literal[1, 2] = None  # 1 - Video only, 2 - Audio only
+    recordFrame: int = None
+    trackIndex: int = None
 
 
 @dataclass
@@ -128,7 +142,8 @@ class MediaPool:
         -   If input is list of *ClipInfos*:
             Appends list of clipInfos specified as dict of "mediaPoolItem", "startFrame"
             (int), "endFrame" (int), (optional) "mediaType" (int; 1 - Video only,
-            2 - Audio only). Returns the list of appended timelineItems.
+            2 - Audio only), "trackIndex" (int) and "recordFrame" (int). Returns the
+            list of appended timelineItems.
 
         """
         ...
@@ -157,7 +172,10 @@ class MediaPool:
         -   If input is list of *ClipInfos*:
             Creates new timeline with specified name, appending the list of clipInfos
             specified as a dict of "mediaPoolItem", "startFrame" (int), "endFrame"
-            (int).
+            (int), "recordFrame" (int).
+
+            -   ClipInfo that CreateTimelineFromClips accept can't include "trackIndex",
+                otherwise DaVinci Resolve will crash.
 
         """
         ...
