@@ -23,3 +23,17 @@ It has the following characteristics:
 # Similar Project
 
 - [pybmd](https://github.com/WheheoHu/pybmd)
+
+# Run Tests
+
+```shell
+pytest -v
+```
+
+By default, pytest captures the output produced by your tests and displays it only if the test fails. However, when you
+use `--capture=no` or `-s`, pytest allows the stdout and stderr to be displayed on the console immediately, regardless of the
+test result.
+
+```shell
+pytest -v -s
+```
