@@ -1,3 +1,6 @@
+from pathlib import Path
+
+
 class TestProject:
     def test_GetMediaPool(self, project):
         media_pool = project.GetMediaPool()
@@ -86,10 +89,22 @@ class TestProject:
         # Now really sure how to handle this setting
         pass
 
-    def test_AddRenderJob(self, project):
+    def test_AddRenderJob(self, project, media_pool):
+        helen_john_file_path = (
+            f"{Path(__file__).parent.parent}/static"
+            f"/ARRI_Helen_John_ALEXA_35_ARRIRAW.jpg"
+        )
+        helen_john_mediaPoolItem = media_pool.ImportMedia([helen_john_file_path])
+        media_pool.CreateTimelineFromClips(
+            "test_AddRenderJob", helen_john_mediaPoolItem
+        )
+
         job_id = None
         try:
             job_id = project.AddRenderJob()
             assert isinstance(job_id, str)
         finally:
+            current_timeline = project.GetCurrentTimeline()
+            media_pool.DeleteTimelines(current_timeline)
+            media_pool.DeleteClips(helen_john_mediaPoolItem)
             project.DeleteRenderJob(job_id)
