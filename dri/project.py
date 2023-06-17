@@ -204,8 +204,9 @@ class Project:
 
         Notes
         -----
-        If there is no clip in current timeline, AddRenderJob will return '', which is
-        False. If there is no timeline, AddRenderJob will return None.
+        -   If there is no clip in current timeline, or you don't set render target
+            directory, AddRenderJob will return '', which is False.
+        -   If there is no timeline, AddRenderJob will return None.
 
         """
         ...
@@ -388,7 +389,7 @@ class Project:
         """
         ...
 
-    def GetSetting(self, setting_name: str = None) -> str | dict[str, str | float]:
+    def GetSetting(self, setting_name: str = "") -> str | dict[str, str | float]:
         """
         Returns value of project setting (indicated by settingName, string). Check
         the section below for more information.
