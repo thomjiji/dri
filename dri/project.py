@@ -202,6 +202,11 @@ class Project:
         str
             Unique job id (string) for the new render job.
 
+        Notes
+        -----
+        If there is no clip in current timeline, AddRenderJob will return '', which is
+        False. If there is no timeline, AddRenderJob will return None.
+
         """
         ...
 
