@@ -1,5 +1,9 @@
 from pathlib import Path
 
+import pytest
+
+from tests import log
+
 
 class TestProject:
     def test_GetMediaPool(self, project):
@@ -89,22 +93,47 @@ class TestProject:
         # Now really sure how to handle this setting
         pass
 
-    def test_AddRenderJob(self, project, media_pool):
+    @pytest.fixture
+    def import_helen_john_to_media_pool(self, project, media_pool):
         helen_john_file_path = (
             f"{Path(__file__).parent.parent}/static"
             f"/ARRI_Helen_John_ALEXA_35_ARRIRAW.jpg"
         )
-        helen_john_mediaPoolItem = media_pool.ImportMedia([helen_john_file_path])
+        helen_john_media_pool_item = media_pool.ImportMedia([helen_john_file_path])
         media_pool.CreateTimelineFromClips(
-            "test_AddRenderJob", helen_john_mediaPoolItem
+            "test_AddRenderJob", helen_john_media_pool_item
         )
 
-        job_id = None
-        try:
-            job_id = project.AddRenderJob()
-            assert isinstance(job_id, str)
-        finally:
-            current_timeline = project.GetCurrentTimeline()
-            media_pool.DeleteTimelines(current_timeline)
-            media_pool.DeleteClips(helen_john_mediaPoolItem)
-            project.DeleteRenderJob(job_id)
+        yield helen_john_media_pool_item
+
+        current_timeline = project.GetCurrentTimeline()
+        media_pool.DeleteTimelines(current_timeline)
+        media_pool.DeleteClips(helen_john_media_pool_item)
+
+    def test_AddRenderJob(self, project, import_helen_john_to_media_pool):
+        render_target_dir = f"{Path.home()}/Desktop/"
+        project.SetRenderSettings({"TargetDir": render_target_dir})
+        job_id = project.AddRenderJob()
+        log.info(f"test_AddRenderJob job id: {job_id}")
+        log.info(f"test_AddRenderJob render queue: {project.GetRenderJobList()}")
+        assert job_id
+        assert isinstance(job_id, str)
+        project.DeleteRenderJob(job_id)
+
+    def test_DeleteRenderJob(self, project, import_helen_john_to_media_pool):
+        render_target_dir = f"{Path.home()}/Desktop/"
+        project.SetRenderSettings({"TargetDir": render_target_dir})
+        job_id = project.AddRenderJob()
+        log.info(f"test_DeleteRenderJob job id: {job_id}")
+        log.info(f"test_DeleteRenderJob render queue: {project.GetRenderJobList()}")
+        result = project.DeleteRenderJob(job_id)
+        assert result
+
+    def test_DeleteAllRenderJobs(self, project, import_helen_john_to_media_pool):
+        render_target_dir = f"{Path.home()}/Desktop/"
+        project.SetRenderSettings({"TargetDir": render_target_dir})
+        job_id_1 = project.AddRenderJob()
+        job_id_2 = project.AddRenderJob()
+        log.info(f"test_DeleteRenderJob job id 1: {job_id_1}, job id 2: {job_id_2}")
+        result = project.DeleteAllRenderJobs()
+        assert result
