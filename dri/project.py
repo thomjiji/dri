@@ -254,9 +254,9 @@ class Project:
 
     def StartRendering(self, *job_ids: str, is_interactive_mode: bool = False) -> bool:
         """
-        Starts rendering jobs indicated by the input job ids. If not specified,
-        it will start all queued jobs one by one. The optional "isInteractiveMode",
-        when set, enables error feedback in the UI during rendering.
+        Starts rendering jobs indicated by the input job ids. If not specified, it will
+        start all queued jobs one by one. The optional "isInteractiveMode", when set,
+        enables error feedback in the UI during rendering.
 
         Parameters
         ----------
