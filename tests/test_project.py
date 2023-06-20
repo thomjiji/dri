@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 
 import pytest
@@ -110,7 +111,11 @@ class TestProject:
         media_pool.DeleteTimelines(current_timeline)
         media_pool.DeleteClips(helen_john_media_pool_item)
 
-    def test_AddRenderJob(self, project, import_helen_john_to_media_pool):
+    def test_AddRenderJob(
+        self, project, project_manager, import_helen_john_to_media_pool
+    ):
+        if project_manager.SaveProject():
+            log.info("Save project")
         render_target_dir = f"{Path.home()}/Desktop/"
         project.SetRenderSettings({"TargetDir": render_target_dir})
         job_id = project.AddRenderJob()
@@ -137,3 +142,33 @@ class TestProject:
         log.info(f"test_DeleteRenderJob job id 1: {job_id_1}, job id 2: {job_id_2}")
         result = project.DeleteAllRenderJobs()
         assert result
+
+    def test_GetRenderJobList(self, project, import_helen_john_to_media_pool):
+        render_target_dir = f"{Path.home()}/Desktop/"
+        project.SetRenderSettings({"TargetDir": render_target_dir})
+        project.AddRenderJob()
+        project.AddRenderJob()
+        result = project.GetRenderJobList()
+        assert result
+        project.DeleteAllRenderJobs()
+
+    @pytest.mark.skip("skipped due to AddRenderJob() bug")
+    def test_StartRendering(self, project, import_helen_john_to_media_pool):
+        render_target_dir = f"{Path.home()}/Desktop/"
+        project.SetRenderSettings(
+            {"TargetDir": render_target_dir, "CustomName": "test_StartRendering_1"}
+        )
+        job_id_1 = project.AddRenderJob()
+
+        project.SetRenderSettings(
+            {"TargetDir": render_target_dir, "CustomName": "test_startRendering_2"}
+        )
+        job_id_2 = project.AddRenderJob()
+
+        result = project.StartRendering(job_id_1, job_id_2)
+        assert result
+
+        project.StopRendering()
+        project.DeleteRenderJob(job_id_1, job_id_2)
+        os.remove(f"{Path.home()}/Desktop/test_StartRendering_1")
+        # os.remove(f"{Path.home()}/Desktop/test_StartRendering_2")
