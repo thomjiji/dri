@@ -94,12 +94,29 @@ class MediaPool:
         """
         Returns root Folder of Media Pool.
 
+        Returns
+        -------
+        Folder
+            Root Folder of Media Pool.
+
         """
         ...
 
     def AddSubFolder(self, folder: Folder, name: str) -> Folder:
         """
         Adds new subfolder under specified Folder object with the given name.
+
+        Parameters
+        ----------
+        folder
+            Folder to add subfolder under.
+        name
+            Name of the subfolder to add.
+
+        Returns
+        -------
+        Folder
+            Subfolder added under specified Folder object.
 
         """
         ...
@@ -108,12 +125,27 @@ class MediaPool:
         """
         Updates the folders in collaboration mode.
 
+        Returns
+        -------
+        bool
+            True if folders were updated, False otherwise.
+
         """
         ...
 
     def CreateEmptyTimeline(self, name: str) -> Timeline:
         """
         Adds new timeline with given name.
+
+        Parameters
+        ----------
+        name
+            Name of the timeline to add.
+
+        Returns
+        -------
+        Timeline
+            Timeline object added.
 
         """
         ...
@@ -125,16 +157,27 @@ class MediaPool:
         Appends specified MediaPoolItem objects in the current timeline. Returns the
         list of appended timelineItems.
 
+        Parameters
+        ----------
+        clip
+            :class:`MediaPoolItem` to be appended. Required.
+        *clips
+            :class:`MediaPoolItem` to be appended.
+
+        Returns
+        -------
+        list[TimelineItem]
+            List of :class:`TimelineItem` appended.
+
         """
         ...
 
     def AppendToTimeline(
-        self, clips: list[MediaPoolItem | ClipInfo]
+        self, clips: list[MediaPoolItem | ClipInfo | dict[str, MediaPoolItem | int]]
     ) -> list[TimelineItem]:
         """
         Notes
         -----
-
         -   If input is list of *MediaPoolItem*:
             Appends specified MediaPoolItem objects in the current timeline. Returns the
             list of appended timelineItems.
@@ -145,15 +188,41 @@ class MediaPool:
             2 - Audio only), "trackIndex" (int) and "recordFrame" (int). Returns the
             list of appended timelineItems.
 
+        Parameters
+        ----------
+        clips
+            List of MediaPoolItems to be appended. It can be a list of multiple
+            MediaPoolItems, or a list of multiple ClipInfo (which is a dict). The
+            specific fields accepted by ClipInfo, please see :class:`ClipInfo`.
+
+        Returns
+        -------
+        list[TimelineItem]
+            List of :class:`TimelineItem` appended.
+
         """
         ...
 
     def CreateTimelineFromClips(
-        self, timeline_name: str, *clips: MediaPoolItem
+        self, timeline_name: str, clip: MediaPoolItem, *clips: MediaPoolItem
     ) -> Timeline:
         """
         Creates new timeline with specified name, and appends the specified
         MediaPoolItem objects.
+
+        Parameters
+        ----------
+        timeline_name
+            Name of the timeline to be created.
+        clip
+            MediaPoolItem to be appended.
+        *clips
+            MediaPoolItems to be appended.
+
+        Returns
+        -------
+        Timeline
+            :class:`Timeline` object created.
 
         """
         ...
@@ -177,11 +246,16 @@ class MediaPool:
             -   ClipInfo that CreateTimelineFromClips accept can't include "trackIndex",
                 otherwise DaVinci Resolve will crash.
 
+        Returns
+        -------
+        Timeline
+            :class:`Timeline` object created.
+
         """
         ...
 
     def ImportTimelineFromFile(
-        self, file_path: str, import_option: ImportOption
+        self, file_path: str, import_option: ImportOption | dict[str, str | list | bool]
     ) -> Timeline:
         """
         Creates timeline based on parameters within given file
@@ -205,12 +279,27 @@ class MediaPool:
         -   interlaceProcessing: Bool, specifies whether to enable interlace processing
             on the imported timeline being created. Valid only for AAF import.
 
+        Returns
+        -------
+        Timeline
+            :class:`Timeline` object created.
+
         """
         ...
 
     def DeleteTimelines(self, timeline: Timeline | list[Timeline]) -> bool:
         """
         Deletes specified timelines in the media pool.
+
+        Parameters
+        ----------
+        timeline
+            Timeline(s) to be deleted.
+
+        Returns
+        -------
+        bool
+            True if successful, false otherwise.
 
         """
         ...
@@ -219,6 +308,11 @@ class MediaPool:
         """
         Returns currently selected Folder.
 
+        Returns
+        -------
+        Folder
+            :class:`Folder` object of currently selected folder.
+
         """
         ...
 
@@ -226,12 +320,63 @@ class MediaPool:
         """
         Sets current folder by given Folder
 
+        Parameters
+        ----------
+        folder
+            Folder to be set as the current folder.
+
+        Returns
+        -------
+        bool
+            True if successful, false otherwise.
+
         """
         ...
 
-    def DeleteClips(self, clips: MediaPoolItem | list[MediaPoolItem]) -> bool:
+    def DeleteClips(self, clip: MediaPoolItem, *clips: MediaPoolItem) -> bool:
+        """
+        Deletes specified clips or timeline mattes in the media pool. It needs to
+        accept as least one MediaPoolItem, or it will return False.
+
+        Parameters
+        ----------
+        clip
+            Clip to be deleted. Required.
+        *clips
+            Clips to be deleted. It can accept more than one MediaPoolItem.
+
+        Returns
+        -------
+        bool
+            True if successful, false otherwise.
+
+        Examples
+        --------
+        >>> clip_1 = root_folder.GetClipList()[0]
+        >>> clip_2 = root_folder.GetClipList()[1]
+        >>> clip_3 = root_folder.GetClipList()[2]
+        >>> clip_4 = root_folder.GetClipList()[3]
+        >>> clip_5 = root_folder.GetClipList()[4]
+        ...
+        >>> media_pool.DeleteClips(clip_1, clip_2, clip_3, clip_4, clip_5)
+        True
+
+        """
+        ...
+
+    def DeleteClips(self, clips: list[MediaPoolItem]) -> bool:
         """
         Deletes specified clips or timeline mattes in the media pool.
+
+        Parameters
+        ----------
+        clips
+            Clips to be deleted.
+
+        Returns
+        -------
+        bool
+            True if successful, false otherwise.
 
         """
         ...
@@ -249,12 +394,46 @@ class MediaPool:
             source clips if the media is inaccessible in their original path, empty by
             default.
 
+        Returns
+        -------
+        bool
+            True if successful, false otherwise.
+
         """
         ...
 
-    def DeleteFolders(self, subfolders: Folder | list[Folder]) -> bool:
+    def DeleteFolders(self, subfolder: Folder, *subfolders: Folder) -> bool:
         """
-        Deletes specified subfolders in the media pool.
+        Deletes specified subfolders in the media pool recursively.
+
+        Parameters
+        ----------
+        subfolder
+            Folder to be deleted. Required.
+        *subfolders
+            Subfolders to be deleted. Optional.
+
+        Returns
+        -------
+        bool
+            True if successful, false otherwise.
+
+        """
+        ...
+
+    def DeleteFolders(self, subfolders: list[Folder]) -> bool:
+        """
+        Deletes specified subfolders in the media pool recursively.
+
+        Parameters
+        ----------
+        subfolders
+            Subfolders to be deleted.
+
+        Returns
+        -------
+        bool
+            True if successful, false otherwise.
 
         """
         ...

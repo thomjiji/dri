@@ -172,7 +172,7 @@ class MediaStorage:
         Returns
         -------
         list[MediaPoolItem]
-            List of created MediaPoolItems.
+            List of created :class:`MediaPoolItem`.
 
         """
         ...
