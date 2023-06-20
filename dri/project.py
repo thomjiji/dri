@@ -252,6 +252,18 @@ class Project:
         """
         ...
 
+    def GetRenderPresetList(self) -> list[str]:
+        """
+        Returns a list of render presets and their information.
+
+        Returns
+        -------
+        list[str]
+            List of render presets and their information.
+
+        """
+        ...
+
     def StartRendering(self, *job_ids: str, is_interactive_mode: bool = False) -> bool:
         """
         Starts rendering jobs indicated by the input job ids. If not specified, it will
@@ -654,6 +666,29 @@ class Project:
         -------
         bool
             True if load successful, False otherwise.
+
+        """
+        ...
+
+    def ExportCurrentFrameAsStill(self, file_path: str) -> bool:
+        """
+        Exports current frame as still to supplied filePath. filePath must end in
+        valid export file format. Returns True if successful, False otherwise.
+
+        Parameters
+        ----------
+        file_path
+            Still export destination.
+
+        Returns
+        -------
+        bool
+            True if successful, False otherwise.
+
+        Examples
+        --------
+        >>> project.ExportCurrentFrameAsStill("/Users/thom/Desktop/arriraw.jpg")
+        True
 
         """
         ...
