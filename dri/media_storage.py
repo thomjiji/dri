@@ -113,19 +113,41 @@ class MediaStorage:
         """
         ...
 
-    # TODO: What is "media" in the dict? Can not make this API to run.
-    def AddItemListToMediaPool(self, item_info: dict) -> list[MediaPoolItem]:
+    def AddItemListToMediaPool(
+        self, item_info: list[dict[str, str | int]]
+    ) -> list[MediaPoolItem]:
         """
-        Adds list of itemInfos specified as dict of "media", "startFrame" (int),
-        "endFrame" (int) from Media Storage into current Media Pool folder. Returns a
-        list of the MediaPoolItems created.
+        Adds list of itemInfos specified as dict of "media" (string), "startFrame"
+        (int), "endFrame" (int) from Media Storage into current Media Pool folder.
+        Returns a list of the MediaPoolItems created.
 
         Parameters
         ----------
         item_info
+            List of dicts of "media" (string), "startFrame" (int), "endFrame" (int)
+            from Media Storage. The key of dict must be "media", "startFrame" and
+            "endFrame". The last two can be emitted (optional).
 
         Returns
         -------
+        list[MediaPoolItem]
+            List of :class:`MediaPoolItem` created.
+
+        Examples
+        --------
+        >>> item_1 = {
+        ...     "media": "/Users/thom/Desktop/A010C0037_220622_005G.MOV",
+        ...     "startFrame": 0,
+        ...     "endFrame": 3182,
+        ... }
+        >>> item_2 = {
+        ...     "media": "/Users/thom/Desktop/A010C0038_220622_005G.MOV",
+        ...     # "startFrame": 1392,  # Can be emitted
+        ...     # "endFrame": 3182,  # Can be emitted
+        ... }
+        >>> media_storage.AddItemListToMediaPool([item_1, item_2])
+        [<BlackmagicFusion.PyRemoteObject at 0x1064d2ff0>,
+         <BlackmagicFusion.PyRemoteObject at 0x1064d2690>]
 
         """
         ...

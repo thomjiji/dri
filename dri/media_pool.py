@@ -27,12 +27,15 @@ class ClipInfo:
         -   2: Audio only
     trackIndex : int
         Indicates which track of the timeline the clip will be inserted into. Optional.
+
         -   If there is only one video track in the timeline: V1, then if trackIndex is
             set to 2, which means the clip will be inserted into the timeline's video
-            track V2, then the API will automatically add video track V2 and insert the
+            track 2, then the API will automatically add video track V2 and insert the
             clip into V2.
+
         -   However, the API does not work if the trackIndex is set to 3 or more when
-            only one video track V1 exists. The clip will stil be inserted into V1.
+            only one video track V1 exists. The clip will still be inserted into V1.
+
     recordFrame: int
         Indicates where in the timeline the clip will be inserted, in Frames. Optional.
 
@@ -192,8 +195,9 @@ class MediaPool:
         ----------
         clips
             List of MediaPoolItems to be appended. It can be a list of multiple
-            MediaPoolItems, or a list of multiple ClipInfo (which is a dict). The
-            specific fields accepted by ClipInfo, please see :class:`ClipInfo`.
+            :class:`MediaPoolItem`, or a list of multiple :class:`ClipInfo` (which is a
+            dict). The specific fields accepted by ClipInfo, please see
+            :class:`ClipInfo`.
 
         Returns
         -------
@@ -485,6 +489,7 @@ class MediaPool:
         Parameters
         ----------
         media_pool_item
+            MediaPoolItem to get mattes for.
 
         Returns
         -------
@@ -587,6 +592,64 @@ class MediaPool:
             Returns a list of MediaPoolItems created. After importing, a list of
             MediaPoolItems will be created.
 
+        """
+        ...
+
+    # TODO: what fields does ClipInfo accept? I have no idea.
+    def ImportMedia(
+        self, paths: list[ClipInfo | dict[str, MediaPoolItem | int]]
+    ) -> list[MediaPoolItem]:
+        """
+        Imports file path(s) into current Media Pool folder as specified in list of
+        clipInfo dict. Returns a list of the MediaPoolItems created.
+
+        -   Each clipInfo gets imported as one :class:`MediaPoolItem` unless 'Show
+            Individual Frames' is turned on.
+
+        -   Example: ImportMedia([{"FilePath":"file_%03d.dpx", "StartIndex":1,
+            "EndIndex":100}]) would import clip "file_[001-100].dpx".
+
+        Parameters
+        ----------
+        paths
+
+        Returns
+        -------
+        list[MediaPoolItem]
+            A list of MediaPoolItems created after importing.
+
+        """
+        ...
+
+    def ExportMetadata(self, file_name: str, clips: list[MediaPoolItem] = []) -> bool:
+        """
+        Exports metadata of specified clips to 'fileName' in CSV format. If no clips
+        are specified, all clips from media pool will be used.
+
+        Parameters
+        ----------
+        file_name
+            The name of the metadata file to export. Adding or not adding csv suffix
+            to it is fine.
+        clips
+            :class:`MediaPoolItem` to export metadata in media pool.
+
+        Returns
+        -------
+        bool
+            True if successful, False otherwise.
+
+        """
+        ...
+
+    def GetUniqueId(self) -> str:
+        """
+        Returns a unique ID for the media pool.
+
+        Returns
+        -------
+        str
+            Unique ID for the media pool.
 
         """
         ...
