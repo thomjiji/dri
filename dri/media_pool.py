@@ -22,22 +22,23 @@ class ClipInfo:
     endFrame : int
         The ending frame of the clip. Optional. If no specified, using the last frame.
     mediaType : Literal[1, 2]
-        The type of media for the clip. Optional.
-        -   1: Video only
-        -   2: Audio only
+        The type of media for the clip. Optional. 1: Video only, 2: Audio only.
     trackIndex : int
         Indicates which track of the timeline the clip will be inserted into. Optional.
-
-        -   If there is only one video track in the timeline: V1, then if trackIndex is
-            set to 2, which means the clip will be inserted into the timeline's video
-            track 2, then the API will automatically add video track V2 and insert the
-            clip into V2.
-
-        -   However, the API does not work if the trackIndex is set to 3 or more when
-            only one video track V1 exists. The clip will still be inserted into V1.
-
     recordFrame: int
         Indicates where in the timeline the clip will be inserted, in Frames. Optional.
+
+    Notes
+    -----
+    trackIndex
+
+    -   If there is only one video track in the timeline: V1, then if trackIndex is
+        set to 2, which means the clip will be inserted into the timeline's video
+        track 2, then the API will automatically add video track V2 and insert the
+        clip into V2.
+
+    -   However, the API does not work if the trackIndex is set to 3 or more when
+        only one video track V1 exists. The clip will still be inserted into V1.
 
     Examples
     --------
@@ -181,15 +182,15 @@ class MediaPool:
         """
         Notes
         -----
-        -   If input is list of *MediaPoolItem*:
-            Appends specified MediaPoolItem objects in the current timeline. Returns the
-            list of appended timelineItems.
+        -   If input is list of :class:`MediaPoolItem`:
+            Appends specified :class:`MediaPoolItem` objects in the current timeline.
+            Returns the list of appended timelineItems.
 
-        -   If input is list of *ClipInfos*:
+        -   If input is list of :class:`ClipInfos`:
             Appends list of clipInfos specified as dict of "mediaPoolItem", "startFrame"
-            (int), "endFrame" (int), (optional) "mediaType" (int; 1 - Video only,
-            2 - Audio only), "trackIndex" (int) and "recordFrame" (int). Returns the
-            list of appended timelineItems.
+            (int), "endFrame" (int), (optional) "mediaType" (int; 1 - Video only, 2 -
+            Audio only), "trackIndex" (int) and "recordFrame" (int). Returns the list of
+            appended timelineItems.
 
         Parameters
         ----------
@@ -235,20 +236,19 @@ class MediaPool:
         self, timeline_name: str, clips: list[MediaPoolItem | ClipInfo]
     ) -> Timeline:
         """
+        If input is list of :class:`MediaPoolItem`:
+        Creates new timeline with specified name, and appends the specified
+        MediaPoolItem objects.
+
+        If input is list of :class:`ClipInfo`:
+        Creates new timeline with specified name, appending the list of clipInfos
+        specified as a dict of "mediaPoolItem", "startFrame" (int), "endFrame" (int),
+        "recordFrame" (int).
+
         Notes
         -----
-
-        -   If input is list of *MediaPoolItem*:
-            Creates new timeline with specified name, and appends the specified
-            MediaPoolItem objects.
-
-        -   If input is list of *ClipInfos*:
-            Creates new timeline with specified name, appending the list of clipInfos
-            specified as a dict of "mediaPoolItem", "startFrame" (int), "endFrame"
-            (int), "recordFrame" (int).
-
-            -   ClipInfo that CreateTimelineFromClips accept can't include "trackIndex",
-                otherwise DaVinci Resolve will crash.
+        -   :class:`ClipInfo` that CreateTimelineFromClips accept can't include
+        "trackIndex", otherwise DaVinci Resolve will crash.
 
         Returns
         -------
@@ -603,9 +603,10 @@ class MediaPool:
         Imports file path(s) into current Media Pool folder as specified in list of
         clipInfo dict. Returns a list of the MediaPoolItems created.
 
+        Notes
+        -----
         -   Each clipInfo gets imported as one :class:`MediaPoolItem` unless 'Show
             Individual Frames' is turned on.
-
         -   Example: ImportMedia([{"FilePath":"file_%03d.dpx", "StartIndex":1,
             "EndIndex":100}]) would import clip "file_[001-100].dpx".
 
