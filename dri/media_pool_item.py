@@ -34,13 +34,28 @@ class MediaPoolItem:
         """
         Returns the clip name.
 
+        Returns
+        -------
+        str
+            Clip name.
+
         """
         ...
 
-    def GetMetadata(self, metadata_type=None) -> str | Metadata:
+    def GetMetadata(self, metadata_type: str = None) -> str | Metadata:
         """
         Returns the metadata value for the key "metadataType". If no argument is
         specified, a dict of all set metadata properties is returned.
+
+        Parameters
+        ----------
+        metadata_type
+            Metadata type to get.
+
+        Returns
+        -------
+        str | Metadata
+            Metadata value for the key "metadataType".
 
         Notes
         -----
@@ -54,6 +69,19 @@ class MediaPoolItem:
     def SetMetadata(self, metadata_type: str, metadata_value: str) -> bool:
         """
         Sets the given metadata to metadataValue (string). Returns True if successfully.
+
+        Parameters
+        ----------
+        metadata_type
+            Metadata type to set.
+        metadata_value
+            Metadata value to set.
+
+
+        Returns
+        -------
+        bool
+            True if successful.
 
         Notes
         -----
@@ -69,6 +97,16 @@ class MediaPoolItem:
         Sets the item metadata with specified "metadata" dict. Returns True if
         successful.
 
+        Parameters
+        ----------
+        metadata
+            Metadata to set.
+
+        Returns
+        -------
+        bool
+            True if successful.
+
         Notes
         -----
         -   You can set all the items in DaVinci Resolve Metadata tab through this
@@ -81,6 +119,11 @@ class MediaPoolItem:
     def GetMediaId(self) -> bool:
         """
         Returns the unique ID for the MediaPoolItem.
+
+        Returns
+        -------
+        str
+            Unique ID for the MediaPoolItem.
 
         """
         ...
@@ -99,6 +142,27 @@ class MediaPoolItem:
         information. "customData" is optional and helps to attach user specific data
         to the marker.
 
+        Parameters
+        ----------
+        frame_id
+            Frame number. Which is "Source Frame".
+        color
+            Marker color.
+        name
+            Marker name.
+        note
+            Marker note.
+        duration
+            Marker duration.
+        custom_data
+            Custom data helps to attach user specific data to the marker. Not visible
+            in the UI.
+
+        Returns
+        -------
+        bool
+            True if successful, False otherwise.
+
         """
         ...
 
@@ -106,16 +170,20 @@ class MediaPoolItem:
         """
         Returns a dict of all markers and dicts with their information.
 
+        Returns
+        -------
+        dict[int, dict[str, str | int]]
+            Dict of all markers and dicts with their information.
+
         Examples
         --------
-
         In the below example, there is one "Green" marker at offset 96 (position of the
         marker):
 
         >>> from resolve_init import GetResolve
         >>> resolve = GetResolve()
-        >>> project_manager.py = resolve.GetProjectManager()
-        >>> project = project_manager.py.GetCurrentProject()
+        >>> project_manager = resolve.GetProjectManager()
+        >>> project = project_manager.GetCurrentProject()
         >>> media_pool = project.GetMediaPool()
         >>> root_folder = media_pool.GetRootFolder()
         >>> for clip in root_folder.GetClipList():
@@ -130,6 +198,16 @@ class MediaPoolItem:
         """
         Returns marker {information} for the first matching marker with specified
         customData.
+
+        Parameters
+        ----------
+        custom_data
+            Custom data to search for.
+
+        Returns
+        -------
+        dict[str, int]
+            Marker information for the first matching marker with specified customData.
 
         Examples
         --------
