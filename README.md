@@ -16,7 +16,7 @@ It has the following characteristics:
 
 - It faithfully duplicates the signature of the original API, adhering strictly to the original parameters, function
   overloading, return type, and other specifications outlined in the DaVinci Resolve API README.
-- All docstrings are derived from the most recent DaVinci Resolve 18.5 Beta 3 README and will be consistently updated.
+- All docstrings are derived from the most recent DaVinci Resolve 18.5 Beta 4 README and will be consistently updated.
 - It serves solely as a development dependency or an interface. Once development is complete, you are free to remove it,
   and the code will continue to function seamlessly in DaVinci Resolve since it employs the identical
   signature as the original API.
@@ -32,9 +32,33 @@ pytest -v
 ```
 
 By default, pytest captures the output produced by your tests and displays it only if the test fails. However, when you
-use `--capture=no` or `-s`, pytest allows the stdout and stderr to be displayed on the console immediately, regardless of the
-test result.
+use `--capture=no` or `-s`, pytest allows the stdout and stderr to be displayed on the console immediately, regardless
+of the test result.
 
 ```shell
 pytest -v -s
+```
+
+# After development using Dri
+
+If your script intends to use outside DaVinci Resolve, then replace the import below
+
+```python
+from dri import Resolve
+
+resolve = Resolve.resolve_init()
+```
+
+with:
+
+```python
+import DaVinciResolveScript as dvr_script
+
+resolve = dvr_script.scriptapp("Resolve")
+```
+
+If your script intends to use inside DaVinci Resolve, replace with:
+
+```python
+resolve = bmd.scriptapp("Resolve")
 ```
