@@ -7,7 +7,8 @@ from dri.project_manager import ProjectManager
 def load_dynamic_lib():
     spec = importlib.util.spec_from_file_location(
         "fusionscript",
-        "/Applications/DaVinci Resolve/DaVinci Resolve.app/Contents/Libraries/Fusion/fusionscript.so",
+        "/Applications/DaVinci Resolve/DaVinci "
+        "Resolve.app/Contents/Libraries/Fusion/fusionscript.so",
     )
     bmd_module = importlib.util.module_from_spec(spec)
 

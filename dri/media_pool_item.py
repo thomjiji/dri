@@ -1,4 +1,3 @@
-from dataclasses import dataclass
 from typing import TypedDict, Literal
 
 from dri.color import MarkerColor, FlagColor, ClipColor
