@@ -1,13 +1,28 @@
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![License: LGPL v3](https://img.shields.io/badge/License-LGPL_v3-blue.svg)](https://www.gnu.org/licenses/lgpl-3.0)
 
-# Introduction
+**This repo is under development which is not complete yet.**
 
-Dri is a type system that aims to provide auto-completion, type annotation, and static type checking for developing
-scripts using DaVinci Resolve API. It packages all APIs according to the latest README and adds well-formatted
-docstrings (using NumPy style, referencing the [Colour](https://github.com/colour-science/colour) project) and detailed
-type hints to help understand the types of parameters accepted by each API and their return value types. This is
-particularly important and useful during development when there is only one README file as reference.
+# Dri
+
+Dri is a type system that aims to provide auto-completion, and static type checking for developing scripts using DaVinci
+Resolve API. It packages all APIs according to the latest README and adds well-formatted docstrings (using NumPy style,
+referencing the [Colour](https://github.com/colour-science/colour) project) and detailed type hints, allowing developers
+to easily view the types of parameters accepted by each API and their return value types, while also helping static
+type checking tools (such as [mypy](https://github.com/python/mypy) or [pyright](https://github.com/microsoft/pyright))
+to better catch type problems in code early.
+
+Dri is a wrapper of DaVinci Resolve Scripting API, aims to provide auto-completion, and static type checking for
+developing scripts using DaVinci Resolve API. It packages all APIs according to the latest README and adds
+**well-formatted docstrings** (using NumPy style, referencing the [Colour](https://github.com/colour-science/colour)
+project) and **detailed type hints**, allowing developers to easily view the types of parameters accepted by each
+API and their return value types, while also helping static type checking tools (such
+as [mypy](https://github.com/python/mypy) or [pyright](https://github.com/microsoft/pyright)) to better catch type
+problems in code early.
+
+## Get Started
+
+### Prerequisites
 
 If you don't know what return type of API, just `Cmd+B` (PyCharm) or `F12` (VS Code) to go to declaration, or hover
 over the function (API) to see well formatted docstring and type hints.
@@ -62,3 +77,7 @@ If your script intends to use inside DaVinci Resolve, replace with:
 ```python
 resolve = bmd.scriptapp("Resolve")
 ```
+
+## License
+
+This project is licensed under the LGPLv3 License - see the [LICENSE](LICENSE) file for details
