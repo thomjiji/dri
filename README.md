@@ -5,36 +5,33 @@
 
 # Dri
 
-Dri is a type system that aims to provide auto-completion, and static type checking for developing scripts using DaVinci
-Resolve API. It packages all APIs according to the latest README and adds well-formatted docstrings (using NumPy style,
-referencing the [Colour](https://github.com/colour-science/colour) project) and detailed type hints, allowing developers
-to easily view the types of parameters accepted by each API and their return value types, while also helping static
-type checking tools (such as [mypy](https://github.com/python/mypy) or [pyright](https://github.com/microsoft/pyright))
-to better catch type problems in code early.
+Dri is a wrapper for the DaVinci Resolve Scripting API that provides auto-completion,
+static type checking, and improved documentation. It packages all the APIs based on the
+latest [README](READMEs), enhances them with well-formatted
+docstrings (in NumPy style), and adds detailed type hints. This allows developers to
+easily view parameter types and return value types for each API, while also enabling
+static type checking tools like [mypy](https://github.com/python/mypy)
+or [pyright](https://github.com/microsoft/pyright) to catch type problems in code early.
 
-Dri is a wrapper of DaVinci Resolve Scripting API, aims to provide auto-completion, and static type checking for
-developing scripts using DaVinci Resolve API. It packages all APIs according to the latest README and adds
-**well-formatted docstrings** (using NumPy style, referencing the [Colour](https://github.com/colour-science/colour)
-project) and **detailed type hints**, allowing developers to easily view the types of parameters accepted by each
-API and their return value types, while also helping static type checking tools (such
-as [mypy](https://github.com/python/mypy) or [pyright](https://github.com/microsoft/pyright)) to better catch type
-problems in code early.
+If you don't know what return type of API, just `Cmd+B` (PyCharm) or `F12` (VS Code) to
+go to declaration, or hover over the function (API) to see well formatted docstring and
+type hints.
+
+- It accurately replicates the original API, preserving the exact parameters, function
+  overloading, return types, and other specifications specified in the DaVinci Resolve
+  API [README](READMEs).
+- The docstrings are generated from the
+  latest [DaVinci Resolve 18.5 Beta 4 README](READMEs/18.5b4_README.txt) and will be
+  regularly updated.
+- It functions as a development dependency or an interface. After development is
+  finished, you can safely remove it without impacting the code's seamless operation in
+  DaVinci Resolve, as it maintains the same signature as the original API.
 
 ## Get Started
 
 ### Prerequisites
 
-If you don't know what return type of API, just `Cmd+B` (PyCharm) or `F12` (VS Code) to go to declaration, or hover
-over the function (API) to see well formatted docstring and type hints.
-
-It has the following characteristics:
-
-- It faithfully duplicates the signature of the original API, adhering strictly to the original parameters, function
-  overloading, return type, and other specifications outlined in the DaVinci Resolve API README.
-- All docstrings are derived from the most recent DaVinci Resolve 18.5 Beta 4 README and will be consistently updated.
-- It serves solely as a development dependency or an interface. Once development is complete, you are free to remove it,
-  and the code will continue to function seamlessly in DaVinci Resolve since it employs the identical
-  signature as the original API.
+...
 
 # Similar Project
 
@@ -46,8 +43,10 @@ It has the following characteristics:
 pytest -v
 ```
 
-By default, pytest captures the output produced by your tests and displays it only if the test fails. However, when you
-use `--capture=no` or `-s`, pytest allows the stdout and stderr to be displayed on the console immediately, regardless
+By default, pytest captures the output produced by your tests and displays it only if
+the test fails. However, when you
+use `--capture=no` or `-s`, pytest allows the stdout and stderr to be displayed on the
+console immediately, regardless
 of the test result.
 
 ```shell
@@ -80,4 +79,5 @@ resolve = bmd.scriptapp("Resolve")
 
 ## License
 
-This project is licensed under the LGPLv3 License - see the [LICENSE](LICENSE) file for details
+This project is licensed under the LGPLv3 License - see the [LICENSE](LICENSE) file for
+details
