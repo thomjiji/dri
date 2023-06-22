@@ -3,7 +3,7 @@ name = "dri"
 version = "0.0.1"
 description = "DaVinci Resolve API type system for script development"
 authors = ["thomjiji <hxy449999@gmail.com>"]
-license = "MIT"
+license = "GPLv3"
 readme = "README.md"
 
 [tool.poetry.dependencies]
@@ -11,7 +11,7 @@ python = "^3.11"
 pytest = "^7.3.2"
 
 [tool.poetry.group.dev.dependencies]
-black = {extras = ["d"], version = "^23.3.0"}
+black = { extras = ["d"], version = "^23.3.0" }
 jupyter = "^1.0.0"
 notebook = "^6.5.4"
 
