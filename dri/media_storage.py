@@ -1,4 +1,4 @@
-from dri import MediaPoolItem
+from dri.media_pool_item import MediaPoolItem
 from typing import Literal
 
 
