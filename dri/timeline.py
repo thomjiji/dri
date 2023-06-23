@@ -262,7 +262,7 @@ class Timeline:
         Parameters
         ----------
         clips
-            List of TimelineItems to delete.
+            TimelineItems to delete. Can be
         ripple_delete
             True if the second argument is True.
 
@@ -270,6 +270,52 @@ class Timeline:
         -------
         bool
             True if the clips were deleted successfully, False otherwise.
+
+        Notes
+        -----
+        -   If clip have audio, then DeleteClips will only delete the video (which is
+            :class:`TimelineItem`), leaving the audio in the timeline.
+
+        """
+        ...
+
+    def SetClipsLinked(self, clips: list[TimelineItem], linked: bool) -> bool:
+        """
+        Links or unlinks the specified TimelineItems depending on second argument.
+
+        Parameters
+        ----------
+        clips
+            TimelineItems to link/unlink.
+        linked
+            Link or not.
+
+        Returns
+        -------
+        bool
+            True if the clips were linked/unlinked successfully, False otherwise.
+
+        """
+        ...
+
+    def GetItemListInTrack(
+        self, track_type: str, track_index: int
+    ) -> list[TimelineItem]:
+        """
+        Returns a list of timeline items on that track (based on trackType and
+        trackIndex). 1 <= trackIndex <= GetTrackCount(trackType).
+
+        Parameters
+        ----------
+        track_type
+                Track type ("audio", "video" or "subtitle").
+        track_index
+            Track index. In this range: 1 <= trackIndex <= GetTrackCount(trackType).
+
+        Returns
+        -------
+        list[TimelineItem]
+            Returns a list of TimelineItem on that track.
 
         """
         ...
@@ -288,6 +334,28 @@ class Timeline:
         information. 'customData' is optional and helps to attach user specific data
         to the marker.
 
+        Parameters
+        ----------
+        frame_id
+            Frame id of the marker. Frame id = Record Frame -
+            :func:`dri.timeline.GetStartFrame`.
+        color
+            Marker color.
+        name
+            Marker name.
+        note
+            Marker note.
+        duration
+            Marker duration.
+        custom_data
+            Custom data helps to attach user specific data to the marker. Not visible
+            in the UI.
+
+        Returns
+        -------
+        bool
+            True if the marker was created successfully.
+
         Notes
         -----
         -   frameId is not source frame, but a Record Frame minus the first frame
@@ -298,10 +366,79 @@ class Timeline:
             current timeline is 24fps, so the first frame is 86400. Here we can get the
             frameId which is 86607 - 86400 = 207.
 
+        """
+        ...
+
+    def GetMarkers(self) -> dict[int, dict[str, str | int]]:
+        """
+        Returns a dict (frameId -> {information}) of all markers and dicts with their
+        information.
+
+        Returns
+        -------
+        dict[int, dict[str, str | int]]
+            Dict of all markers and dicts with their information.
+
+        """
+        ...
+
+    def GetMarkerByCustomData(
+        self, custom_data: str
+    ) -> dict[int, dict[str, str | int]]:
+        """
+        Returns marker {information} for the first matching marker with specified
+        customData.
+
+        Parameters
+        ----------
+        custom_data
+            Custom data helps to attach user specific data to the marker. Not visible
+            in the UI.
+
+        Returns
+        -------
+        dict[int, dict[str, str | int]]
+            Dict of all markers and dicts with their information.
+
+
+        """
+        ...
+
+    def UpdateMarkerCustomData(self, frame_id: int, custom_data: str) -> bool:
+        """
+        Updates customData (string) for the marker at given frameId position.
+        CustomData is not exposed via UI and is useful for scripting developer to
+        attach any user specific data to markers.
+
+        Parameters
+        ----------
+        frame_id
+            Frame id of the marker.
+        custom_data
+            Custom data helps to attach user specific data to the marker. Not visible
+            in the UI.
+
         Returns
         -------
         bool
-            True if the marker was created successfully.
+            True if the marker was updated successfully.
+
+        """
+        ...
+
+    def GetMarkerCustomData(self, frame_id: int) -> str:
+        """
+        Returns customData string for the marker at given frameId position.
+
+        Parameters
+        ----------
+        frame_id
+            Frame id of the marker.
+
+        Returns
+        -------
+        str
+            Custom data string.
 
         """
         ...
