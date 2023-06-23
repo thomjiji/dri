@@ -248,7 +248,7 @@ class MediaPool:
         Notes
         -----
         -   :class:`ClipInfo` that CreateTimelineFromClips accept can't include
-        "trackIndex", otherwise DaVinci Resolve will crash.
+            "trackIndex", otherwise DaVinci Resolve will crash.
 
         Returns
         -------

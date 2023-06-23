@@ -85,8 +85,9 @@ class MediaPoolItem:
         Notes
         -----
         -   You can set all the items in DaVinci Resolve Metadata tab through this
-            API, except for "Clip Color" (see "GetClipColor()"), "Flags" (see
-            "AddFlag(color)") and items that cannot be modified in the UI.
+            API, except for "Clip Color" (see :func:`dri.media_pool_item.GetClipColor`),
+            "Flags" (see :func:`dri.media_pool_item.AddFlag`) and items that cannot be
+            modified in the UI.
 
         """
         ...
@@ -109,8 +110,9 @@ class MediaPoolItem:
         Notes
         -----
         -   You can set all the items in DaVinci Resolve Metadata tab through this
-            API, except for "Clip Color" (see "GetClipColor()"), "Flags" (see
-            "AddFlag(color)") and items that cannot be modified in the UI.
+            API, except for "Clip Color" (see :func:`dri.media_pool_item.GetClipColor`),
+            "Flags" (see :func:`dri.media_pool_item.AddFlag`) and items that cannot be
+            modified in the UI.
 
         """
         ...
@@ -231,6 +233,18 @@ class MediaPoolItem:
         """
         Updates the customData (string) for the marker at given frameId position.
 
+        Parameters
+        ----------
+        frame_id
+            Frame number. On the Resolve UI it's called "Source Frame".
+        custom_data
+            Custom data to update.
+
+        Returns
+        -------
+        bool
+            True if successful, False otherwise.
+
         """
         ...
 
@@ -238,13 +252,33 @@ class MediaPoolItem:
         """
         Returns customData string for the marker at given frameId position.
 
+        Parameters
+        ----------
+        frame_id
+            Frame number. On the Resolve UI it's called "Source Frame".
+
+        Returns
+        -------
+        str
+            Custom data string for the marker at given frameId position.
+
         """
         ...
 
-    def DeleteMarkersByColor(self, color: MarkerColor) -> bool:
+    def DeleteMarkersByColor(self, color: MarkerColor | str) -> bool:
         """
-        Delete all markers of the specified color from the media pool item. *"All"* as
+        Delete all markers of the specified color from the media pool item. **"All"** as
         argument deletes all markers.
+
+        Parameters
+        ----------
+        color
+            Marker color.
+
+        Returns
+        -------
+        bool
+            True if successful, False otherwise.
 
         """
         ...
@@ -253,6 +287,16 @@ class MediaPoolItem:
         """
         Delete marker at frame number from the media pool item.
 
+        Parameters
+        ----------
+        frame_num
+            Frame number. On the Resolve UI it's called "Source Frame".
+
+        Returns
+        -------
+        bool
+            True if successful, False otherwise.
+
         """
         ...
 
@@ -260,34 +304,74 @@ class MediaPoolItem:
         """
         Delete first matching marker with specified customData.
 
+        Parameters
+        ----------
+        custom_data
+            Custom data to search for.
+
+        Returns
+        -------
+        bool
+            True if successful, False otherwise.
+
         """
         ...
 
-    def AddFlag(self, color: FlagColor) -> bool:
+    def AddFlag(self, color: FlagColor | str) -> bool:
         """
         Adds a flag with given color (string).
 
+        Parameters
+        ----------
+        color
+            Flag color.
+
+        Returns
+        -------
+        bool
+            True if successful, False otherwise.
+
         """
         ...
 
-    def GetFlagList(self) -> list[FlagColor]:
+    def GetFlagList(self) -> list[FlagColor | str]:
         """
         Returns a list of flag colors assigned to the item.
 
+        Returns
+        -------
+        list[FlagColor | str]
+            List of flag colors assigned to the item.
+
         """
         ...
 
-    def ClearFlags(self, color: FlagColor) -> bool:
+    def ClearFlags(self, color: FlagColor | str) -> bool:
         """
-        Clears the flag of the given color if one exists. An *"All"* argument is
+        Clears the flag of the given color if one exists. An **"All"** argument is
         supported and clears all flags.
 
+        Parameters
+        ----------
+        color
+            Flag color.
+
+        Returns
+        -------
+        bool
+            True if successful, False otherwise.
+
         """
         ...
 
-    def GetClipColor(self) -> str:
+    def GetClipColor(self) -> ClipColor | str:
         """
         Returns the item color as a string.
+
+        Returns
+        -------
+        ClipColor | str
+            Return Clip color as a string.
 
         """
         ...
@@ -296,6 +380,16 @@ class MediaPoolItem:
         """
         Sets the item color based on the colorName (string).
 
+        Parameters
+        ----------
+        color_name
+            Clip color name.
+
+        Returns
+        -------
+        bool
+            True if successful, False otherwise.
+
         """
         ...
 
@@ -303,14 +397,29 @@ class MediaPoolItem:
         """
         Clear the item color.
 
+        Returns
+        -------
+        bool
+            True if successful, False otherwise.
+
         """
         ...
 
-    def GetClipProperty(self, property_name=None) -> str | dict[str, str]:
+    def GetClipProperty(self, property_name: str = None) -> str | dict[str, str]:
         """
         Returns the property value for the key "propertyName". If no argument is
         specified, a dict of all clip properties is returned. Check the section below
         for more information.
+
+        Parameters
+        ----------
+        property_name
+            Property name.
+
+        Returns
+        -------
+        str | dict[str, str]
+            Return property value or dict of properties.
 
         Examples
         --------
@@ -335,7 +444,7 @@ class MediaPoolItem:
           'Data Level': 'Auto',
           'Date Added': 'Fri May 19 2023 19:37:03',
           'Date Created': 'Sat Nov 5 2022 20:16:20',
-          'Date Modified': 'Sat Nov  5 20:16:44 2022',
+          'Date Modified': 'Sat Nov 5 20:16:44 2022',
           'Description': '',
           'Drop frame': '0',
           'Duration': '00:00:24:05',
@@ -394,6 +503,18 @@ class MediaPoolItem:
         Sets the given property to propertyValue (string). Check the section below
         for more information.
 
+        Parameters
+        ----------
+        property_name
+            Property name.
+        property_value
+            Property value.
+
+        Returns
+        -------
+        bool
+            True if successful, False otherwise.
+
         """
         ...
 
@@ -402,14 +523,24 @@ class MediaPoolItem:
         Links proxy media located at path specified by arg "proxyMediaFilePath" with
         the current clip. "proxyMediaFilePath" should be absolute clip path.
 
+        Parameters
+        ----------
+        proxy_media_file_path
+            Path to proxy media file.
+
+        Returns
+        -------
+        bool
+            True if successful, False otherwise.
+
         Notes
         -----
         -   Proxy files must have identical timecode to the source file.
         -   Proxy files must have the same file name as the source file (excluding
-        extensions).
+            extensions).
         -   Proxy files must have the same frame rate as the source file.
         -   The format and codec used for proxy files must be supported in DaVinci
-        Resolve.
+            Resolve.
 
         """
         ...
@@ -417,6 +548,11 @@ class MediaPoolItem:
     def UnlinkProxyMedia(self) -> bool:
         """
         Unlinks any proxy media associated with clip.
+
+        Returns
+        -------
+        bool
+            True if successful, False otherwise.
 
         """
         ...
@@ -426,12 +562,53 @@ class MediaPoolItem:
         Replaces the underlying asset and metadata of MediaPoolItem with the
         specified absolute clip path.
 
+        Parameters
+        ----------
+        file_path
+            Absolute clip path.
+
+        Returns
+        -------
+        bool
+            True if successful, False otherwise.
+
         """
         ...
 
     def GetUniqueId(self) -> str:
         """
         Returns a unique ID for the media pool item.
+
+        Returns
+        -------
+        str
+            Unique ID.
+
+        """
+        ...
+
+    def TranscribeAudio(self) -> bool:
+        """
+        Transcribes audio of the MediaPoolItem. Returns True if successful; False
+        otherwise.
+
+        Returns
+        -------
+        bool
+            True if successful, False otherwise.
+
+        """
+        ...
+
+    def ClearTranscription(self) -> bool:
+        """
+        Clears audio transcription of the MediaPoolItem. Returns True if successful;
+        False otherwise.
+
+        Returns
+        -------
+        bool
+            True if successful, False otherwise.
 
         """
         ...
