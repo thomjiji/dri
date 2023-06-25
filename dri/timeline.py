@@ -1,5 +1,11 @@
-from dri.timeline_item import TimelineItem
+from typing import Literal
+
 from dri.color import MarkerColor
+from dri.timeline_item import TimelineItem
+
+
+class ThumbnailData:
+    width: int
 
 
 class Timeline:
@@ -439,6 +445,260 @@ class Timeline:
         -------
         str
             Custom data string.
+
+        """
+        ...
+
+    def DeleteMarkersByColor(self, color: MarkerColor | str) -> bool:
+        """
+        Deletes all timeline markers of the specified color. An "All" argument is
+        supported and deletes all timeline markers.
+
+        Parameters
+        ----------
+        color
+            Marker color, passing "All" to it will delete all timeline markers.
+
+        Returns
+        -------
+        bool
+            True if the markers were deleted successfully.
+
+        """
+        ...
+
+    def DeleteMarkerAtFrame(self, frame_number: int) -> bool:
+        """
+        Delete marker at frame number from the media pool item.
+
+        Parameters
+        ----------
+        frame_number
+            Frame id, which is Frame id = Record Frame -
+            :func:`dri.timeline.GetStartFrame`.
+
+        Returns
+        -------
+        bool
+            True if the marker was deleted successfully.
+
+        """
+        ...
+
+    def DeleteMarkerByCustomData(self, custom_data: str) -> bool:
+        """
+        Delete first matching marker with specified customData.
+
+        Parameters
+        ----------
+        custom_data
+            Custom data helps to attach user specific data to the marker. Not visible
+            in the UI.
+
+        Returns
+        -------
+        bool
+            True if the marker was deleted successfully.
+
+        """
+        ...
+
+    def ApplyGradeFromDRX(
+        self,
+        path: str,
+        grade_mode: Literal[0, 1, 2],
+        item: TimelineItem,
+        *items: TimelineItem
+    ) -> bool:
+        """
+        Loads a still from given file path (string) and applies grade to Timeline
+        Items with gradeMode (int): 0 - "No keyframes", 1 - "Source Timecode
+        aligned", 2 - "Start Frames aligned".
+
+        Parameters
+        ----------
+        path
+            Path to still file.
+        grade_mode
+            0 - "No keyframes", 1 - "Source Timecode aligned", 2 - "Start Frames
+            aligned".
+        item
+            :class:`TimelineItem` to apply grade to.
+
+        Other Parameters
+        ----------
+        *items
+            List of :class:`TimelineItem` to apply grade to.
+
+        Returns
+        -------
+        bool
+            True if the grade was applied successfully.
+
+        """
+        ...
+
+    def ApplyGradeFromDRX(
+        self, path: str, grade_mode: Literal[0, 1, 2], items: list[TimelineItem]
+    ) -> bool:
+        """
+        Loads a still from given file path (string) and applies grade to Timeline
+        Items with gradeMode (int): 0 - "No keyframes", 1 - "Source Timecode
+        aligned", 2 - "Start Frames aligned".
+
+        Parameters
+        ----------
+        path
+            Path to still file.
+        grade_mode
+            0 - "No keyframes", 1 - "Source Timecode aligned", 2 - "Start Frames
+            aligned".
+        items
+            List of :class:`TimelineItem` to apply grade to.
+
+        Returns
+        -------
+        bool
+            True if the grade was applied successfully.
+
+        """
+        ...
+
+    def GetCurrentTimecode(self) -> str:
+        """
+        Returns a string timecode representation for the current playhead position,
+        while on Cut, Edit, Color, Fairlight and Deliver pages.
+
+        Returns
+        -------
+        str
+            Timecode in format "HH:MM:SS:FF".
+
+        """
+        ...
+
+    def SetCurrentTimecode(self, timecode: str) -> bool:
+        """
+        Sets current playhead position from input timecode for Cut, Edit, Color,
+        Fairlight and Deliver pages.
+
+        Parameters
+        ----------
+        timecode
+            Playhead position in the timeline to set.
+
+        Returns
+        -------
+        bool
+            True if the timecode was set successfully.
+
+        """
+        ...
+
+    def GetCurrentVideoItem(self) -> TimelineItem:
+        """
+        Returns the current video timeline item.
+
+        Returns
+        -------
+        TimelineItem
+            The current video timeline item.
+
+        """
+        ...
+
+    def GetCurrentClipThumbnailImage(self) -> dict:
+        """
+        Returns a dict (keys "width", "height", "format" and "data") with data
+        containing raw thumbnail image data (RGB 8-bit image data encoded in base64
+        format) for current media in the Color Page.
+
+        An example of how to retrieve and interpret thumbnails is provided in
+        6_get_current_media_thumbnail.py in the Examples folder.
+
+        Returns
+        -------
+
+        """
+        ...
+
+    def GetTrackName(self, track_type: str, track_index: int) -> str:
+        """
+        Returns the track name for track indicated by trackType ("audio", "video" or
+        "subtitle") and index. 1 <= trackIndex <= GetTrackCount(trackType).
+
+        Parameters
+        ----------
+        track_type
+            Track type ("audio", "video" or "subtitle").
+        track_index
+            Track index. In this range: 1 <= trackIndex <= GetTrackCount(trackType).
+
+        Returns
+        -------
+        str
+            Track name.
+
+        """
+        ...
+
+    def SetTrackName(self, track_type: str, track_index: int) -> bool:
+        """
+        Sets the track name (string) for track indicated by trackType ("audio",
+        "video" or "subtitle") and index. 1 <= trackIndex <= GetTrackCount(trackType).
+
+        Parameters
+        ----------
+        track_type
+            Track type ("audio", "video" or "subtitle").
+        track_index
+            Track index. In this range: 1 <= trackIndex <= GetTrackCount(trackType).
+
+        Returns
+        -------
+        bool
+            True if the track name was set successfully.
+
+        """
+        ...
+
+    def DuplicateTimeline(self, new_timeline_name: str) -> "Timeline":
+        """
+        Duplicates the timeline and returns the created timeline, with the (optional)
+        timelineName, on success.
+
+        Parameters
+        ----------
+        new_timeline_name
+            Name of the new timeline.
+
+        Returns
+        -------
+        :class:`Timeline`
+            The new timeline after duplication.
+
+        """
+        ...
+
+    def CreateCompoundClip(
+        self, timeline_items: list[TimelineItem], clip_info: dict[str, str] = None
+    ) -> TimelineItem:
+        """
+        Creates a compound clip of input timeline items with an optional clipInfo
+        map: {"startTimecode" : "00:00:00:00", "name" : "Compound Clip 1"}. It
+        returns the created timeline item.
+
+        Parameters
+        ----------
+        timeline_items
+            List of timeline items to be composed.
+        clip_info
+            Optional clipInfo.
+
+        Returns
+        -------
+        :class:`TimelineItem`
+            The created timeline item.
 
         """
         ...
