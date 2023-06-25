@@ -15,9 +15,35 @@ def load_dynamic_lib():
     return bmd_module
 
 
+# TODO: Complete this, filling into __init__
 class Resolve:
+    EXPORT_AAF = "AAF"
+    EXPORT_DRT = "DRT"
+    EXPORT_EDL = "EDL"
+    EXPORT_FCP_7_XML = "FCP_7_XML"
+    EXPORT_FCPXML_1_8 = "FCPXML_1_8"
+    EXPORT_FCPXML_1_9 = "FCPXML_1_9"
+    EXPORT_FCPXML_1_10 = "FCPXML_1_10"
+    EXPORT_HDR_10_PROFILE_A = "HDR_10_PROFILE_A"
+    EXPORT_HDR_10_PROFILE_B = "HDR_10_PROFILE_B"
+    EXPORT_TEXT_CSV = "TEXT_CSV"
+    EXPORT_TEXT_TAB = "TEXT_TAB"
+    EXPORT_DOLBY_VISION_VER_2_9 = "DOLBY_VISION_VER_2_9"
+    EXPORT_DOLBY_VISION_VER_4_0 = "DOLBY_VISION_VER_4_0"
+    EXPORT_DOLBY_VISION_VER_5_1 = "DOLBY_VISION_VER_5_1"
+    EXPORT_OTIO = "OTIO"
+
+    EXPORT_NONE = "NONE"
+    EXPORT_AAF_NEW = "AAF_NEW"
+    EXPORT_AAF_EXISTING = "AAF_EXISTING"
+    EXPORT_CDL = "CDL"
+    EXPORT_SDL = "SDL"
+    EXPORT_MISSING_CLIPS = "MISSING_CLIPS"
+
     def __init__(self):
-        self.resolve = self.resolve_init()
+        # self.resolve = self.resolve_init()
+        self.EXPORT_AAF = None
+        self.EXPORT_AAF = self.EXPORT_AAF
 
     @staticmethod
     def resolve_init() -> "Resolve":
