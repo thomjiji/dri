@@ -62,9 +62,9 @@ class ClipInfo:
 
 
 @dataclass
-class ImportOption:
+class TimelineImportOption:
     """
-    For `ImportTimelineFromFile()` use.
+    For :func:`ImportTimelineFromFile()` use.
 
     Attributes
     ----------
@@ -259,7 +259,9 @@ class MediaPool:
         ...
 
     def ImportTimelineFromFile(
-        self, file_path: str, import_option: ImportOption | dict[str, str | list | bool]
+        self,
+        file_path: str,
+        import_option: TimelineImportOption | dict[str, str | list | bool],
     ) -> Timeline:
         """
         Creates timeline based on parameters within given file

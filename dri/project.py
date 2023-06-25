@@ -403,24 +403,29 @@ class Project:
 
     def GetSetting(self, setting_name: str = "") -> str | dict[str, str | float]:
         """
-        Returns value of project setting (indicated by settingName, string). Check
-        the section below for more information.
+        Returns value of project setting (indicated by settingName, string). Check the
+        section below for more information.
 
         Parameters
         ----------
         setting_name
-            Project setting name. Could be None. If not specified, return all
-            settings and their value (string).
+            Project setting name. Could be None. If not specified, return all settings
+            and their value (string).
 
         Returns
         -------
         str | dict[str, str | float]
-            Value of project setting (indicated by settingName, string). If settingName
-            is not specified, will return dict[str, str | float]. "timelineFrameRate"
-            could be of float, see example below.
+            Value of project setting. If settingName is not specified, will return
+            all settings and their value (string) which is a dict[str, str | float].
+            "timelineFrameRate" could be of float, see example below.
 
         Examples
         --------
+        >>> from dri.resolve import Resolve
+        ...
+        >>> resolve = Resolve.resolve_init()
+        >>> project_manager = resolve.GetProjectManager()
+        >>> project = project_manager.GetCurrentProject()
         >>> project.GetSetting("timelineFrameRate")
         "24.0"
 
