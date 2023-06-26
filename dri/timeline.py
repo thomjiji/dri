@@ -1,11 +1,17 @@
+from dataclasses import dataclass
 from typing import Literal
 
 from dri.color import MarkerColor
+from dri.gallery_still import GalleryStill
 from dri.timeline_item import TimelineItem
 
 
+@dataclass
 class ThumbnailData:
     width: int
+    height: int
+    format: str
+    data: str
 
 
 class ImportOption:
@@ -650,7 +656,7 @@ class Timeline:
         """
         ...
 
-    def GetCurrentClipThumbnailImage(self) -> dict:
+    def GetCurrentClipThumbnailImage(self) -> ThumbnailData | dict[str, int | str]:
         """
         Returns a dict (keys "width", "height", "format" and "data") with data
         containing raw thumbnail image data (RGB 8-bit image data encoded in base64
@@ -661,6 +667,8 @@ class Timeline:
 
         Returns
         -------
+        ThumbnailData | dict
+            Dict with raw thumbnail data for current media in the Color Page.
 
         """
         ...
@@ -830,6 +838,20 @@ class Timeline:
         bool
             True if the timeline was exported successfully.
 
+        # TODO: Does these notes can be expressed using Python's data structure?
+        Notes
+        -----
+        -   Please note that :param:`exportSubType` is a required parameter for
+            :py:data:`resolve.EXPORT_AAF` and :py:data:`resolve.EXPORT_EDL`. For rest
+            of the :param:`exportType`, :param:`exportSubType` is ignored.
+
+        -   When exportType is resolve.EXPORT_AAF, valid exportSubtype values are
+            resolve.EXPORT_AAF_NEW and resolve.EXPORT_AAF_EXISTING.
+
+        -   When exportType is resolve.EXPORT_EDL, valid exportSubtype values are
+            resolve.EXPORT_CDL, resolve.EXPORT_SDL, resolve.EXPORT_MISSING_CLIPS and
+            resolve.EXPORT_NONE.
+
         Examples
         --------
         >>> from dri.resolve import Resolve
@@ -903,9 +925,15 @@ class Timeline:
         :class:`TimelineItem`
             The created timeline item.
 
+        Notes
+        -----
+        -   Not work for "BT.2111 Color Bar HLG Narrow", "BT.2111 Color Bar PQ Full",
+            "BT.2111 Color Bar PQ Narrow".
+
         """
         ...
 
+    # TODO: Not work for all Fusion Generators
     def InsertFusionGeneratorIntoTimeline(self, generator_name: str) -> TimelineItem:
         """
         Inserts a Fusion generator (indicated by generatorName : string) into the
@@ -921,6 +949,10 @@ class Timeline:
         -------
         :class:`TimelineItem`
             The created timeline item.
+
+        Notes
+        -----
+        -   For all Fusion generator, it has no effect. I have no idea.
 
         """
         ...
@@ -951,6 +983,108 @@ class Timeline:
         -------
         :class:`TimelineItem`
             Timeline item created.
+
+        """
+        ...
+
+    def InsertTitleIntoTimeline(self, title_name: str) -> TimelineItem:
+        """
+        Inserts a title (indicated by titleName : string) into the timeline.
+
+        Parameters
+        ----------
+        title_name
+            Title name.
+
+        Returns
+        -------
+        :class:`TimelineItem`
+            The created timeline item.
+
+        """
+        ...
+
+    def InsertFusionTitleIntoTimeline(self, title_name: str) -> TimelineItem:
+        """
+        Inserts a Fusion title (indicated by titleName : string) into the timeline.
+
+        Parameters
+        ----------
+        title_name
+            Fusion title.
+
+        Returns
+        -------
+        :class:`TimelineItem`
+            The created timeline item.
+
+        """
+        ...
+
+    def GrabStill(self) -> GalleryStill:
+        """
+        Grabs still from the current video clip. Returns a GalleryStill object.
+
+        Returns
+        -------
+        :class:`GalleryStill`
+            The created :class:`GalleryStill` object.
+
+        """
+        ...
+
+    def GrabAllStills(self, still_frame_source: Literal[1, 2]) -> list[GalleryStill]:
+        """
+        Grabs stills from all the clips of the timeline at 'stillFrameSource' (1 -
+        First frame, 2 - Middle frame). Returns the list of GalleryStill objects.
+
+        Parameters
+        ----------
+        still_frame_source
+            Choose grab still from first frame (1) or middle frame (2).
+
+        Returns
+        -------
+        list[GalleryStill]
+            The created :class:`GalleryStill` object.
+
+        """
+        ...
+
+    def GetUniqueId(self) -> str:
+        """
+        Returns a unique ID for the timeline.
+
+        Returns
+        -------
+        str
+            Unique ID for the timeline.
+
+        """
+        ...
+
+    def CreateSubtitlesFromAudio(self) -> bool:
+        """
+        Creates subtitles from audio for the timeline. Returns True on success,
+        False otherwise.
+
+        Returns
+        -------
+        bool
+            True if subtitles were created successfully.
+
+        """
+        ...
+
+    def DetectSceneCuts(self) -> bool:
+        """
+        Detects and makes scene cuts along the timeline. Returns True if successful,
+        False otherwise.
+
+        Returns
+        -------
+        bool
+            True if scene cuts were detected successfully.
 
         """
         ...
