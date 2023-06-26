@@ -1,4 +1,5 @@
 import importlib.util
+from dataclasses import dataclass
 
 from dri.media_storage import MediaStorage
 from dri.project_manager import ProjectManager
@@ -15,35 +16,31 @@ def load_dynamic_lib():
     return bmd_module
 
 
-# TODO: Complete this, filling into __init__
+@dataclass
 class Resolve:
-    EXPORT_AAF = "AAF"
-    EXPORT_DRT = "DRT"
-    EXPORT_EDL = "EDL"
-    EXPORT_FCP_7_XML = "FCP_7_XML"
-    EXPORT_FCPXML_1_8 = "FCPXML_1_8"
-    EXPORT_FCPXML_1_9 = "FCPXML_1_9"
-    EXPORT_FCPXML_1_10 = "FCPXML_1_10"
-    EXPORT_HDR_10_PROFILE_A = "HDR_10_PROFILE_A"
-    EXPORT_HDR_10_PROFILE_B = "HDR_10_PROFILE_B"
-    EXPORT_TEXT_CSV = "TEXT_CSV"
-    EXPORT_TEXT_TAB = "TEXT_TAB"
-    EXPORT_DOLBY_VISION_VER_2_9 = "DOLBY_VISION_VER_2_9"
-    EXPORT_DOLBY_VISION_VER_4_0 = "DOLBY_VISION_VER_4_0"
-    EXPORT_DOLBY_VISION_VER_5_1 = "DOLBY_VISION_VER_5_1"
-    EXPORT_OTIO = "OTIO"
+    # For timeline.Export().
+    EXPORT_AAF: str = "AAF"
+    EXPORT_DRT: str = "DRT"
+    EXPORT_EDL: str = "EDL"
+    EXPORT_FCP_7_XML: str = "FCP_7_XML"
+    EXPORT_FCPXML_1_8: str = "FCPXML_1_8"
+    EXPORT_FCPXML_1_9: str = "FCPXML_1_9"
+    EXPORT_FCPXML_1_10: str = "FCPXML_1_10"
+    EXPORT_HDR_10_PROFILE_A: str = "HDR_10_PROFILE_A"
+    EXPORT_HDR_10_PROFILE_B: str = "HDR_10_PROFILE_B"
+    EXPORT_TEXT_CSV: str = "TEXT_CSV"
+    EXPORT_TEXT_TAB: str = "TEXT_TAB"
+    EXPORT_DOLBY_VISION_VER_2_9: str = "DOLBY_VISION_VER_2_9"
+    EXPORT_DOLBY_VISION_VER_4_0: str = "DOLBY_VISION_VER_4_0"
+    EXPORT_DOLBY_VISION_VER_5_1: str = "DOLBY_VISION_VER_5_1"
+    EXPORT_OTIO: str = "OTIO"
 
-    EXPORT_NONE = "NONE"
-    EXPORT_AAF_NEW = "AAF_NEW"
-    EXPORT_AAF_EXISTING = "AAF_EXISTING"
-    EXPORT_CDL = "CDL"
-    EXPORT_SDL = "SDL"
-    EXPORT_MISSING_CLIPS = "MISSING_CLIPS"
-
-    def __init__(self):
-        # self.resolve = self.resolve_init()
-        self.EXPORT_AAF = None
-        self.EXPORT_AAF = self.EXPORT_AAF
+    EXPORT_NONE: str = "NONE"
+    EXPORT_AAF_NEW: str = "AAF_NEW"
+    EXPORT_AAF_EXISTING: str = "AAF_EXISTING"
+    EXPORT_CDL: str = "CDL"
+    EXPORT_SDL: str = "SDL"
+    EXPORT_MISSING_CLIPS: str = "MISSING_CLIPS"
 
     @staticmethod
     def resolve_init() -> "Resolve":
