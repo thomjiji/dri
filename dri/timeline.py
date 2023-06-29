@@ -721,7 +721,8 @@ class Timeline:
         Parameters
         ----------
         new_timeline_name
-            Name of the new timeline.
+            Name of the new timeline. If not specified, the new timeline name will
+            append a "copy" to its suffix.
 
         Returns
         -------
