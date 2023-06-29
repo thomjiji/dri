@@ -1,4 +1,4 @@
-from typing import TypedDict, Literal
+from typing import TypedDict, Literal, Optional
 
 from dri.color import MarkerColor, FlagColor, ClipColor
 
@@ -134,9 +134,9 @@ class MediaPoolItem:
         frame_id: int,
         color: MarkerColor,
         name: str,
-        note: str,
+        note: Optional[str],
         duration: int,
-        custom_data: str,
+        custom_data: Optional[str],
     ) -> bool:
         """
         Creates a new marker at given frameId position and with given marker
@@ -152,12 +152,12 @@ class MediaPoolItem:
         name
             Marker name.
         note
-            Marker note.
+            Marker note. Optional.
         duration
             Marker duration.
         custom_data
             Custom data helps to attach user specific data to the marker. Not visible
-            in the UI.
+            in the UI. Optional.
 
         Returns
         -------
