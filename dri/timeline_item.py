@@ -1,6 +1,6 @@
 from typing import Optional
 
-from dri.color import MarkerColor
+from dri.color import MarkerColor, FlagColor, ClipColor
 from dri.fusion_comp import FusionComp
 
 
@@ -296,6 +296,212 @@ class TimelineItem:
 
         Returns
         -------
+
+        """
+        ...
+
+    def GetMarkerCustomData(self, frame_id: int) -> str:
+        """
+        Returns customData string for the marker at given frameId position.
+
+        Parameters
+        ----------
+        frame_id
+            Frame number. On the Resolve UI it's called "Source Frame".
+
+        Returns
+        -------
+        str
+            CustomData string.
+
+        """
+        ...
+
+    def DeleteMarkersByColor(self, color: MarkerColor) -> bool:
+        """
+        Delete all markers of the specified color from the timeline item. "All" as
+        argument deletes all color markers.
+
+        Parameters
+        ----------
+        color
+            Marker color
+
+        Returns
+        -------
+        bool
+            True if successful, False otherwise.
+
+        """
+        ...
+
+    def DeleteMarkerAtFrame(self, frame_num: int) -> bool:
+        """
+        Delete marker at frame number from the timeline item.
+
+        Parameters
+        ----------
+        frame_num
+            Frame number. On the Resolve UI it's called "Source Frame".
+
+        Returns
+        -------
+        bool
+            True if successful, False otherwise.
+
+        """
+        ...
+
+    def DeleteMarkerByCustomData(self, custom_data: str) -> bool:
+        """
+        Delete first matching marker with specified customData.
+
+        Parameters
+        ----------
+        custom_data
+            Custom data to search for.
+
+        Returns
+        -------
+        bool
+            True if successful, False otherwise.
+
+        """
+        ...
+
+    def AddFlag(self, color: FlagColor | str) -> bool:
+        """
+        Adds a flag with given color (string).
+
+        Parameters
+        ----------
+        color
+            Flag color.
+
+        Returns
+        -------
+        bool
+            True if successful, False otherwise.
+
+        """
+        ...
+
+    def GetFlagList(self) -> list[FlagColor | str]:
+        """
+        Returns a list of flag colors assigned to the item.
+
+        Returns
+        -------
+        list[FlagColor | str]
+            List of flag colors assigned to the item.
+
+        """
+        ...
+
+    def ClearFlags(self, color: FlagColor | str) -> bool:
+        """
+        Clear flags of the specified color. An "All" argument is supported to clear
+        all flags.
+
+        Parameters
+        ----------
+        color
+            Flag color.
+
+        Returns
+        -------
+        bool
+            True if successful, False otherwise.
+
+        """
+        ...
+
+    def GetClipColor(self) -> str:
+        """
+        Returns the item color as a string.
+
+        Returns
+        -------
+        str
+            Timeline item color.
+
+        """
+        ...
+
+    def SetClipColor(self, color_name: ClipColor | str) -> bool:
+        """
+        Sets the item color based on the colorName (string).
+
+        Parameters
+        ----------
+        color_name
+            Clip color name.
+
+        Returns
+        -------
+        bool
+            True if successful, False otherwise.
+
+        """
+        ...
+
+    def ClearClipColor(self) -> bool:
+        """
+        Clears the item color.
+
+        Returns
+        -------
+        bool
+            True if successful, False otherwise.
+
+        """
+        ...
+
+    def AddFusionComp(self) -> FusionComp:
+        """
+        Adds a new Fusion composition associated with the timeline item.
+
+        Returns
+        -------
+        FusionComp
+            Fusion composition.
+
+        """
+        ...
+
+    def ImportFusionComp(self, path: str) -> FusionComp:
+        """
+        Imports a Fusion composition from given file path by creating and adding a
+        new composition for the item.
+
+        Parameters
+        ----------
+        path
+            Path to the Fusion composition.
+
+        Returns
+        -------
+        FusionComp
+            Fusion composition created after importing.
+
+        """
+        ...
+
+    def ExportFusionComp(self, path: list, comp_index: int) -> bool:
+        """
+        Exports the Fusion composition based on given index to the path provided.
+
+        Parameters
+        ----------
+        path
+            Path to the Fusion composition exporting destination.
+        comp_index
+            Index of the Fusion composition to export.
+
+        Returns
+        -------
+        bool
+            True if successful, False otherwise.
 
         """
         ...
