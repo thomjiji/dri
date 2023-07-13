@@ -505,3 +505,56 @@ class TimelineItem:
 
         """
         ...
+
+    def DeleteFusionCompByName(self, comp_name: str) -> bool:
+        """
+        Deletes the named Fusion composition.
+
+
+        Parameters
+        ----------
+        comp_name
+            Name of the Fusion composition.
+
+        Returns
+        -------
+        bool
+            True if successful, False otherwise.
+
+        """
+        ...
+
+    def LoadFusionCompByName(self, comp_name: str) -> FusionComp:
+        """
+        Loads the named Fusion composition as the active composition.
+
+        Parameters
+        ----------
+        comp_name
+            Name of the Fusion composition.
+
+        Returns
+        -------
+        bool
+            True if successful, False otherwise.
+
+        """
+        ...
+
+    def RenameFusionCompByName(self, old_name: str, new_name: str) -> bool:
+        """
+        Renames the Fusion composition identified by oldName.
+
+        Parameters
+        ----------
+        old_name
+        new_name
+
+        Returns
+        -------
+        bool
+            True if successful, False otherwise.
+
+        """
+        ...
+
