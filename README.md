@@ -21,7 +21,7 @@ type hints.
   overloading, return types, and other specifications specified in the DaVinci Resolve
   API [README](READMEs).
 - The docstrings are generated from the
-  latest [DaVinci Resolve 18.5 Beta 4 README](READMEs/18.5b4_README.txt) and will be
+  latest [DaVinci Resolve 18.5 Beta 5 README](READMEs/18.5b5_README.txt) and will be
   regularly updated.
 - It functions as a development dependency or an interface. After development is
   finished, you can safely remove it without impacting the code's seamless operation in
