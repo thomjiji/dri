@@ -3,6 +3,16 @@
 
 **This repo is under development which is not complete yet.**
 
+Table of Content
+
+- [Dri](#dri)
+  - [Get Started](#get-started)
+    - [Prerequistes](#prerequisites)
+    - [After development using Dri](#after-development-using-dri)
+  - [Run Tests](#run-tests)
+  - [Similar Project](#similar-project)
+  - [License](#license)
+
 # Dri
 
 Dri is a wrapper for the DaVinci Resolve Scripting API that provides auto-completion,
@@ -21,8 +31,8 @@ type hints.
   overloading, return types, and other specifications specified in the DaVinci Resolve
   API [README](READMEs).
 - The docstrings are generated from the
-  latest [DaVinci Resolve 18.5 Beta 5 README](READMEs/18.5b5_README.txt) and will be
-  regularly updated.
+  latest [DaVinci Resolve 18.5 README](READMEs/18.5_README.txt) and will be regularly 
+  updated.
 - It functions as a development dependency or an interface. After development is
   finished, you can safely remove it without impacting the code's seamless operation in
   DaVinci Resolve, as it maintains the same signature as the original API.
@@ -31,29 +41,9 @@ type hints.
 
 ### Prerequisites
 
-...
+[WIP]
 
-# Similar Project
-
-- [pybmd](https://github.com/WheheoHu/pybmd)
-
-# Run Tests
-
-```shell
-pytest -v
-```
-
-By default, pytest captures the output produced by your tests and displays it only if
-the test fails. However, when you
-use `--capture=no` or `-s`, pytest allows the stdout and stderr to be displayed on the
-console immediately, regardless
-of the test result.
-
-```shell
-pytest -v -s
-```
-
-# After development using Dri
+### After development using Dri
 
 If your script intends to use outside DaVinci Resolve, then replace the import below
 
@@ -77,7 +67,30 @@ If your script intends to use inside DaVinci Resolve, replace with:
 resolve = bmd.scriptapp("Resolve")
 ```
 
+## Run Tests
+
+```shell
+pytest -v
+```
+
+By default, pytest captures the output produced by your tests and displays it only if
+the test fails. However, when you
+use `--capture=no` or `-s`, pytest allows the stdout and stderr to be displayed on the
+console immediately, regardless
+of the test result.
+
+```shell
+pytest -v -s
+```
+
+## Similar Project
+
+- [pybmd](https://github.com/WheheoHu/pybmd)
+- [pydavinci](https://github.com/pedrolabonia/pydavinci)
+- [fusionscript-stubs](https://github.com/czukowski/fusionscript-stubs/)
+
+
 ## License
 
-This project is licensed under the LGPLv3 License - see the [LICENSE](LICENSE) file for
-details
+This project is licensed under the LGPLv3 License, see the [LICENSE](LICENSE) file for 
+details.
