@@ -92,5 +92,4 @@ pytest -v -s
 
 ## License
 
-This project is licensed under the LGPLv3 License, see the [LICENSE](LICENSE) file for 
-details.
+GPLv3
