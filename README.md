@@ -3,38 +3,28 @@
 
 **This repo is under development which is not complete yet.**
 
-Table of Content
-
-- [Dri](#dri)
-  - [Get Started](#get-started)
-    - [Prerequistes](#prerequisites)
-    - [After development using Dri](#after-development-using-dri)
-  - [Run Tests](#run-tests)
-  - [Similar Project](#similar-project)
-  - [License](#license)
-
 # Dri
 
 Dri is a wrapper for the DaVinci Resolve Scripting API that provides auto-completion,
 static type checking, and improved documentation. It packages all the APIs based on the
-latest [README](READMEs), enhances them with well-formatted
+latest DaVinci Resolve API [README](READMEs), enhances them with well-formatted
 docstrings (in NumPy style), and adds detailed type hints. This allows developers to
-easily view parameter types and return value types for each API, while also enabling
-static type checking tools like [mypy](https://github.com/python/mypy)
-or [pyright](https://github.com/microsoft/pyright) to catch type problems in code early.
+check parameter types and return value types for each API, while also enabling static
+type checking tools like [mypy](https://github.com/python/mypy)
+or [pyright](https://github.com/microsoft/pyright) to catch type problems in code
+early.
 
-If you don't know what return type of API, just `Cmd+B` (PyCharm) or `F12` (VS Code) to
-go to declaration, or hover over the function (API) to see well formatted docstring and
-type hints.
+Just `Cmd+B` (PyCharm) or `F12` (VS Code) to go to declaration, or hover over the
+function (API) to see well-formatted docstring and type hints.
 
 - It accurately replicates the original API, preserving the exact parameters, function
   overloading, return types, and other specifications specified in the DaVinci Resolve
   API [README](READMEs).
 - The docstrings are generated from the
-  latest [DaVinci Resolve 18.5 README](READMEs/18.5_README.txt) and will be regularly 
+  latest [DaVinci Resolve 18.5 README](READMEs/18.5_README.txt) and will be regularly
   updated.
-- It functions as a development dependency or an interface. After development is
-  finished, you can safely remove it without impacting the code's seamless operation in
+- It functions as a development dependency (not your running code's dependency). After 
+  development is finished, you can safely remove it without impacting the code in
   DaVinci Resolve, as it maintains the same signature as the original API.
 
 ## Get Started
@@ -45,7 +35,7 @@ type hints.
 
 ### After development using Dri
 
-If your script intends to use outside DaVinci Resolve, then replace the import below
+If your script intends to use outside DaVinci Resolve, replace the import below
 
 ```python
 from dri import Resolve
@@ -61,7 +51,7 @@ import DaVinciResolveScript as dvr_script
 resolve = dvr_script.scriptapp("Resolve")
 ```
 
-If your script intends to use inside DaVinci Resolve, replace with:
+If your script intends to use inside DaVinci Resolve, replace it with:
 
 ```python
 resolve = bmd.scriptapp("Resolve")
@@ -89,7 +79,6 @@ pytest -v -s
 - [pydavinci](https://github.com/pedrolabonia/pydavinci)
 - [fusionscript-stubs](https://github.com/czukowski/fusionscript-stubs/)
 
-
 ## License
 
-GPLv3
+[GPLv3](LICENSE)
