@@ -1,17 +1,40 @@
 import importlib.util
+import platform
 from dataclasses import dataclass
+from types import ModuleType
+from typing import Optional
 
 from dri.media_storage import MediaStorage
 from dri.project_manager import ProjectManager
 
 
-def load_dynamic_lib():
-    spec = importlib.util.spec_from_file_location(
-        "fusionscript",
-        "/Applications/DaVinci Resolve/DaVinci "
-        "Resolve.app/Contents/Libraries/Fusion/fusionscript.so",
-    )
-    bmd_module = importlib.util.module_from_spec(spec)
+def load_dynamic_lib() -> Optional[ModuleType]:
+    try:
+        if platform.system() == "Windows":
+            path = (
+                "C:\\Program Files\\Blackmagic Design\\DaVinci "
+                "Resolve\\fusionscript.dll"
+            )
+        elif platform.system() == "Darwin":
+            path = (
+                "/Applications/DaVinci Resolve/DaVinci "
+                "Resolve.app/Contents/Libraries/Fusion/fusionscript.so"
+            )
+        elif platform.system() == "Linux":
+            path = "/opt/resolve/libs/Fusion/fusionscript.so"
+        else:
+            raise Exception("Unsupported platform")
+
+        spec = importlib.util.spec_from_file_location("fusionscript", path)
+        if spec is None:
+            raise ImportError(f"Module not found at {path}")
+
+        bmd_module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(bmd_module)
+
+    except Exception as e:
+        print(f"Failed to load module due to error: {e}")
+        bmd_module = None
 
     return bmd_module
 
@@ -45,7 +68,7 @@ class Resolve:
     @staticmethod
     def resolve_init() -> "Resolve":
         bmd_module = load_dynamic_lib()
-        resolve = bmd_module.scriptapp("Resolve")
+        resolve = bmd_module.scriptapp("resolve")
         return resolve
 
     def Fusion(self):
