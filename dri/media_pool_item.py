@@ -76,7 +76,6 @@ class MediaPoolItem:
         metadata_value
             Metadata value to set.
 
-
         Returns
         -------
         bool

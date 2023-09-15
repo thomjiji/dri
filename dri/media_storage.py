@@ -24,12 +24,12 @@ class MediaStorage:
         Parameters
         ----------
         folder_path
-            The given absolute folder path, used to retrieve sub folder paths list.
+            The given absolute folder path, used to retrieve the subfolder paths list.
 
         Returns
         -------
         list[str]
-            List of folder paths (absolute path) in the given absolute folder path.
+            List of folder paths (absolute path) under the given absolute folder path.
 
         """
         ...
