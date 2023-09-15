@@ -8,3 +8,4 @@ from dri.timeline_item import TimelineItem
 from dri.project_manager import ProjectManager
 from dri.media_storage import MediaStorage
 from dri.project import Project
+from dri.gallery_still import GalleryStill

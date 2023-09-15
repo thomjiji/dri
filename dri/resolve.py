@@ -268,3 +268,73 @@ class Resolve:
 
         """
         ...
+
+    def ImportRenderPreset(self, preset_path: str) -> bool:
+        """
+        Import a preset from presetPath (string) and set it as current preset for
+        rendering.
+
+        Parameters
+        ----------
+        preset_path
+            The path to the preset file to import.
+
+        Returns
+        -------
+        bool
+            True if import successful, False otherwise.
+
+        """
+
+    def ExportRenderPreset(self, preset_name: str, export_path: str) -> bool:
+        """
+        Export a preset to a given path (string) if presetName(string) exists.
+
+        Parameters
+        -------
+        preset_name
+            The name of the preset to import.
+        export_path
+            The export destination path.
+
+        Returns
+        -------
+        bool
+            True if import successful, False otherwise.
+
+        """
+
+    def ImportBurnInPreset(self, preset_path: str) -> bool:
+        """
+        Import a data burn in preset from a given presetPath (string).
+
+        Parameters
+        ----------
+        preset_path
+            The path to the preset file to import.
+
+        Returns
+        -------
+        bool
+            True if import successful, False otherwise.
+
+        """
+
+    def ExportBurnInPreset(self, preset_name: str, export_path: str) -> bool:
+        """
+        Export a data burn in preset to a given path (string) if presetName (string)
+        exists.
+
+        Parameters
+        -------
+        preset_name
+            The name of the preset to import.
+        export_path
+            The export destination path.
+
+        Returns
+        -------
+        bool
+            True if import successful, False otherwise.
+
+        """
