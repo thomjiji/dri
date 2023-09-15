@@ -20,9 +20,8 @@ function (API) to see well-formatted docstring and type hints.
 - It accurately replicates the original API, preserving the exact parameters, function
   overloading, return types, and other specifications specified in the DaVinci Resolve
   API [README](READMEs).
-- The docstrings are generated from the
-  latest [DaVinci Resolve 18.5 README](READMEs/18.5_README.txt) and will be regularly
-  updated.
+- The docstrings are generated from the latest DaVinci Resolve API README and will be
+  regularly updated.
 - It functions as a development dependency (not your running code's dependency). After 
   development is finished, you can safely remove it without impacting the code in
   DaVinci Resolve, as it maintains the same signature as the original API.

@@ -1,1 +1,0 @@
-from .python_get_resolve import GetResolve
