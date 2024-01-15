@@ -53,7 +53,7 @@ class ImportOption:
     importMultiChannelAudioTracksAsLinkedGroups: bool = False
     insertAdditionalTracks: bool = True
     insertWithOffset: str = "00:00:00:00"
-    sourceClipsPath: str = True
+    sourceClipsPath: str = ""
     sourceClipsFolder: str
 
 
@@ -363,7 +363,7 @@ class Timeline:
         Parameters
         ----------
         track_type
-                Track type ("audio", "video" or "subtitle").
+            Track type ("audio", "video" or "subtitle").
         track_index
             Track index. In this range: 1 <= trackIndex <= GetTrackCount(trackType).
 
