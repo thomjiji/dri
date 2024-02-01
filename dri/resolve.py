@@ -308,6 +308,7 @@ class Resolve:
             True if import successful, False otherwise.
 
         """
+        ...
 
     def ExportRenderPreset(self, preset_name: str, export_path: str) -> bool:
         """
@@ -326,6 +327,7 @@ class Resolve:
             True if import successful, False otherwise.
 
         """
+        ...
 
     def ImportBurnInPreset(self, preset_path: str) -> bool:
         """
@@ -342,6 +344,7 @@ class Resolve:
             True if import successful, False otherwise.
 
         """
+        ...
 
     def ExportBurnInPreset(self, preset_name: str, export_path: str) -> bool:
         """
@@ -361,3 +364,4 @@ class Resolve:
             True if import successful, False otherwise.
 
         """
+        ...
