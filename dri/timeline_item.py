@@ -3,6 +3,7 @@ from typing import Optional
 from dri.color import LiteralClipColor, LiteralFlagColor, LiteralMarkerColor
 from dri.fusion_comp import FusionComp
 from dri.media_pool_item import MediaPoolItem
+from dri.timeline_item import TimelineItem
 
 
 class TimelineItem:
@@ -583,3 +584,498 @@ class TimelineItem:
         """
         ...
 
+    def AddVersion(self, version_name: str, version_type: int) -> bool:
+        """
+        Add a new color version for a video clip based on versionType (0 - local, 1 -
+        remote).
+
+        Parameters
+        ----------
+        version_name
+            Any str you want to name the color version.
+        version_type
+            0 for local version, 1 for remote version.
+
+        Returns
+        -------
+        bool
+            True if successful, False otherwise.
+
+        """
+        ...
+
+    def GetCurrentVersion(self) -> dict:
+        """
+        Return the current version of the video clip. The returned value will have the
+        keys versionName and versionType (0 - local, 1 - remote).
+
+        Returns
+        -------
+        dict
+
+        Examples
+        --------
+        >>> from dri.resolve import Resolve
+        ...
+        >>> resolve = Resolve.resolve_init()
+        >>> project_manager = resolve.GetProjectManager()
+        >>> project = project_manager.GetCurrentProject()
+        >>> media_storage = resolve.GetMediaStorage()
+        >>> media_pool = project.GetMediaPool()
+        >>> root_folder = media_pool.GetRootFolder()
+        >>> current_timeline = project.GetCurrentTimeline()
+        ...
+        >>> for i in current_timeline.GetItemListInTrack("video", 1):
+        ...     print(i.GetCurrentVersion())
+        {'versionName': 'Version 1', 'versionType': 0}
+        {'versionName': 'Version 1', 'versionType': 0}
+
+        """
+        ...
+
+    def DeleteVersionByName(self, version_name: str, version_type: int) -> bool:
+        """
+        Deletes a color version by name and versionType (0 - local, 1 - remote).
+
+        Parameters
+        ----------
+        version_name
+            Any str you want to name the color version.
+        version_type
+            0 for local version, 1 for remote version.
+
+        Returns
+        -------
+        bool
+            True if successful, False otherwise.
+
+        """
+        ...
+
+    def LoadVersionByName(self, version_name: str, version_type: int) -> bool:
+        """
+        Loads a named color version as the active version. versionType: 0 - local,
+        1 - remote.
+
+        Parameters
+        ----------
+        version_name
+            Any str you want to name the color version.
+        version_type
+            0 for local version, 1 for remote version.
+
+        Returns
+        -------
+        bool
+            True if successful, False otherwise.
+
+        """
+        ...
+
+    def RenameVersionByName(
+        self, old_name: str, new_name: str, version_type: int
+    ) -> bool:
+        """
+        Renames the color version identified by oldName and versionType (0 - local,
+        1 - remote).
+
+        Parameters
+        ----------
+        old_name
+        new_name
+        version_type
+            0 for local version, 1 for remote version.
+
+        Returns
+        -------
+        bool
+            True if successful, False otherwise.
+
+        """
+        ...
+
+    def GetVersionNameList(self, version_type: int) -> list[str]:
+        """
+        Returns a list of all color versions for the given versionType (0 - local, 1 -
+        remote).
+
+        Parameters
+        ----------
+        version_type
+            0 for local version, 1 for remote version.
+
+        Returns
+        -------
+        list
+            A list contains all the version names.
+
+        """
+        ...
+
+    def GetMediaPoolItem(self) -> MediaPoolItem:
+        """
+        Returns the media pool item corresponding to the timeline item if one exists.
+
+        Returns
+        -------
+        MediaPoolItem
+
+        """
+        ...
+
+    def GetStereoConvergenceValues(self) -> dict:
+        """
+        Returns a dict (offset -> value) of keyframe offsets and respective convergence
+        values.
+
+        Returns
+        -------
+        dict
+
+        """
+        ...
+
+    def GetStereoLeftFloatingWindowParams(self) -> dict:
+        """
+        For the LEFT eye -> returns a dict (offset -> dict) of keyframe offsets and
+        respective floating window params. Value at particular offset includes the left,
+        right, top and bottom floating window values.
+
+        Returns
+        -------
+        dict
+
+        """
+        ...
+
+    def GetStereoRightFloatingWindowParams(self) -> dict:
+        """
+        For the RIGHT eye -> returns a dict (offset -> dict) of keyframe offsets and
+        respective floating window params. Value at particular offset includes the left,
+        right, top and bottom floating window values.
+
+        Returns
+        -------
+        dict
+
+        """
+        ...
+
+    def GetNumNodes(self) -> int:
+        """
+        Returns the number of nodes in the current graph for the timeline item.
+
+        Returns
+        -------
+        int
+            The number of nodes in the color page for this MediaPoolItem.
+
+        Notes
+        -----
+        The "node" here refers to the nodes of the color page.
+
+        """
+        ...
+
+    def ApplyArriCdlLut(self) -> bool:
+        """
+        Applies ARRI CDL and LUT. Returns True if successful, False otherwise.
+
+        Returns
+        -------
+        bool
+            True if successful, False otherwise.
+
+        """
+        ...
+
+    def SetLUT(self, node_index: int, lut_path: str) -> bool:
+        """
+        Sets LUT on the node mapping the node index provided, 1 <= nodeIndex <= total
+        number of nodes.
+
+        The lutPath can be an absolute path, or a relative path (based off custom LUT
+        paths or the master LUT path).
+
+        The operation is successful for valid lut paths that Resolve has already
+        discovered (see Project.RefreshLUTList).
+
+        Returns
+        -------
+        bool
+            True if successful, False otherwise.
+
+        """
+        ...
+
+    def GetLUT(self, node_index: int) -> str:
+        """
+        Gets relative LUT path based on the node index provided, 1 <= nodeIndex <= total
+        number of nodes.
+
+        Returns
+        -------
+        str
+            Get the path relative to the Resolve LUT path.
+
+        Examples
+        --------
+        >>> from dri.resolve import Resolve
+        ...
+        >>> resolve = Resolve.resolve_init()
+        >>> project_manager = resolve.GetProjectManager()
+        >>> project = project_manager.GetCurrentProject()
+        >>> media_storage = resolve.GetMediaStorage()
+        >>> media_pool = project.GetMediaPool()
+        >>> root_folder = media_pool.GetRootFolder()
+        >>> current_timeline = project.GetCurrentTimeline()
+        ...
+        >>> for i in current_timeline.GetItemListInTrack("video", 1):
+        ...     print(i.GetLUT())
+        Arri/ARRI_LogC4_v1_LUT_Package/LUTs/ARRI_LogC4-to-Gamma24_Rec709-D65_v1-65.cube
+        Arri/ARRI_LogC4_v1_LUT_Package/LUTs/ARRI_LogC4-to-Gamma24_Rec709-D65_v1-65.cube
+
+        """
+        ...
+
+    def SetCDL(self, CDL_map: dict) -> bool:
+        """
+        Keys of map are: "NodeIndex", "Slope", "Offset", "Power", "Saturation", where 1
+        <= NodeIndex <= total number of nodes. Example python code - SetCDL({"NodeIndex"
+        : "1", "Slope" : "0.5 0.4 0.2", "Offset" : "0.4 0.3 0.2", "Power" : "0.6 0.7
+        0.8", "Saturation" : "0.65"})
+
+        Parameters
+        ----------
+        CDL_map
+            A dict with keys "NodeIndex", "Slope", "Offset", "Power", and "Saturation".
+
+        Returns
+        -------
+        bool
+            True if successful, False otherwise.
+
+        Examples
+        --------
+        >>> from dri.resolve import Resolve
+        ...
+        >>> resolve = Resolve.resolve_init()
+        >>> project_manager = resolve.GetProjectManager()
+        >>> project = project_manager.GetCurrentProject()
+        >>> media_storage = resolve.GetMediaStorage()
+        >>> media_pool = project.GetMediaPool()
+        >>> root_folder = media_pool.GetRootFolder()
+        >>> current_timeline = project.GetCurrentTimeline()
+        ...
+        >>> for i in current_timeline.GetItemListInTrack("video", 1):
+        ...     print(
+        ...         i.SetCDL(
+        ...             {
+        ...                 "NodeIndex": "1",
+        ...                 "Slope": "0.5 0.4 0.2",
+        ...                 "Offset": "0.4 0.3 0.2",
+        ...                 "Power": "0.6 0.7 0.8",
+        ...                 "Saturation": "0.65",
+        ...             }
+        ...         )
+        ...     )
+        True
+
+        """
+        ...
+
+    def AddTake(
+        self,
+        media_pool_item: MediaPoolItem,
+        start_frame: Optional[int] = None,
+        end_frame: Optional[int] = None,
+    ) -> bool:
+        """
+        Adds mediaPoolItem as a new take. Initializes a take selector for the timeline
+        item if needed. By default, the full clip extents is added. startFrame (int) and
+        endFrame (int) are optional arguments used to specify the extents.
+
+        Parameters
+        ----------
+        media_pool_item
+        start_frame
+            Start frame
+        end_frame
+            End frame
+
+        Returns
+        -------
+        bool
+            True if successful, False otherwise.
+
+        """
+        ...
+
+    def GetSelectedTakeIndex(self) -> int:
+        """
+        Returns the index of the currently selected take, or 0 if the clip is not a take
+        selector.
+
+        Returns
+        -------
+        int
+            The index of the currently selected take. 0 if current
+            :class:`dri.TimelineItem` is not a take selector.
+
+        Notes
+        -----
+        -   "take selector" is in Edit page > Timeline > right click any clip in
+            timeline, and then your will see "Take Selector" in the menu.
+
+        """
+        ...
+
+    def GetTakesCount(self) -> int:
+        """
+        Returns the number of takes in take selector, or 0 if the clip is not a take
+        selector.
+
+        Returns
+        -------
+        int
+            The number of takes in take selector.
+
+        Notes
+        -----
+        -   "take selector" is in Edit page > Timeline > right click any clip in
+            timeline, and then your will see "Take Selector" in the menu.
+
+        Examples
+        --------
+        >>> from dri.resolve import Resolve
+        ...
+        >>> resolve = Resolve.resolve_init()
+        >>> project_manager = resolve.GetProjectManager()
+        >>> project = project_manager.GetCurrentProject()
+        >>> media_storage = resolve.GetMediaStorage()
+        >>> media_pool = project.GetMediaPool()
+        >>> root_folder = media_pool.GetRootFolder()
+        >>> current_timeline = project.GetCurrentTimeline()
+        ...
+        >>> for i in current_timeline.GetItemListInTrack("video", 1):
+        ...     print(i.GetTakesCount())
+        3
+
+        """
+        ...
+
+    def GetTakeByIndex(self, idx: int) -> dict:
+        """
+        Returns a dict (keys "startFrame", "endFrame" and "mediaPoolItem") with take
+        info for specified index.
+
+        Parameters
+        ----------
+        idx
+            Take index.
+
+        Returns
+        -------
+        dict
+            A dict with keys "startFrame", "endFrame", and "mediaPoolitem".
+
+        Examples
+        --------
+        >>> from dri.resolve import Resolve
+        ...
+        >>> resolve = Resolve.resolve_init()
+        >>> project_manager = resolve.GetProjectManager()
+        >>> project = project_manager.GetCurrentProject()
+        >>> media_storage = resolve.GetMediaStorage()
+        >>> media_pool = project.GetMediaPool()
+        >>> root_folder = media_pool.GetRootFolder()
+        >>> current_timeline = project.GetCurrentTimeline()
+        ...
+        >>> for i in current_timeline.GetItemListInTrack("video", 1):
+        >>>     print(i.GetTakeByIndex(1))
+        {'mediaPoolItem': <BlackmagicFusion.PyRemoteObject object at 0x10677acf0>,
+        'startFrame': 0, 'endFrame': 415}
+
+        """
+        ...
+
+    def DeleteTakeByIndex(self, idx: int) -> bool:
+        """
+        Deletes a take by index, 1 <= idx <= number of takes.
+
+        Parameters
+        ----------
+        idx
+            Take index.
+
+        Returns
+        -------
+        bool
+            True if successful, False otherwise.
+
+        """
+        ...
+
+    def SelectTakeByIndex(self, idx: int) -> bool:
+        """
+        Selects a take by index, 1 <= idx <= number of takes.
+
+        Parameters
+        ----------
+        idx
+            Take index.
+
+        Returns
+        -------
+        bool
+            True if successful, False otherwise.
+
+        """
+        ...
+
+    def FinalizeTake(self) -> bool:
+        """
+        Finalizes take selection.
+
+        Returns
+        -------
+        bool
+            True if successful, False otherwise.
+
+        """
+        ...
+
+    def CopyGrades(self, target_timemline_items: list[TimelineItem]) -> bool:
+        """
+        Copies the current grade to all the items in tgtTimelineItems list. Returns True
+        on success and False if any error occurred.
+
+        Parameters
+        ----------
+        target_timeline_items
+            Target :class:`dri.TimelineItems` list.
+
+        Returns
+        -------
+        bool
+            True if successful, False otherwise.
+
+        """
+        ...
+
+    def SetClipEnabled(self, enabled: bool) -> bool:
+        """
+        Sets clip enabled based on argument.
+
+        Parameters
+        ----------
+        enabled
+            Clip enable or disable.
+
+        Returns
+        -------
+        bool
+            True if successful, False otherwise.
+
+        """
+        ...
