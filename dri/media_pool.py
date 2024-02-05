@@ -54,11 +54,11 @@ class ClipInfo:
     """
 
     mediaPoolItem: MediaPoolItem
-    startFrame: int = None
-    endFrame: int = None
-    mediaType: Literal[1, 2] = None  # 1 - Video only, 2 - Audio only
-    recordFrame: int = None
-    trackIndex: int = None
+    startFrame: int = 0
+    endFrame: int = 0
+    mediaType: Literal[1, 2] = 1  # 1 - Video only, 2 - Audio only
+    recordFrame: int = 0
+    trackIndex: int = 0
 
 
 @dataclass
