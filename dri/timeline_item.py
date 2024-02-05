@@ -3,7 +3,6 @@ from typing import Optional
 from dri.color import LiteralClipColor, LiteralFlagColor, LiteralMarkerColor
 from dri.fusion_comp import FusionComp
 from dri.media_pool_item import MediaPoolItem
-from dri.timeline_item import TimelineItem
 
 
 class TimelineItem:
@@ -1045,7 +1044,7 @@ class TimelineItem:
         """
         ...
 
-    def CopyGrades(self, target_timemline_items: list[TimelineItem]) -> bool:
+    def CopyGrades(self, target_timemline_items: list["TimelineItem"]) -> bool:
         """
         Copies the current grade to all the items in tgtTimelineItems list. Returns True
         on success and False if any error occurred.
