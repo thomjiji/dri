@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Literal, Optional
 
 from dri.color import LiteralClipColor, LiteralFlagColor, LiteralMarkerColor
 from dri.fusion_comp import FusionComp
@@ -1070,6 +1070,130 @@ class TimelineItem:
         ----------
         enabled
             Clip enable or disable.
+
+        Returns
+        -------
+        bool
+            True if successful, False otherwise.
+
+        """
+        ...
+
+    def GetClipEnabled(self) -> bool:
+        """
+        Gets clip enabled status.
+
+        Returns
+        -------
+        bool
+            True if clip is already enabled, False otherwise.
+
+        """
+        ...
+
+    def UpdateSidecar(self) -> bool:
+        """
+        Updates sidecar file for BRAW clips or RMD file for R3D clips.
+
+        Returns
+        -------
+        bool
+            True if successful, False otherwise.
+
+        """
+        ...
+
+    def GetUniqueId(self) -> str:
+        """
+        Returns a unique ID for the timeline item
+
+        Returns
+        -------
+        str
+            Unique ID for the timeline item.
+        """
+        ...
+
+    def LoadBurnInPreset(self, preset_name: str) -> bool:
+        """
+        Loads user defined data burn in preset for clip when supplied presetName
+        (string). Returns true if successful.
+
+        Parameters
+        ----------
+        preset_name
+            User defined data burn-in preset name.
+
+        Returns
+        -------
+        bool
+            True if successful, False otherwise.
+
+        """
+        ...
+
+    def GetNodeLabel(self, node_index: int) -> str:
+        """
+        Returns the label of the node at nodeIndex.
+
+        Parameters
+        ----------
+        node_index
+            Node index in the Color page.
+
+        Returns
+        -------
+        str
+            Label in that node.
+
+        """
+        ...
+
+    def CreateMagicMask(self, mode: Literal["F", "B", "BI"]) -> bool:
+        """
+        Returns True if magic mask was created successfully, False otherwise. mode can
+        "F" (forward), "B" (backward), or "BI" (bidirection).
+
+        Parameters
+        ----------
+        mode
+            Can be "F" (forward), "B" (backward), or "BI" (bidirection).
+
+        Returns
+        -------
+        bool
+            True if successful, False otherwise.
+
+        """
+        ...
+
+    def RegenerateMagicMask(self) -> bool:
+        """
+        Returns True if magic mask was regenerated successfully, False otherwise.
+
+        Returns
+        -------
+        bool
+            True if successful, False otherwise.
+
+        """
+        ...
+
+    def Stabilize(self) -> bool:
+        """
+        Returns True if stabilization was successful, False otherwise
+
+        Returns
+        -------
+        bool
+            True if successful, False otherwise.
+
+        """
+        ...
+
+    def SmartReframe(self) -> bool:
+        """
+        Performs Smart Reframe. Returns True if successful, False otherwise.
 
         Returns
         -------
