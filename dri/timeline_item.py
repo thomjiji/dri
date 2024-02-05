@@ -150,7 +150,7 @@ class TimelineItem:
         Returns
         -------
         bool
-            True if successful.
+            True if successful, False otherwise.
 
         """
         ...

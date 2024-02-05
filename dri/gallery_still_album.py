@@ -12,6 +12,7 @@ class GalleryStillAlbum:
             A list of GalleryStill objects in the album.
 
         """
+        ...
 
     def GetLabel(self, gallery_still: GalleryStill) -> str:
         """
@@ -28,6 +29,7 @@ class GalleryStillAlbum:
             The Label of this :class:`GalleryStill` object.
 
         """
+        ...
 
     def SetLabel(self, gallery_still: GalleryStill, label: str) -> bool:
         """
@@ -46,6 +48,7 @@ class GalleryStillAlbum:
             True if successful, false otherwise.
 
         """
+        ...
 
     def ImportStills(self, file_paths: list[str]) -> bool:
         """
@@ -63,6 +66,7 @@ class GalleryStillAlbum:
             True if at least one still is imported successfully, false otherwise.
 
         """
+        ...
 
     def ExportStills(
         self,
@@ -95,8 +99,9 @@ class GalleryStillAlbum:
             otherwise.
 
         """
+        ...
 
-    def DeleteStills(gallery_still: list[GalleryStill]) -> bool:
+    def DeleteStills(self, gallery_still: list[GalleryStill]) -> bool:
         """
         Deletes specified list of GalleryStill objects '[galleryStill]'.
 
@@ -111,3 +116,4 @@ class GalleryStillAlbum:
             Return `True` if all objects were successfully deleted, `False` otherwise.
 
         """
+        ...
