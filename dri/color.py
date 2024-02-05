@@ -1,60 +1,62 @@
-from enum import Enum
+from typing import Literal
+
+LiteralMarkerColor = Literal[
+    "All",
+    "Blue",
+    "Cyan",
+    "Green",
+    "Yellow",
+    "Red",
+    "Pink",
+    "Purple",
+    "Fuchsia",
+    "Rose",
+    "Lavender",
+    "Sky",
+    "Mint",
+    "Lemon",
+    "Sand",
+    "Cocoa",
+    "Cream",
+]
 
 
-class MarkerColor(Enum):
-    All = "All"
-    Blue = "Blue"
-    Cyan = "Cyan"
-    Green = "Green"
-    Yellow = "Yellow"
-    Red = "Red"
-    Pink = "Pink"
-    Purple = "Purple"
-    Fuchsia = "Fuchsia"
-    Rose = "Rose"
-    Lavender = "Lavender"
-    Sky = "Sky"
-    Mint = "Mint"
-    Lemon = "Lemon"
-    Sand = "Sand"
-    Cocoa = "Cocoa"
-    Cream = "Cream"
+LiteralFlagColor = Literal[
+    "All",
+    "Blue",
+    "Cyan",
+    "Green",
+    "Yellow",
+    "Red",
+    "Pink",
+    "Purple",
+    "Fuchsia",
+    "Rose",
+    "Lavender",
+    "Sky",
+    "Mint",
+    "Lemon",
+    "Sand",
+    "Cocoa",
+    "Cream",
+]
 
 
-class FlagColor(Enum):
-    All = "All"
-    Blue = "Blue"
-    Cyan = "Cyan"
-    Green = "Green"
-    Yellow = "Yellow"
-    Red = "Red"
-    Pink = "Pink"
-    Purple = "Purple"
-    Fuchsia = "Fuchsia"
-    Rose = "Rose"
-    Lavender = "Lavender"
-    Sky = "Sky"
-    Mint = "Mint"
-    Lemon = "Lemon"
-    Sand = "Sand"
-    Cocoa = "Cocoa"
-    Cream = "Cream"
-
-
-class ClipColor(Enum):
-    Orange = "Orange"
-    Apricot = "Apricot"
-    Yellow = "Yellow"
-    Lime = "Lime"
-    Olive = "Olive"
-    Green = "Green"
-    Teal = "Teal"
-    Navy = "Navy"
-    Blue = "Blue"
-    Purple = "Purple"
-    Violet = "Violet"
-    Pink = "Pink"
-    Tan = "Tan"
-    Beige = "Beige"
-    Brown = "Brown"
-    Chocolate = "Chocolate"
+LiteralClipColor = Literal[
+    "Orange",
+    "Apricot",
+    "Yellow",
+    "Lime",
+    "Olive",
+    "Green",
+    "Teal",
+    "Navy",
+    "Blue",
+    "Purple",
+    "Violet",
+    "Pink",
+    "Tan",
+    "Beige",
+    "Brown",
+    "Chocolate",
+]

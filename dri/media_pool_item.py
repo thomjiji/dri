@@ -1,6 +1,6 @@
-from typing import TypedDict, Literal, Optional
+from typing import Literal, Optional, TypedDict
 
-from dri.color import MarkerColor, FlagColor, ClipColor
+from dri.color import LiteralClipColor, LiteralFlagColor, LiteralMarkerColor
 
 
 # TODO This Metadata class is incomplete
@@ -131,7 +131,7 @@ class MediaPoolItem:
     def AddMarker(
         self,
         frame_id: int,
-        color: MarkerColor,
+        color: LiteralMarkerColor,
         name: str,
         note: Optional[str],
         duration: int,
@@ -264,7 +264,7 @@ class MediaPoolItem:
         """
         ...
 
-    def DeleteMarkersByColor(self, color: MarkerColor | str) -> bool:
+    def DeleteMarkersByColor(self, color: LiteralMarkerColor) -> bool:
         """
         Delete all markers of the specified color from the media pool item. **"All"** as
         argument deletes all markers.
@@ -316,7 +316,7 @@ class MediaPoolItem:
         """
         ...
 
-    def AddFlag(self, color: FlagColor | str) -> bool:
+    def AddFlag(self, color: LiteralFlagColor) -> bool:
         """
         Adds a flag with given color (string).
 
@@ -333,22 +333,22 @@ class MediaPoolItem:
         """
         ...
 
-    def GetFlagList(self) -> list[FlagColor | str]:
+    def GetFlagList(self) -> list[LiteralFlagColor]:
         """
         Returns a list of flag colors assigned to the item.
 
         Returns
         -------
-        list[FlagColor | str]
+        list[LiteralFlagColor | str]
             List of flag colors assigned to the item.
 
         """
         ...
 
-    def ClearFlags(self, color: FlagColor | str) -> bool:
+    def ClearFlags(self, color: LiteralFlagColor) -> bool:
         """
-        Clears the flag of the given color if one exists. An **"All"** argument is
-        supported and clears all flags.
+        Clears the flag of the given color if one exists. An "All" argument is supported
+        and clears all flags.
 
         Parameters
         ----------
@@ -363,19 +363,19 @@ class MediaPoolItem:
         """
         ...
 
-    def GetClipColor(self) -> ClipColor | str:
+    def GetClipColor(self) -> LiteralClipColor:
         """
         Returns the item color as a string.
 
         Returns
         -------
-        ClipColor | str
+        LiteralClipColor | str
             Return Clip color as a string.
 
         """
         ...
 
-    def SetClipColor(self, color_name: ClipColor | str) -> bool:
+    def SetClipColor(self, color_name: LiteralClipColor) -> bool:
         """
         Sets the item color based on the colorName (string).
 

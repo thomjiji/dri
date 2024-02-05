@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from typing import Literal, Optional
 
-from dri.color import MarkerColor
+from dri.color import LiteralMarkerColor
 from dri.gallery_still import GalleryStill
 from dri.timeline_item import TimelineItem
 
@@ -378,7 +378,7 @@ class Timeline:
     def AddMarker(
         self,
         frame_id: int,
-        color: MarkerColor,
+        color: LiteralMarkerColor,
         name: str,
         note: Optional[str],
         duration: int,
@@ -498,7 +498,7 @@ class Timeline:
         """
         ...
 
-    def DeleteMarkersByColor(self, color: MarkerColor | str) -> bool:
+    def DeleteMarkersByColor(self, color: LiteralMarkerColor) -> bool:
         """
         Deletes all timeline markers of the specified color. An "All" argument is
         supported and deletes all timeline markers.
@@ -557,7 +557,7 @@ class Timeline:
         path: str,
         grade_mode: Literal[0, 1, 2],
         item: TimelineItem,
-        *items: TimelineItem
+        *items: TimelineItem,
     ) -> bool:
         """
         Loads a still from given file path (string) and applies grade to Timeline

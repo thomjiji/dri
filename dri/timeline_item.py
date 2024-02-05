@@ -1,7 +1,8 @@
 from typing import Optional
 
-from dri.color import MarkerColor, FlagColor, ClipColor
+from dri.color import LiteralClipColor, LiteralFlagColor, LiteralMarkerColor
 from dri.fusion_comp import FusionComp
+from dri.media_pool_item import MediaPoolItem
 
 
 class TimelineItem:
@@ -219,7 +220,7 @@ class TimelineItem:
     def AddMarker(
         self,
         frame_id: int,
-        color: MarkerColor,
+        color: LiteralMarkerColor,
         name: str,
         note: Optional[str],
         duration: int,
@@ -317,7 +318,7 @@ class TimelineItem:
         """
         ...
 
-    def DeleteMarkersByColor(self, color: MarkerColor) -> bool:
+    def DeleteMarkersByColor(self, color: LiteralMarkerColor) -> bool:
         """
         Delete all markers of the specified color from the timeline item. "All" as
         argument deletes all color markers.
@@ -369,7 +370,7 @@ class TimelineItem:
         """
         ...
 
-    def AddFlag(self, color: FlagColor | str) -> bool:
+    def AddFlag(self, color: LiteralFlagColor) -> bool:
         """
         Adds a flag with given color (string).
 
@@ -386,19 +387,19 @@ class TimelineItem:
         """
         ...
 
-    def GetFlagList(self) -> list[FlagColor | str]:
+    def GetFlagList(self) -> list[LiteralFlagColor]:
         """
         Returns a list of flag colors assigned to the item.
 
         Returns
         -------
-        list[FlagColor | str]
+        list[LiteralFlagColor]
             List of flag colors assigned to the item.
 
         """
         ...
 
-    def ClearFlags(self, color: FlagColor | str) -> bool:
+    def ClearFlags(self, color: LiteralFlagColor) -> bool:
         """
         Clear flags of the specified color. An "All" argument is supported to clear
         all flags.
@@ -428,7 +429,7 @@ class TimelineItem:
         """
         ...
 
-    def SetClipColor(self, color_name: ClipColor | str) -> bool:
+    def SetClipColor(self, color_name: LiteralClipColor) -> bool:
         """
         Sets the item color based on the colorName (string).
 
