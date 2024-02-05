@@ -426,6 +426,8 @@ class Timeline:
         -   The parameters `note` and `custom_data` are optional, which means: when
             calling this function, you should at least give it a null value `""` instead
             of omitting this parameter completely.
+        -   If there is already a marker at the position of frameId, it will return
+            False.
 
         Examples
         --------
