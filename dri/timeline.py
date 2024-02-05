@@ -386,8 +386,8 @@ class Timeline:
     ) -> bool:
         """
         Creates a new marker at given frameId position and with given marker
-        information. 'customData' is optional and helps to attach user specific data
-        to the marker.
+        information. 'customData' is optional and helps to attach user specific data to
+        the marker.
 
         Parameters
         ----------
@@ -403,8 +403,8 @@ class Timeline:
         duration
             Marker duration.
         custom_data
-            Custom data helps to attach user specific data to the marker. Not visible
-            in the UI. Optional.
+            Custom data helps to attach user specific data to the marker. Not visible in
+            the UI. Optional.
 
         Returns
         -------
@@ -413,13 +413,34 @@ class Timeline:
 
         Notes
         -----
-        -   frameId is not source frame, but a Record Frame minus the first frame
-            of the current timeline (you can get it through
-            :func:`dri.timeline.GetStartFrame`) - 01:00:00:00 (24 fps timeline: 86400,
-            25 fps timeline: 90000).
-        -   For example: Here is a marker located at record frame 86607. We know that
-            current timeline is 24fps, so the first frame is 86400. Here we can get the
-            frameId which is 86607 - 86400 = 207.
+        -   frameId is not source frame, but a Record Frame minus the first frame of the
+            current timeline (you can get it through :func:`dri.timeline.GetStartFrame`)
+            — 01:00:00:00 on 24 fps timeline: 86400, on 25 fps timeline: 90000).
+        -   For instance, consider a marker positioned at record frame 86607 in a 24 fps
+            timeline, where the initial frame is 86400. To calculate the frameId for
+            this marker, subtract the first frame from its record frame: 86607 - 86400,
+            resulting in a frameId of 207.
+        -   :func:`dri.timeline.AddMarker` only accepts positional arguments like in the
+            example below. If you pass keyword arguments (kwarg=value) to it, it will
+            always return False.
+        -   The parameters `note` and `custom_data` are optional, which means: when
+            calling this function, you should at least give it a null value `""` instead
+            of omitting this parameter completely.
+
+        Examples
+        --------
+        >>> from dri.resolve import Resolve
+        ...
+        >>> resolve = Resolve.resolve_init()
+        >>> project_manager = resolve.GetProjectManager()
+        >>> project = project_manager.GetCurrentProject()
+        >>> media_storage = resolve.GetMediaStorage()
+        >>> media_pool = project.GetMediaPool()
+        >>> root_folder = media_pool.GetRootFolder()
+        >>> current_timeline = project.GetCurrentTimeline()
+        ...
+        >>> current_timeline.AddMarker(171, "Blue", "name", "note", 1, "custom_data")
+        True
 
         """
         ...

@@ -228,13 +228,13 @@ class TimelineItem:
     ) -> bool:
         """
         Creates a new marker at given frameId position and with given marker
-        information. 'customData' is optional and helps to attach user specific data
-        to the marker.
+        information. 'customData' is optional and helps to attach user specific data to
+        the marker.
 
         Parameters
         ----------
         frame_id
-            Frame number. Which is "Source Frame".
+            Frame number. Which is "Source Frame" located in the UI.
         color
             Marker color.
         name
@@ -244,13 +244,37 @@ class TimelineItem:
         duration
             Marker duration.
         custom_data
-            Custom data helps to attach user specific data to the marker. Not visible
-            in the UI. Optional.
+            Custom data helps to attach user specific data to the marker. Not visible in
+            the UI. Optional.
 
         Returns
         -------
         bool
             True if successful, False otherwise.
+
+        Notes
+        -----
+        -   :func:`dri.timeline.AddMarker` only accepts positional arguments like in the
+            example below. If you pass keyword arguments (kwarg=value) to it, it will
+            always return False.
+        -   The parameters `note` and `custom_data` are optional, which means: when
+            calling this function, you should at least give it a null value `""` instead
+            of omitting this parameter completely.
+
+        Examples
+        --------
+        >>> from dri.resolve import Resolve
+        ...
+        >>> resolve = Resolve.resolve_init()
+        >>> project_manager = resolve.GetProjectManager()
+        >>> project = project_manager.GetCurrentProject()
+        >>> media_storage = resolve.GetMediaStorage()
+        >>> media_pool = project.GetMediaPool()
+        >>> root_folder = media_pool.GetRootFolder()
+        >>> current_timeline = project.GetCurrentTimeline()
+        ...
+        >>> for i in current_timeline.GetItemListInTrack("video", 1):
+        >>>     i.AddMarker(20, "Blue", "name", "", 1, "")
 
         """
         ...
