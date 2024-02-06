@@ -3,7 +3,7 @@ name = "dri"
 version = "0.0.1"
 description = "DaVinci Resolve API type system for script development"
 authors = ["thomjiji <hxy449999@gmail.com>"]
-license = "GPLv3"
+license = "LGPLv3"
 readme = "README.md"
 
 [tool.poetry.dependencies]

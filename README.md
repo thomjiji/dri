@@ -34,7 +34,7 @@ function (API) to see well-formatted docstring and type hints.
 
 ### After development using Dri
 
-If your script intends to use outside DaVinci Resolve, replace the import below
+If your script intends to use outside of DaVinci Resolve, replace the imports below
 
 ```python
 from dri import Resolve
@@ -63,16 +63,14 @@ pytest -v
 ```
 
 By default, pytest captures the output produced by your tests and displays it only if
-the test fails. However, when you
-use `--capture=no` or `-s`, pytest allows the stdout and stderr to be displayed on the
-console immediately, regardless
-of the test result.
+the test fails. However, when you use `--capture=no` or `-s`, pytest allows the stdout
+and stderr to be displayed on the console immediately, regardless of the test result.
 
 ```shell
 pytest -v -s
 ```
 
-## Similar Project
+## Similar Projects
 
 - [pybmd](https://github.com/WheheoHu/pybmd)
 - [pydavinci](https://github.com/pedrolabonia/pydavinci)
