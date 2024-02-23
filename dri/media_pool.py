@@ -265,8 +265,8 @@ class MediaPool:
     ) -> Timeline:
         """
         Creates timeline based on parameters within given file
-        (AAF/EDL/XML/FCPXML/DRT/ADL) and optional importOptions dict, with support for
-        the keys:
+        (AAF/EDL/XML/FCPXML/DRT/ADL/OTIO) and optional importOptions dict, with support
+        for the keys:
 
         -   timelineName: string, specifies the name of the timeline to be created. Not
             valid for DRT import.
