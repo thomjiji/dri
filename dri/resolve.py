@@ -315,7 +315,7 @@ class Resolve:
         Export a preset to a given path (string) if presetName(string) exists.
 
         Parameters
-        -------
+        ----------
         preset_name
             The name of the preset to import.
         export_path
@@ -352,7 +352,7 @@ class Resolve:
         exists.
 
         Parameters
-        -------
+        ----------
         preset_name
             The name of the preset to import.
         export_path
