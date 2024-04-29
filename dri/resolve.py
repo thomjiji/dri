@@ -1,3 +1,4 @@
+from enum import IntEnum
 import importlib.util
 import platform
 from dataclasses import dataclass
@@ -39,6 +40,22 @@ def load_dynamic_lib() -> Optional[ModuleType]:
     return bmd_module
 
 
+class KeyframeMode(IntEnum):
+    """
+    'keyframeMode' can be one of the following enums:
+        - resolve.KEYFRAME_MODE_ALL     == 0
+        - resolve.KEYFRAME_MODE_COLOR   == 1
+        - resolve.KEYFRAME_MODE_SIZING  == 2
+
+    Integer values returned by Resolve.GetKeyframeMode() will correspond to the enums
+    above.
+    """
+
+    ALL = 0
+    COLOR = 1
+    SIZING = 2
+
+
 @dataclass
 class Resolve:
     # For timeline.Export().
@@ -64,6 +81,10 @@ class Resolve:
     EXPORT_CDL: str = "CDL"
     EXPORT_SDL: str = "SDL"
     EXPORT_MISSING_CLIPS: str = "MISSING_CLIPS"
+
+    KEYFRAME_MODE_ALL: KeyframeMode = KeyframeMode.ALL
+    KEYFRAME_MODE_COLOR: KeyframeMode = KeyframeMode.COLOR
+    KEYFRAME_MODE_SIZING: KeyframeMode = KeyframeMode.SIZING
 
     @staticmethod
     def resolve_init() -> "Resolve":
@@ -362,6 +383,39 @@ class Resolve:
         -------
         bool
             True if import successful, False otherwise.
+
+        """
+        ...
+
+    def GetKeyframeMode(self) -> KeyframeMode:
+        """
+        Returns the currently set keyframe mode (int). Refer to section 'Keyframe Mode
+        information' below for details.
+
+        Notes
+        -----
+        It's located on Color page > Keyframes panel which next to Scopes.
+
+        Returns
+        -------
+        KeyframeMode
+            Three integers: 0, 1 or 2 correspond to All, Color and Sizing.
+
+        """
+        ...
+
+    def SetKeyframeMode(self, keyframe_mode: KeyframeMode) -> bool:
+        """
+        Returns True when 'keyframeMode'(enum) is successfully set.
+
+        Parameters
+        ----------
+        keyframe_mode
+            Three integers: 0, 1 and 2 correspond to All, Color and Sizing.
+
+        Returns
+        -------
+            True if successful, False otherwise.
 
         """
         ...
