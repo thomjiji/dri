@@ -3,6 +3,7 @@ from typing import Literal, Optional
 
 from dri.color import LiteralMarkerColor
 from dri.gallery_still import GalleryStill
+from dri.graph import Graph
 from dri.timeline_item import TimelineItem
 
 
@@ -1110,5 +1111,11 @@ class Timeline:
         bool
             True if scene cuts were detected successfully.
 
+        """
+        ...
+
+    def GetNodeGraph(self) -> Graph:
+        """
+        Returns the timeline's node graph object.
         """
         ...

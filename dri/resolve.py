@@ -1,7 +1,7 @@
-from enum import IntEnum
 import importlib.util
 import platform
 from dataclasses import dataclass
+from enum import Enum, IntEnum
 from types import ModuleType
 from typing import Optional
 
@@ -56,6 +56,18 @@ class KeyframeMode(IntEnum):
     SIZING = 2
 
 
+class ExportType(Enum):
+    """
+    ExportLUT notes
+    ---------------
+    """
+
+    EXPORT_LUT_17PTCUBE = "EXPORT_LUT_17PTCUBE"
+    EXPORT_LUT_33PTCUBE = "EXPORT_LUT_33PTCUBE"
+    EXPORT_LUT_65PTCUBE = "EXPORT_LUT_65PTCUBE"
+    EXPORT_LUT_PANASONICVLUT = "EXPORT_LUT_PANASONICVLUT"
+
+
 @dataclass
 class Resolve:
     # For timeline.Export().
@@ -74,6 +86,8 @@ class Resolve:
     EXPORT_DOLBY_VISION_VER_4_0: str = "DOLBY_VISION_VER_4_0"
     EXPORT_DOLBY_VISION_VER_5_1: str = "DOLBY_VISION_VER_5_1"
     EXPORT_OTIO: str = "OTIO"
+    EXPORT_ALE: str = "ALE"
+    EXPORT_CDL: str = "CDL"
 
     EXPORT_NONE: str = "NONE"
     EXPORT_AAF_NEW: str = "AAF_NEW"
@@ -85,6 +99,10 @@ class Resolve:
     KEYFRAME_MODE_ALL: KeyframeMode = KeyframeMode.ALL
     KEYFRAME_MODE_COLOR: KeyframeMode = KeyframeMode.COLOR
     KEYFRAME_MODE_SIZING: KeyframeMode = KeyframeMode.SIZING
+    EXPORT_LUT_17PTCUBE: ExportType = ExportType.EXPORT_LUT_17PTCUBE
+    EXPORT_LUT_33PTCUBE: ExportType = ExportType.EXPORT_LUT_33PTCUBE
+    EXPORT_LUT_65PTCUBE: ExportType = ExportType.EXPORT_LUT_65PTCUBE
+    EXPORT_LUT_PANASONICVLUT: ExportType = ExportType.EXPORT_LUT_PANASONICVLUT
 
     @staticmethod
     def resolve_init() -> "Resolve":

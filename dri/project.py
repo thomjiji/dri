@@ -1,5 +1,6 @@
 from typing import Literal, TypedDict
 
+from dri.color_group import ColorGroup
 from dri.gallery import Gallery
 from dri.media_pool import MediaPool
 from dri.timeline import Timeline
@@ -695,5 +696,23 @@ class Project:
         >>> project.ExportCurrentFrameAsStill("/Users/thom/Desktop/arriraw.jpg")
         True
 
+        """
+        ...
+
+    def GetColorGroupsList(self) -> list[ColorGroup]:
+        """
+        Returns a list of all group objects in the timeline.
+        """
+        ...
+
+    def AddColorGroup(self, group_name: str) -> ColorGroup:
+        """
+        Creates a new ColorGroup. groupName must be a unique string.
+        """
+        ...
+
+    def DeleteColorGroup(self, color_group: ColorGroup) -> bool:
+        """
+        Deletes the given color group and sets clips to ungrouped.
         """
         ...

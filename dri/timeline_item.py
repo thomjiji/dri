@@ -1,8 +1,11 @@
 from typing import Literal, Optional
 
 from dri.color import LiteralClipColor, LiteralFlagColor, LiteralMarkerColor
+from dri.color_group import ColorGroup
 from dri.fusion_comp import FusionComp
+from dri.graph import Graph
 from dri.media_pool_item import MediaPoolItem
+from dri.resolve import ExportType
 
 
 class TimelineItem:
@@ -760,22 +763,6 @@ class TimelineItem:
         """
         ...
 
-    def GetNumNodes(self) -> int:
-        """
-        Returns the number of nodes in the current graph for the timeline item.
-
-        Returns
-        -------
-        int
-            The number of nodes in the color page for this MediaPoolItem.
-
-        Notes
-        -----
-        The "node" here refers to the nodes of the color page.
-
-        """
-        ...
-
     def ApplyArriCdlLut(self) -> bool:
         """
         Applies ARRI CDL and LUT. Returns True if successful, False otherwise.
@@ -784,55 +771,6 @@ class TimelineItem:
         -------
         bool
             True if successful, False otherwise.
-
-        """
-        ...
-
-    def SetLUT(self, node_index: int, lut_path: str) -> bool:
-        """
-        Sets LUT on the node mapping the node index provided, 1 <= nodeIndex <= total
-        number of nodes.
-
-        The lutPath can be an absolute path, or a relative path (based off custom LUT
-        paths or the master LUT path).
-
-        The operation is successful for valid lut paths that Resolve has already
-        discovered (see Project.RefreshLUTList).
-
-        Returns
-        -------
-        bool
-            True if successful, False otherwise.
-
-        """
-        ...
-
-    def GetLUT(self, node_index: int) -> str:
-        """
-        Gets relative LUT path based on the node index provided, 1 <= nodeIndex <= total
-        number of nodes.
-
-        Returns
-        -------
-        str
-            Get the path relative to the Resolve LUT path.
-
-        Examples
-        --------
-        >>> from dri.resolve import Resolve
-        ...
-        >>> resolve = Resolve.resolve_init()
-        >>> project_manager = resolve.GetProjectManager()
-        >>> project = project_manager.GetCurrentProject()
-        >>> media_storage = resolve.GetMediaStorage()
-        >>> media_pool = project.GetMediaPool()
-        >>> root_folder = media_pool.GetRootFolder()
-        >>> current_timeline = project.GetCurrentTimeline()
-        ...
-        >>> for i in current_timeline.GetItemListInTrack("video", 1):
-        ...     print(i.GetLUT())
-        Arri/ARRI_LogC4_v1_LUT_Package/LUTs/ARRI_LogC4-to-Gamma24_Rec709-D65_v1-65.cube
-        Arri/ARRI_LogC4_v1_LUT_Package/LUTs/ARRI_LogC4-to-Gamma24_Rec709-D65_v1-65.cube
 
         """
         ...
@@ -1132,23 +1070,6 @@ class TimelineItem:
         """
         ...
 
-    def GetNodeLabel(self, node_index: int) -> str:
-        """
-        Returns the label of the node at nodeIndex.
-
-        Parameters
-        ----------
-        node_index
-            Node index in the Color page.
-
-        Returns
-        -------
-        str
-            Label in that node.
-
-        """
-        ...
-
     def CreateMagicMask(self, mode: Literal["F", "B", "BI"]) -> bool:
         """
         Returns True if magic mask was created successfully, False otherwise. mode can
@@ -1200,5 +1121,43 @@ class TimelineItem:
         bool
             True if successful, False otherwise.
 
+        """
+        ...
+
+    def GetNodeGraph(self) -> Graph:
+        """
+        Returns the clip's node graph object.
+        """
+        ...
+
+    def GetColorGroup(self) -> ColorGroup:
+        """
+        Returns the clip's color group if one exists.
+        """
+        ...
+
+    def AssignToColorGroup(self, color_group: ColorGroup) -> bool:
+        """
+        Returns True if TiItem to successfully assigned to given ColorGroup. ColorGroup
+        must be an existing group in the current project.
+        """
+        ...
+
+    def RemoveFromColorGroup(self) -> bool:
+        """
+        Returns True if the TiItem is successfully removed from the ColorGroup it is in.
+        """
+        ...
+
+    def ExportLUT(self, export_type: ExportType, path: str) -> bool:
+        """
+        Exports LUTs from tiItem referring to value passed in 'exportType' (enum) for
+        LUT size. Refer to. 'ExportLUT notes' section for possible values.
+
+        Saves generated LUT in the provided 'path' (string). 'path' should include the
+        intended file name.
+
+        If an empty or incorrect extension is provided, the appropriate extension
+        (.cube/.vlt) will be appended at the end of the path.
         """
         ...
