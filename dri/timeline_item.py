@@ -1,11 +1,9 @@
 from typing import Literal, Optional
 
 from dri.color import LiteralClipColor, LiteralFlagColor, LiteralMarkerColor
-from dri.color_group import ColorGroup
 from dri.fusion_comp import FusionComp
 from dri.graph import Graph
 from dri.media_pool_item import MediaPoolItem
-from dri.resolve import ExportType
 
 
 class TimelineItem:
@@ -1130,13 +1128,13 @@ class TimelineItem:
         """
         ...
 
-    def GetColorGroup(self) -> ColorGroup:
+    def GetColorGroup(self):
         """
         Returns the clip's color group if one exists.
         """
         ...
 
-    def AssignToColorGroup(self, color_group: ColorGroup) -> bool:
+    def AssignToColorGroup(self, color_group) -> bool:
         """
         Returns True if TiItem to successfully assigned to given ColorGroup. ColorGroup
         must be an existing group in the current project.
@@ -1149,7 +1147,7 @@ class TimelineItem:
         """
         ...
 
-    def ExportLUT(self, export_type: ExportType, path: str) -> bool:
+    def ExportLUT(self, export_type, path: str) -> bool:
         """
         Exports LUTs from tiItem referring to value passed in 'exportType' (enum) for
         LUT size. Refer to. 'ExportLUT notes' section for possible values.
