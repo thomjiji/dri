@@ -1157,5 +1157,21 @@ class TimelineItem:
 
         If an empty or incorrect extension is provided, the appropriate extension
         (.cube/.vlt) will be appended at the end of the path.
+
+        Examples
+        -------
+        >>> from dri.resolve import Resolve
+        ...
+        >>> resolve = Resolve.resolve_init()
+        >>> project_manager = resolve.GetProjectManager()
+        >>> project = project_manager.GetCurrentProject()
+        >>> media_storage = resolve.GetMediaStorage()
+        >>> media_pool = project.GetMediaPool()
+        >>> root_folder = media_pool.GetRootFolder()
+        >>> current_timeline = project.GetCurrentTimeline()
+        ...
+        >>> for timeline_item in current_timeline.GetItemListInTrack("video", 1):
+        ...     timeline_item.ExportLUT(resolve.EXPORT_LUT_33PTCUBE, '/Users/thom/Desktop/sample_lut.cube')
+
         """
         ...
