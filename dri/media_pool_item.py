@@ -635,3 +635,16 @@ class MediaPoolItem:
 
         """
         ...
+
+    def GetAudioMapping(self) -> dict:
+        """
+        Returns a string with MediaPoolItem's audio mapping information. Check 'Audio
+        Mapping' section below for more information.
+
+        Returns
+        -------
+        dict
+            json formatted string.
+
+        """
+        ...
