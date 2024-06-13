@@ -128,6 +128,23 @@ class ExportType(Enum):
     EXPORT_LUT_PANASONICVLUT = "EXPORT_LUT_PANASONICVLUT"
 
 
+class CloudSync(Enum):
+    """ """
+
+    CLOUD_SYNC_DEFAULT = -1
+    CLOUD_SYNC_DOWNLOAD_IN_QUEUE = 0
+    CLOUD_SYNC_DOWNLOAD_IN_PROGRESS = 1
+    CLOUD_SYNC_DOWNLOAD_SUCCESS = 2
+    CLOUD_SYNC_DOWNLOAD_FAIL = 3
+    CLOUD_SYNC_DOWNLOAD_NOT_FOUND = 4
+
+    CLOUD_SYNC_UPLOAD_IN_QUEUE = 5
+    CLOUD_SYNC_UPLOAD_IN_PROGRESS = 6
+    CLOUD_SYNC_UPLOAD_SUCCESS = 7
+    CLOUD_SYNC_UPLOAD_FAIL = 8
+    CLOUD_SYNC_UPLOAD_NOT_FOUND = 9
+
+
 class RenderSetting(TypedDict):
     SelectAllFrames: bool
     MarkIn: int
@@ -363,6 +380,20 @@ class Resolve:
     EXPORT_LUT_33PTCUBE: ExportType = ExportType.EXPORT_LUT_33PTCUBE
     EXPORT_LUT_65PTCUBE: ExportType = ExportType.EXPORT_LUT_65PTCUBE
     EXPORT_LUT_PANASONICVLUT: ExportType = ExportType.EXPORT_LUT_PANASONICVLUT
+
+    CLOUD_SYNC_DEFAULT: CloudSync = CloudSync.CLOUD_SYNC_DEFAULT
+    CLOUD_SYNC_DOWNLOAD_IN_QUEUE: CloudSync = CloudSync.CLOUD_SYNC_DOWNLOAD_IN_QUEUE
+    CLOUD_SYNC_DOWNLOAD_IN_PROGRESS: CloudSync = (
+        CloudSync.CLOUD_SYNC_DOWNLOAD_IN_PROGRESS
+    )
+    CLOUD_SYNC_DOWNLOAD_SUCCESS: CloudSync = CloudSync.CLOUD_SYNC_DOWNLOAD_SUCCESS
+    CLOUD_SYNC_DOWNLOAD_FAIL: CloudSync = CloudSync.CLOUD_SYNC_DOWNLOAD_FAIL
+    CLOUD_SYNC_DOWNLOAD_NOT_FOUND: CloudSync = CloudSync.CLOUD_SYNC_DOWNLOAD_NOT_FOUND
+    CLOUD_SYNC_DOWNLOAD_IN_QUEUE: CloudSync = CloudSync.CLOUD_SYNC_DOWNLOAD_IN_QUEUE
+    CLOUD_SYNC_UPLOAD_IN_PROGRESS: CloudSync = CloudSync.CLOUD_SYNC_UPLOAD_IN_PROGRESS
+    CLOUD_SYNC_UPLOAD_SUCCESS: CloudSync = CloudSync.CLOUD_SYNC_UPLOAD_SUCCESS
+    CLOUD_SYNC_UPLOAD_FAIL: CloudSync = CloudSync.CLOUD_SYNC_UPLOAD_FAIL
+    CLOUD_SYNC_UPLOAD_NOT_FOUND: CloudSync = CloudSync.CLOUD_SYNC_UPLOAD_NOT_FOUND
 
     @staticmethod
     def resolve_init() -> "Resolve":
@@ -3308,19 +3339,19 @@ class Timeline:
         """
         ...
 
-    def AddTrack(self, track_type: str, optional_sub_track_type: str = None) -> bool:
+    def AddTrack(self, track_type: str, sub_track_type: str = "") -> bool:
         """
-        Adds track of trackType ("video", "subtitle", "audio"). Second argument
-        optionalSubTrackType is required for "audio".
+        Adds track of trackType ("video", "subtitle", "audio"). Optional argument
+        subTrackType is used for "audio" trackType.
 
-        optionalSubTrackType can be one of {"mono", "stereo", "5.1", "5.1film",
+        subTrackType can be one of {"mono", "stereo", "5.1", "5.1film",
         "7.1", "7.1film", "adaptive1", ... , "adaptive24"}.
 
         Parameters
         ----------
         track_type
             Track type ("audio", "video" or "subtitle")
-        optional_sub_track_type
+        sub_track_type
             Sub track type ("audio", "video" or "subtitle"). Optional. Can be one of
             "mono", "stereo", "5.1", "5.1film", "7.1", "7.1film", "adaptive1",
             "adaptive2", "adaptive3", ..., "adaptive24".
@@ -3329,6 +3360,59 @@ class Timeline:
         -------
         bool
             True if the track was added successfully, False otherwise.
+
+        Examples
+        -------
+        >>> from dri import Resolve
+        ...
+        >>> resolve = Resolve.resolve_init()
+        >>> project_manager = resolve.GetProjectManager()
+        >>> project = project_manager.GetCurrentProject()
+        >>> media_storage = resolve.GetMediaStorage()
+        >>> media_pool = project.GetMediaPool()
+        >>> root_folder = media_pool.GetRootFolder()
+        >>> current_timeline = project.GetCurrentTimeline()
+        ...
+        >>> current_timeline.AddTrack("audio", "7.1")
+        True
+
+        """
+        ...
+
+    def AddTrack(
+        self, track_type: str, new_track_options: dict[str, str | int]
+    ) -> bool:
+        """
+        Adds track of trackType ("video", "subtitle", "audio"). Optional newTrackOptions
+        = {'audioType': same as subTrackType above, 'index': 1 <= index <=
+        GetTrackCount(trackType)}
+
+        'audiotype' defaults to 'mono' if arg skipped and
+        track type is ‘audio’.
+
+        'index' if skipped (or if value not in bounds) appends
+        track.
+
+        Returns
+        -------
+        bool
+            True if the track was added successfully, False otherwise.
+
+        Examples
+        -------
+        >>> from dri import Resolve
+        ...
+        >>> resolve = Resolve.resolve_init()
+        >>> project_manager = resolve.GetProjectManager()
+        >>> project = project_manager.GetCurrentProject()
+        >>> media_storage = resolve.GetMediaStorage()
+        >>> media_pool = project.GetMediaPool()
+        >>> root_folder = media_pool.GetRootFolder()
+        >>> current_timeline = project.GetCurrentTimeline()
+        ...
+        >>> new_track_option = {'audioType': "5.1", 'index': 3}
+        >>> current_timeline.AddTrack("audio", new_track_option)
+        True
 
         """
         ...
