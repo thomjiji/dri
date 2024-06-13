@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "dri"
-version = "0.0.1"
+version = "0.0.2"
 description = "DaVinci Resolve API type system for script development"
 authors = ["thomjiji <hxy449999@gmail.com>"]
 license = "LGPLv3"
@@ -8,12 +8,12 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.11"
-pytest = "^7.3.2"
 
 [tool.poetry.group.dev.dependencies]
-black = { extras = ["d"], version = "^23.3.0" }
 jupyter = "^1.0.0"
 notebook = "^6.5.4"
+pyyaml = { version = "!=6.0.0,!=5.4.0,!=5.4.1" }
+ruff = "^0.4.8"
 
 [build-system]
 requires = ["poetry-core"]
