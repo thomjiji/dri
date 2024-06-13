@@ -154,7 +154,7 @@ class RenderSetting(TypedDict):
     AudioCodec: str  # Example: "aac"
     AudioBitDepth: int
     AudioSampleRate: int
-    ColorSpaceTag: str  # Example: "Same as Project", "AstroDesign"
+    ColorSpaceTag: str  # Example: "Same as Project", "ACES (AP0)"
     GammaTag: str  # Example: "Same as Project", "ACEScct"
     ExportAlpha: bool
     EncodingProfile: str  # Example: "Main10". Can only be set for H.264 and H.265.
@@ -358,6 +358,7 @@ class Resolve:
     KEYFRAME_MODE_ALL: KeyframeMode = KeyframeMode.ALL
     KEYFRAME_MODE_COLOR: KeyframeMode = KeyframeMode.COLOR
     KEYFRAME_MODE_SIZING: KeyframeMode = KeyframeMode.SIZING
+
     EXPORT_LUT_17PTCUBE: ExportType = ExportType.EXPORT_LUT_17PTCUBE
     EXPORT_LUT_33PTCUBE: ExportType = ExportType.EXPORT_LUT_33PTCUBE
     EXPORT_LUT_65PTCUBE: ExportType = ExportType.EXPORT_LUT_65PTCUBE
@@ -1432,14 +1433,13 @@ class Project:
 
         Examples
         --------
-        >>> from dri.resolve import Resolve
+        >>> from dri import Resolve
         ...
         >>> resolve = Resolve.resolve_init()
         >>> project_manager = resolve.GetProjectManager()
         >>> project = project_manager.GetCurrentProject()
         >>> project.GetSetting("timelineFrameRate")
         "24.0"
-
 
         """
         ...
@@ -2719,7 +2719,7 @@ class MediaPoolItem:
 
         Examples
         --------
-        >>> from dri.resolve import Resolve
+        >>> from dri import Resolve
         ...
         >>> resolve = Resolve.resolve_init()
         >>> project_manager = resolve.GetProjectManager()
@@ -3569,7 +3569,7 @@ class Timeline:
 
         Examples
         --------
-        >>> from dri.resolve import Resolve
+        >>> from dri import Resolve
         ...
         >>> resolve = Resolve.resolve_init()
         >>> project_manager = resolve.GetProjectManager()
@@ -4016,7 +4016,7 @@ class Timeline:
 
         Examples
         --------
-        >>> from dri.resolve import Resolve
+        >>> from dri import Resolve
         ...
         >>> resolve = Resolve.resolve_init()
         >>> project_manager = resolve.GetProjectManager()
@@ -4427,7 +4427,7 @@ class TimelineItem:
 
         Examples
         --------
-        >>> from dri.resolve import Resolve
+        >>> from dri import Resolve
         ...
         >>> resolve = Resolve.resolve_init()
         >>> project_manager = resolve.GetProjectManager()
@@ -4516,7 +4516,7 @@ class TimelineItem:
 
         Examples
         --------
-        >>> from dri.resolve import Resolve
+        >>> from dri import Resolve
         ...
         >>> resolve = Resolve.resolve_init()
         >>> project_manager = resolve.GetProjectManager()
@@ -4867,7 +4867,7 @@ class TimelineItem:
 
         Examples
         --------
-        >>> from dri.resolve import Resolve
+        >>> from dri import Resolve
         ...
         >>> resolve = Resolve.resolve_init()
         >>> project_manager = resolve.GetProjectManager()
@@ -5044,7 +5044,7 @@ class TimelineItem:
 
         Examples
         --------
-        >>> from dri.resolve import Resolve
+        >>> from dri import Resolve
         ...
         >>> resolve = Resolve.resolve_init()
         >>> project_manager = resolve.GetProjectManager()
@@ -5134,7 +5134,7 @@ class TimelineItem:
 
         Examples
         --------
-        >>> from dri.resolve import Resolve
+        >>> from dri import Resolve
         ...
         >>> resolve = Resolve.resolve_init()
         >>> project_manager = resolve.GetProjectManager()
@@ -5168,7 +5168,7 @@ class TimelineItem:
 
         Examples
         --------
-        >>> from dri.resolve import Resolve
+        >>> from dri import Resolve
         ...
         >>> resolve = Resolve.resolve_init()
         >>> project_manager = resolve.GetProjectManager()
@@ -5412,7 +5412,7 @@ class TimelineItem:
 
         Examples
         -------
-        >>> from dri.resolve import Resolve
+        >>> from dri import Resolve
         ...
         >>> resolve = Resolve.resolve_init()
         >>> project_manager = resolve.GetProjectManager()
@@ -5658,7 +5658,7 @@ class Graph:
 
         Examples
         --------
-        >>> from dri.resolve import Resolve
+        >>> from dri import Resolve
         ...
         >>> resolve = Resolve.resolve_init()
         >>> project_manager = resolve.GetProjectManager()
