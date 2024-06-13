@@ -1,10 +1,7 @@
-[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
-[![License: LGPL v3](https://img.shields.io/badge/License-LGPL_v3-blue.svg)](https://www.gnu.org/licenses/lgpl-3.0)
-
 # Quickstart
 
 ```py
-from dri.resolve import Resolve
+from dri import Resolve
 
 resolve = Resolve.resolve_init()
 project_manager = resolve.GetProjectManager()
@@ -39,20 +36,6 @@ If your script intends to use inside DaVinci Resolve, replace it with:
 resolve = bmd.scriptapp("Resolve")
 ```
 
-# Run Tests
-
-```shell
-pytest -v
-```
-
-By default, pytest captures the output produced by your tests and displays it only if
-the test fails. However, when you use `--capture=no` or `-s`, pytest allows the stdout
-and stderr to be displayed on the console immediately, regardless of the test result.
-
-```shell
-pytest -v -s
-```
-
 # License
 
-[LGPLv3](LICENSE)
+[MIT](LICENSE)
