@@ -740,8 +740,8 @@ class ProjectManager:
         is_archive_proxy_media: bool = False,
     ) -> bool:
         """
-        Archives project to provided file path with the configuration as provided by
-        the optional arguments
+        Archives project to provided file path with the configuration as provided by the
+        optional arguments.
 
         Parameters
         ----------
@@ -759,7 +759,32 @@ class ProjectManager:
         Returns
         -------
         bool
-            True if successful, False otherwise
+            True if successful, False otherwise.
+
+        Notes
+        -----
+        is_archive_src_media can't be set to False for no reason. It also can't be
+        uncheck when using GUI > right click project > Export Project Archive.
+
+        Examples
+        --------
+        >>> from dri import Resolve
+        ...
+        >>> resolve = Resolve.resolve_init()
+        >>> project_manager = resolve.GetProjectManager()
+        >>> project = project_manager.GetCurrentProject()
+        >>> media_storage = resolve.GetMediaStorage()
+        >>> media_pool = project.GetMediaPool()
+        >>> root_folder = media_pool.GetRootFolder()
+        >>> current_timeline = project.GetCurrentTimeline()
+        >>> project_manager.ArchiveProject(
+        ...    "Daily work",
+        ...    "/Users/thom/Downloads/Daily work",
+        ...    is_archive_src_media=False,
+        ...    is_archive_render_cache=False,
+        ...    is_archive_proxy_media=False,
+        ... )
+        True
 
         """
         ...
