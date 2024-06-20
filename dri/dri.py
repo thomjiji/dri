@@ -772,11 +772,6 @@ class ProjectManager:
         ...
         >>> resolve = Resolve.resolve_init()
         >>> project_manager = resolve.GetProjectManager()
-        >>> project = project_manager.GetCurrentProject()
-        >>> media_storage = resolve.GetMediaStorage()
-        >>> media_pool = project.GetMediaPool()
-        >>> root_folder = media_pool.GetRootFolder()
-        >>> current_timeline = project.GetCurrentTimeline()
         >>> project_manager.ArchiveProject(
         ...    "Daily work",
         ...    "/Users/thom/Downloads/Daily work",
@@ -1029,7 +1024,9 @@ class ProjectManager:
         project_name
             Project name of the project to be exported.
         file_path
-            File path to export project to. Must be an absolute path.
+            File path to export project to. Must be an absolute path. Must including the
+            exported project name (without extension, Resolve will take care of
+            that), see Examples below.
         with_stills_and_luts
             "Export Project with Stills and LUTs...", Defaults to True.
 
@@ -1037,6 +1034,15 @@ class ProjectManager:
         -------
         bool
             True if successful, False otherwise.
+
+        Examples
+        --------
+        >>> from dri import Resolve
+        ...
+        >>> resolve = Resolve.resolve_init()
+        >>> project_manager = resolve.GetProjectManager()
+        >>> project_manager.ExportProject("Daily work", "/Users/thom/Downloads/Daily work")
+        True
 
         """
         ...
