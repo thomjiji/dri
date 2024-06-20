@@ -36,6 +36,19 @@ If your script intends to use inside DaVinci Resolve, replace it with:
 resolve = bmd.scriptapp("Resolve")
 ```
 
+# Notes
+
+## Headless DaVinci Resolve
+
+`cd` into `/Applications/DaVinci Resolve/DaVinci Resolve.app/Contents/MacOS/`, run:
+
+```
+./Resolve -nogui
+```
+
+It will run in the background without GUI, block current tty (terminal session), output
+some logs in the stdout.
+
 # License
 
 [MIT](LICENSE)
