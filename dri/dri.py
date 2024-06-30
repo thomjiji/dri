@@ -2220,7 +2220,7 @@ class MediaPool:
         """
         ...
 
-    def SetCurentFolder(self, folder: "Folder") -> bool:
+    def SetCurrentFolder(self, folder: "Folder") -> bool:
         """
         Sets current folder by given Folder
 
