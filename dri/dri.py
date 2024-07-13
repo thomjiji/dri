@@ -5349,8 +5349,8 @@ class TimelineItem:
 
     def CopyGrades(self, target_timemline_items: list["TimelineItem"]) -> bool:
         """
-        Copies the current grade to all the items in tgtTimelineItems list. Returns True
-        on success and False if any error occurred.
+        Copies the current node stack layer grade to the same layer for each
+        item in tgtTimelineItems. Returns True if successful.
 
         Parameters
         ----------
@@ -5489,9 +5489,19 @@ class TimelineItem:
         """
         ...
 
-    def GetNodeGraph(self) -> "Graph":
+    def GetNodeGraph(self, layer_index: int = 1) -> "Graph":
         """
-        Returns the clip's node graph object.
+        Returns the clip's node graph object at layerIdx (int, optional). Returns the
+        first layer if layerIdx is skipped. 1 <= layerIdx <=
+        project.GetSetting("nodeStackLayers").
+
+        Parameters
+        ----------
+        layer_index
+            Defaults to 1 as it's at less 1 layer in the node graph - The clip level
+            node graph (There is also Timeline level node graph). Maximum is 4. 1 <=
+            layerIdx <= project.GetSetting("nodeStackLayers").
+
         """
         ...
 
