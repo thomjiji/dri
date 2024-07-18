@@ -4524,6 +4524,19 @@ class Timeline:
     def GetNodeGraph(self) -> "Graph":
         """
         Returns the timeline's node graph object.
+
+        """
+        ...
+
+    def AnalyzeDolbyVision(
+        self, timeline_item: list["TimelineItem"] = [], analysis_type=None
+    ) -> bool:
+        """
+        Analyzes Dolby Vision on clips present on the timeline. Returns True if analysis
+        start is successful; False otherwise. if [timelineItems] is empty, analysis
+        performed on all items. Else, analysis performed on [timelineItems] only. set
+        analysisType to resolve.DLB_BLEND_SHOTS for blend setting.
+
         """
         ...
 
@@ -5704,6 +5717,14 @@ class TimelineItem:
         ...
         >>> for timeline_item in current_timeline.GetItemListInTrack("video", 1):
         ...     timeline_item.ExportLUT(resolve.EXPORT_LUT_33PTCUBE, '/Users/thom/Desktop/sample_lut.cube')
+
+        """
+        ...
+
+    def SetNodeEnabled(self, node_index: int, is_enabled: bool) -> bool:
+        """
+        Sets the node at the given nodeIndex (int) to isEnabled (bool). 1 <= nodeIndex
+        <= self.GetNumNodes().
 
         """
         ...
