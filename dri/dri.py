@@ -6116,13 +6116,10 @@ class Graph:
         >>> resolve = Resolve.resolve_init()
         >>> project_manager = resolve.GetProjectManager()
         >>> project = project_manager.GetCurrentProject()
-        >>> media_storage = resolve.GetMediaStorage()
-        >>> media_pool = project.GetMediaPool()
-        >>> root_folder = media_pool.GetRootFolder()
         >>> current_timeline = project.GetCurrentTimeline()
         ...
         >>> for i in current_timeline.GetItemListInTrack("video", 1):
-        ...     print(i.GetLUT())
+        ...     print(i.GetNodeGraph().GetLUT(1))
         Arri/ARRI_LogC4_v1_LUT_Package/LUTs/ARRI_LogC4-to-Gamma24_Rec709-D65_v1-65.cube
         Arri/ARRI_LogC4_v1_LUT_Package/LUTs/ARRI_LogC4-to-Gamma24_Rec709-D65_v1-65.cube
         """
