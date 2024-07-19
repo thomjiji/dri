@@ -5746,6 +5746,19 @@ class Gallery:
         str
             Album name.
 
+        Examples
+        --------
+        >>> from dri import GalleryStillAlbum, Resolve
+        ...
+        >>> resolve = Resolve.resolve_init()
+        >>> project_manager = resolve.GetProjectManager()
+        >>> project = project_manager.GetCurrentProject()
+        ...
+        >>> galley = project.GetGallery()
+        >>> current_gallery_still_ablum: GalleryStillAlbum = galley.GetCurrentStillAlbum()
+        >>> galley.GetAlbumName(current_gallery_still_ablum)
+        Stills 1
+
         """
         ...
 
@@ -5767,12 +5780,37 @@ class Gallery:
         bool
             True if successful, False otherwise.
 
+        Examples
+        --------
+        >>> from dri import GalleryStillAlbum, Resolve
+        ...
+        >>> resolve = Resolve.resolve_init()
+        >>> project_manager = resolve.GetProjectManager()
+        >>> project = project_manager.GetCurrentProject()
+        ...
+        >>> galley = project.GetGallery()
+        >>> current_gallery_still_ablum: GalleryStillAlbum = galley.GetCurrentStillAlbum()
+        >>> galley.SetAlbumName(current_gallery_still_ablum, "New Album Name")
+        True
+
         """
         ...
 
     def GetCurrentStillAlbum(self) -> "GalleryStillAlbum":
         """
         Returns current album as a GalleryStillAlbum object.
+
+        Examples
+        --------
+        >>> from dri import GalleryStillAlbum, Resolve
+        ...
+        >>> resolve = Resolve.resolve_init()
+        >>> project_manager = resolve.GetProjectManager()
+        >>> project = project_manager.GetCurrentProject()
+        ...
+        >>> galley = project.GetGallery()
+        >>> current_gallery_still_ablum: GalleryStillAlbum = galley.GetCurrentStillAlbum()
+
         """
         ...
 
@@ -5790,6 +5828,19 @@ class Gallery:
         bool
             True if successful, False otherwise.
 
+        Examples
+        --------
+        >>> from dri import GalleryStillAlbum, Resolve
+        ...
+        >>> resolve = Resolve.resolve_init()
+        >>> project_manager = resolve.GetProjectManager()
+        >>> project = project_manager.GetCurrentProject()
+        ...
+        >>> galley = project.GetGallery()
+        >>> gallery_still_ablums: list[GalleryStillAlbum] = galley.GetGalleryStillAlbums()
+        >>> galley.SetCurrentStillAlbum(gallery_still_ablums[0])
+        True
+
         """
         ...
 
@@ -5801,6 +5852,18 @@ class Gallery:
         -------
         list[GalleryStillAlbum]
             A list of :class:`dri.GalleryStillAlbum` object.
+
+        Examples
+        --------
+        >>> from dri import GalleryStillAlbum, Resolve
+        ...
+        >>> resolve = Resolve.resolve_init()
+        >>> project_manager = resolve.GetProjectManager()
+        >>> project = project_manager.GetCurrentProject()
+        ...
+        >>> galley = project.GetGallery()
+        >>> gallery_still_albums: list[GalleryStillAlbum] = galley.GetGalleryStillAlbums()
+
         """
         ...
 
@@ -5814,6 +5877,19 @@ class GalleryStillAlbum:
         -------
         list[GalleryStill]
             A list of GalleryStill objects in the album.
+
+        Examples
+        --------
+        >>> from dri import GalleryStillAlbum, Resolve
+        ...
+        >>> resolve = Resolve.resolve_init()
+        >>> project_manager = resolve.GetProjectManager()
+        >>> project = project_manager.GetCurrentProject()
+        ...
+        >>> galley = project.GetGallery()
+        >>> current_gallery_still_ablum: GalleryStillAlbum = galley.GetCurrentStillAlbum()
+        >>> current_gallery_still_ablum.GetStills()
+        [<BlackmagicFusion.PyRemoteObject object at 0x102f72070>, <BlackmagicFusion.PyRemoteObject object at 0x102f70ff0>]
 
         """
         ...
@@ -5831,6 +5907,19 @@ class GalleryStillAlbum:
         -------
         str
             The Label of this :class:`GalleryStill` object.
+
+        Examples
+        --------
+        >>> from dri import GalleryStillAlbum, Resolve
+        ...
+        >>> resolve = Resolve.resolve_init()
+        >>> project_manager = resolve.GetProjectManager()
+        >>> project = project_manager.GetCurrentProject()
+        ...
+        >>> galley = project.GetGallery()
+        >>> current_gallery_still_ablum: GalleryStillAlbum = galley.GetCurrentStillAlbum()
+        >>> for still in current_gallery_still_ablum.GetStills():
+        ...     current_gallery_still_ablum.GetLabel(still)
 
         """
         ...
@@ -5851,6 +5940,19 @@ class GalleryStillAlbum:
         bool
             True if successful, false otherwise.
 
+        Examples
+        --------
+        >>> from dri import GalleryStillAlbum, Resolve
+        ...
+        >>> resolve = Resolve.resolve_init()
+        >>> project_manager = resolve.GetProjectManager()
+        >>> project = project_manager.GetCurrentProject()
+        ...
+        >>> galley = project.GetGallery()
+        >>> current_gallery_still_ablum: GalleryStillAlbum = galley.GetCurrentStillAlbum()
+        >>> for still in current_gallery_still_ablum.GetStills():
+        ...     current_gallery_still_ablum.SetLabel(still, "Label Name")
+
         """
         ...
 
@@ -5868,6 +5970,23 @@ class GalleryStillAlbum:
         -------
         bool
             True if at least one still is imported successfully, false otherwise.
+
+        Notes
+        -----
+        It can also take a single file path, not limited to only accept a list of file
+        paths.
+
+        Examples
+        --------
+        >>> from dri import GalleryStillAlbum, Resolve
+        ...
+        >>> resolve = Resolve.resolve_init()
+        >>> project_manager = resolve.GetProjectManager()
+        >>> project = project_manager.GetCurrentProject()
+        ...
+        >>> galley = project.GetGallery()
+        >>> current_gallery_still_ablum: GalleryStillAlbum = galley.GetCurrentStillAlbum()
+        >>> current_gallery_still_ablum.ImportStills("~/Downloads/Still_1.1.1.drx")
 
         """
         ...
@@ -5902,6 +6021,26 @@ class GalleryStillAlbum:
             Return `True` if all the stills are successfully exported, `False`
             otherwise.
 
+        Notes
+        -----
+        folder_path must be absolute path, abbreviation like `~/Downloads/` will not
+        work.
+
+        Examples
+        --------
+        >>> from dri import GalleryStillAlbum, Resolve
+        ...
+        >>> resolve = Resolve.resolve_init()
+        >>> project_manager = resolve.GetProjectManager()
+        >>> project = project_manager.GetCurrentProject()
+        ...
+        >>> galley = project.GetGallery()
+        >>> current_gallery_still_ablum: GalleryStillAlbum = galley.GetCurrentStillAlbum()
+        >>> gallery_stills_to_export = current_gallery_still_ablum.GetStills()
+        >>> current_gallery_still_ablum.ExportStills(
+        ...     gallery_stills_to_export, "/Users/thom/Downloads/", "prefix", "png"
+        ... )
+
         """
         ...
 
@@ -5918,6 +6057,19 @@ class GalleryStillAlbum:
         -------
         bool
             Return `True` if all objects were successfully deleted, `False` otherwise.
+
+        Examples
+        --------
+        >>> from dri import GalleryStillAlbum, Resolve
+        ...
+        >>> resolve = Resolve.resolve_init()
+        >>> project_manager = resolve.GetProjectManager()
+        >>> project = project_manager.GetCurrentProject()
+        ...
+        >>> galley = project.GetGallery()
+        >>> current_gallery_still_ablum: GalleryStillAlbum = galley.GetCurrentStillAlbum()
+        >>> gallery_stills_to_export = current_gallery_still_ablum.GetStills()
+        >>> current_gallery_still_ablum.DeleteStills(gallery_stills_to_export)
 
         """
         ...
