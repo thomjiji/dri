@@ -5854,7 +5854,7 @@ class GalleryStillAlbum:
         """
         ...
 
-    def ImportStills(self, file_paths: list[str]) -> bool:
+    def ImportStills(self, file_paths: str | list[str]) -> bool:
         """
         Imports GalleryStill from each filePath in [filePaths] list. True if at least
         one still is imported successfully. False otherwise.
