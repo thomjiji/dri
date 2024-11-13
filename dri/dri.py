@@ -5721,14 +5721,6 @@ class TimelineItem:
         """
         ...
 
-    def SetNodeEnabled(self, node_index: int, is_enabled: bool) -> bool:
-        """
-        Sets the node at the given nodeIndex (int) to isEnabled (bool). 1 <= nodeIndex
-        <= self.GetNumNodes().
-
-        """
-        ...
-
 
 class Gallery:
     def GetAlbumName(self, gallery_still_album: "GalleryStillAlbum") -> str:
@@ -6135,6 +6127,14 @@ class Graph:
         """
         Returns toolsList (list of strings) of the tools used in the node indicated by
         given nodeIndex (int).
+        """
+        ...
+
+    def SetNodeEnabled(self, node_index: int, is_enabled: bool) -> bool:
+        """
+        Sets the node at the given nodeIndex (int) to isEnabled (bool). 1 <= nodeIndex
+        <= self.GetNumNodes().
+
         """
         ...
 
