@@ -5721,6 +5721,23 @@ class TimelineItem:
         """
         ...
 
+    def GetLinkedItems(self) -> list["TimelineItem"]:
+        """
+        Returns a list of linked timeline items.
+        """
+        ...
+
+    def GetTrackTypeAndIndex(self) -> list[tuple[str, int]]:
+        """
+        Returns a list of two values that correspond to the TimelineItem's trackType
+        (string) and trackIndex (int) respectively.
+
+        trackType is one of {"audio", "video", "subtitle"}.
+
+        trackIndex is in this range: 1 <= trackIndex <= GetTrackCount(trackType).
+        """
+        ...
+
 
 class Gallery:
     def GetAlbumName(self, gallery_still_album: "GalleryStillAlbum") -> str:
