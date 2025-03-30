@@ -129,8 +129,6 @@ class ExportType(Enum):
 
 
 class CloudSync(Enum):
-    """ """
-
     CLOUD_SYNC_DEFAULT = -1
     CLOUD_SYNC_DOWNLOAD_IN_QUEUE = 0
     CLOUD_SYNC_DOWNLOAD_IN_PROGRESS = 1
@@ -143,6 +141,7 @@ class CloudSync(Enum):
     CLOUD_SYNC_UPLOAD_SUCCESS = 7
     CLOUD_SYNC_UPLOAD_FAIL = 8
     CLOUD_SYNC_UPLOAD_NOT_FOUND = 9
+    CLOUD_SYNC_SUCCESS = 10
 
 
 class RenderSetting(TypedDict):
@@ -3623,6 +3622,16 @@ class Timeline:
         """
         ...
 
+    def GetTrackSubType(self, track_type: str, track_index: str) -> str:
+        """
+        Returns an audio track's format. The return value is one of {"mono", "stereo",
+        "5.1", "5.1film", "7.1", "7.1film", "adaptive1", ... , "adaptive24"} and matches
+        the parameters 'subTrackType' and 'audioType' in timeline.AddTrack.
+
+        Returns a blank string for non audio tracks.
+        """
+        ...
+
     def SetTrackEnable(self, track_type: str, track_index: int, enabled: bool) -> bool:
         """
         Enables/Disables track with given trackType and trackIndex.
@@ -5735,6 +5744,13 @@ class TimelineItem:
         trackType is one of {"audio", "video", "subtitle"}.
 
         trackIndex is in this range: 1 <= trackIndex <= GetTrackCount(trackType).
+        """
+        ...
+
+    def GetSourceAudioChannelMapping(self) -> str:
+        """
+        Returns a string with TimelineItem's audio mapping information. Check 'Audio
+        Mapping' section below for more information.
         """
         ...
 
