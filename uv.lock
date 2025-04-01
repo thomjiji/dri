@@ -5,7 +5,7 @@ requires-python = ">=3.12"
 [[package]]
 name = "dri"
 version = "0.0.2"
-source = { virtual = "." }
+source = { editable = "." }
 
 [package.dev-dependencies]
 dev = [
