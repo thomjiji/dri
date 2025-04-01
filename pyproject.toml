@@ -1,20 +1,12 @@
-[tool.poetry]
+[project]
 name = "dri"
 version = "0.0.2"
 description = "DaVinci Resolve API type system for script development"
-authors = ["thomjiji <hxy449999@gmail.com>"]
-license = "MIT"
 readme = "README.md"
+requires-python = ">=3.12"
+dependencies = []
 
-[tool.poetry.dependencies]
-python = "^3.11"
-
-[tool.poetry.group.dev.dependencies]
-jupyter = "^1.0.0"
-notebook = "^6.5.4"
-pyyaml = { version = "!=6.0.0,!=5.4.0,!=5.4.1" }
-ruff = "^0.4.8"
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+[dependency-groups]
+dev = [
+    "ruff>=0.11.2",
+]
