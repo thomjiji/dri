@@ -2754,6 +2754,17 @@ class MediaPool:
         """
         ...
 
+    def CreateStereoClip(
+        self,
+        left_media_pool_item: "MediaPoolItem",
+        right_media_pool_item: "MediaPoolItem",
+    ) -> "MediaPoolItem":
+        """
+        Takes in two existing media pool items and creates a new 3D stereoscopic media
+        pool entry replacing the input media in the media pool.
+        """
+        ...
+
 
 class Folder:
     def GetClipList(self) -> list["MediaPoolItem"]:

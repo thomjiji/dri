@@ -242,7 +242,7 @@ MediaPool
   CreateStereoClip(LeftMediaPoolItem,
                    RightMediaPoolItem)            --> MediaPoolItem      # Takes in two existing media pool items and creates a new 3D stereoscopic media pool entry replacing the input media in the media pool.
   GetSelectedClips()                              --> [MediaPoolItems]   # Returns the current selected MediaPoolItems
-  SetSelectedClip(Med19.0.1_README.txtiaPoolItem)                  --> Bool               # Sets the selected MediaPoolItem to the given MediaPoolItem
+  SetSelectedClip(MediaPoolItem)                  --> Bool               # Sets the selected MediaPoolItem to the given MediaPoolItem
 
 Folder
   GetClipList()                                   --> [clips...]         # Returns a list of clips (items) within the folder.
