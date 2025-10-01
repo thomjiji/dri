@@ -2765,6 +2765,18 @@ class MediaPool:
         """
         ...
 
+    def GetSelectedClips(self) -> list["MediaPoolItem"]:
+        """
+        Returns the current selected MediaPoolItems.
+        """
+        ...
+
+    def SetSelectedClip(self, media_pool_item: "MediaPoolItem") -> bool:
+        """
+        Sets the selected MediaPoolItem to the given MediaPoolItem.
+        """
+        ...
+
 
 class Folder:
     def GetClipList(self) -> list["MediaPoolItem"]:
@@ -2930,6 +2942,29 @@ class MediaPoolItem:
             "Flags" (see :func:`dri.media_pool_item.AddFlag`) and items that cannot be
             modified in the UI.
 
+        """
+        ...
+
+    def GetThirdPartyMetadata(self, metadata_type: str = "") -> str | dict:
+        """
+        Returns the third party metadata value for the key 'metadataType'.
+
+        If no argument is specified, a dict of all set third party metadata properties
+        is returned.
+        """
+        ...
+
+    def SetThirdPartyMetadata(self, metadata_type: str, metadata_value: str) -> bool:
+        """
+        Sets/Add the given third party metadata to metadataValue (string). Returns True
+        if successful.
+        """
+        ...
+
+    def SetThirdPartyMetadata(self, metadata: dict) -> bool:
+        """
+        Sets/Add the item third party metadata with specified 'metadata' dict. Returns
+        True if successful.
         """
         ...
 
@@ -4619,26 +4654,31 @@ class TimelineItem:
         """
         ...
 
-    def GetDuration(self) -> int:
+    def GetDuration(self, subframe_precision: bool) -> int | float:
         """
-        Returns the item duration.
-
-        Returns
-        -------
-        int
-            The timeline item duration.
+        Returns the item duration. Returns fractional frames if subframe_precision is
+        True.
 
         """
         ...
 
-    def GetEnd(self) -> int:
+    def GetEnd(self, subframe_precision: bool) -> int | float:
         """
-        Returns the end frame position on the timeline.
+        Returns the end frame position on the timeline. Returns fractional frames if
+        subframe_precision is True.
 
-        Returns
-        -------
-        int
-            The end frame position of that timeline item on the timeline.
+        """
+        ...
+
+    def GetSourceEndFrame(self) -> int:
+        """
+        Returns the end frame position of the media pool clip in the timeline clip.
+        """
+        ...
+
+    def GetSourceEndTime(self) -> float:
+        """
+        Returns the end time position of the media pool clip in the timeline clip.
         """
         ...
 
@@ -4701,7 +4741,7 @@ class TimelineItem:
         """
         ...
 
-    def GetLeftOffset(self) -> int:
+    def GetLeftOffset(self, subframe_precision: bool) -> int | float:
         """
         Returns the maximum extension by frame for clip from left side.
 
@@ -4713,7 +4753,7 @@ class TimelineItem:
         """
         ...
 
-    def GetRightOffset(self) -> int:
+    def GetRightOffset(self, subframe_precision: bool) -> int | float:
         """
         Returns the maximum extension by frame for clip from right side.
 
@@ -4725,7 +4765,7 @@ class TimelineItem:
         """
         ...
 
-    def GetStart(self) -> int:
+    def GetStart(self, subframe_precision: bool) -> int | float:
         """
         Returns the start frame position on the timeline.
 
@@ -4734,6 +4774,18 @@ class TimelineItem:
         int
             The start frame position of that timeline item on the timeline.
 
+        """
+        ...
+
+    def GetSourceStartFrame(self) -> int:
+        """
+        Returns the start frame position of the media pool clip in the timeline clip.
+        """
+        ...
+
+    def GetSourceStartTime(self) -> float:
+        """
+        Returns the start time position of the media pool clip in the timeline clip.
         """
         ...
 
