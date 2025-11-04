@@ -157,17 +157,13 @@ class RenderSetting(TypedDict):
     FormatWidth: int
     FormatHeight: int
     FrameRate: float  # Example: 23.976, 24
-
     # For SD resolution: "16_9" or "4_3", other resolution: "square" or "cinemascope"
     PixelAspectRatio: str
-
     # "VideoQuality" possible values for current codec (if applicable):
-    #  -    0 (int) - will set quality to automatic
-    #  -    [1 -> MAX] (int) - will set input bit rate
-    #  -    ["Least", "Low", "Medium", "High", "Best"] (string) - will set input
-    #       quality level
+    #  - 0 (int) - will set quality to automatic
+    #  - [1 -> MAX] (int) - will set input bit rate
+    #  - ["Least", "Low", "Medium", "High", "Best"] (string) - will set input quality level
     VideoQuality: int | str
-
     AudioCodec: str  # Example: "aac"
     AudioBitDepth: int
     AudioSampleRate: int
@@ -176,11 +172,14 @@ class RenderSetting(TypedDict):
     ExportAlpha: bool
     EncodingProfile: str  # Example: "Main10". Can only be set for H.264 and H.265.
     MultiPassEncode: bool  # Can only be set for H.264.
-
     # 0 - Premultiplied, 1 - Straight. Can only be set for H.264 and H.265.
     AlphaMode: Literal[0, 1]
-
     NetworkOptimization: bool
+    ClipStartFrame: int
+    TimelineStartTimecode: str
+    ReplaceExistingFilesInPlace: bool
+    ExportSubtitle: bool
+    SubtitleFormat: str
 
 
 @dataclass
