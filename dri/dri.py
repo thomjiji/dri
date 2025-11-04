@@ -344,10 +344,8 @@ class ImportOption:
     sourceClipsFolder: str
 
 
-@dataclass
 class Resolve:
     # fmt: off
-    # For timeline.Export().
     EXPORT_AAF: str                  = "AAF"
     EXPORT_DRT: str                  = "DRT"
     EXPORT_EDL: str                  = "EDL"
@@ -2590,6 +2588,15 @@ class MediaPool:
         """
         ...
 
+    def CreateStereoClip(
+        self, left_media_pool_item: MediaPoolItem, right_media_pool_item: MediaPoolItem
+    ) -> "MediaPoolItem":
+        """
+        Takes in two existing media pool items and creates a new 3D stereoscopic media
+        pool entry replacing the input media in the media pool.
+        """
+        ...
+
 
 class Folder:
     def GetClipList(self) -> list["MediaPoolItem"]:
@@ -4385,10 +4392,11 @@ class Timeline:
         """
         ...
 
-    def CreateSubtitlesFromAudio(self) -> bool:
+    def CreateSubtitlesFromAudio(self, auto_caption_settings: Optional[dict]) -> bool:
         """
-        Creates subtitles from audio for the timeline. Returns True on success,
-        False otherwise.
+        Creates subtitles from audio for the timeline. Takes in optional dictionary
+        {autoCaptionSettings}. Check 'Auto Caption Settings' subsection below for more
+        information.
 
         Returns
         -------
@@ -4408,6 +4416,12 @@ class Timeline:
         bool
             True if scene cuts were detected successfully.
 
+        """
+        ...
+
+    def ConvertTimelineToStereo() -> bool:
+        """
+        Converts timeline to stereo. Returns True if successful; False otherwise.
         """
         ...
 
