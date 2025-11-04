@@ -117,11 +117,6 @@ class KeyframeMode(IntEnum):
 
 
 class ExportType(Enum):
-    """
-    ExportLUT notes
-    ---------------
-    """
-
     EXPORT_LUT_17PTCUBE = "EXPORT_LUT_17PTCUBE"
     EXPORT_LUT_33PTCUBE = "EXPORT_LUT_33PTCUBE"
     EXPORT_LUT_65PTCUBE = "EXPORT_LUT_65PTCUBE"
@@ -142,6 +137,12 @@ class CloudSync(Enum):
     CLOUD_SYNC_UPLOAD_FAIL = 8
     CLOUD_SYNC_UPLOAD_NOT_FOUND = 9
     CLOUD_SYNC_SUCCESS = 10
+
+
+class SyncMode(Enum):
+    CLOUD_SYNC_NONE = "CLOUD_SYNC_NONE"
+    CLOUD_SYNC_PROXY_ONLY = "CLOUD_SYNC_PROXY_ONLY"
+    CLOUD_SYNC_PROXY_AND_ORIG = "CLOUD_SYNC_PROXY_AND_ORIG"
 
 
 class RenderSetting(TypedDict):
@@ -345,54 +346,65 @@ class ImportOption:
 
 @dataclass
 class Resolve:
+    # fmt: off
     # For timeline.Export().
-    EXPORT_AAF: str = "AAF"
-    EXPORT_DRT: str = "DRT"
-    EXPORT_EDL: str = "EDL"
-    EXPORT_FCP_7_XML: str = "FCP_7_XML"
-    EXPORT_FCPXML_1_8: str = "FCPXML_1_8"
-    EXPORT_FCPXML_1_9: str = "FCPXML_1_9"
-    EXPORT_FCPXML_1_10: str = "FCPXML_1_10"
-    EXPORT_HDR_10_PROFILE_A: str = "HDR_10_PROFILE_A"
-    EXPORT_HDR_10_PROFILE_B: str = "HDR_10_PROFILE_B"
-    EXPORT_TEXT_CSV: str = "TEXT_CSV"
-    EXPORT_TEXT_TAB: str = "TEXT_TAB"
+    EXPORT_AAF: str                  = "AAF"
+    EXPORT_DRT: str                  = "DRT"
+    EXPORT_EDL: str                  = "EDL"
+    EXPORT_FCP_7_XML: str            = "FCP_7_XML"
+    EXPORT_FCPXML_1_8: str           = "FCPXML_1_8"
+    EXPORT_FCPXML_1_9: str           = "FCPXML_1_9"
+    EXPORT_FCPXML_1_10: str          = "FCPXML_1_10"
+    EXPORT_HDR_10_PROFILE_A: str     = "HDR_10_PROFILE_A"
+    EXPORT_HDR_10_PROFILE_B: str     = "HDR_10_PROFILE_B"
+    EXPORT_TEXT_CSV: str             = "TEXT_CSV"
+    EXPORT_TEXT_TAB: str             = "TEXT_TAB"
     EXPORT_DOLBY_VISION_VER_2_9: str = "DOLBY_VISION_VER_2_9"
     EXPORT_DOLBY_VISION_VER_4_0: str = "DOLBY_VISION_VER_4_0"
     EXPORT_DOLBY_VISION_VER_5_1: str = "DOLBY_VISION_VER_5_1"
-    EXPORT_OTIO: str = "OTIO"
-    EXPORT_ALE: str = "ALE"
-    EXPORT_CDL: str = "CDL"
+    EXPORT_OTIO: str                 = "OTIO"
+    EXPORT_ALE: str                  = "ALE"
+    EXPORT_CDL: str                  = "CDL"
 
-    EXPORT_NONE: str = "NONE"
-    EXPORT_AAF_NEW: str = "AAF_NEW"
-    EXPORT_AAF_EXISTING: str = "AAF_EXISTING"
-    EXPORT_CDL: str = "CDL"
-    EXPORT_SDL: str = "SDL"
-    EXPORT_MISSING_CLIPS: str = "MISSING_CLIPS"
+    EXPORT_NONE: str                 = "NONE"
+    EXPORT_AAF_NEW: str              = "AAF_NEW"
+    EXPORT_AAF_EXISTING: str         = "AAF_EXISTING"
+    EXPORT_CDL: str                  = "CDL"
+    EXPORT_SDL: str                  = "SDL"
+    EXPORT_MISSING_CLIPS: str        = "MISSING_CLIPS"
 
-    KEYFRAME_MODE_ALL: KeyframeMode = KeyframeMode.ALL
-    KEYFRAME_MODE_COLOR: KeyframeMode = KeyframeMode.COLOR
-    KEYFRAME_MODE_SIZING: KeyframeMode = KeyframeMode.SIZING
+    KEYFRAME_MODE_ALL: int           = 1
+    KEYFRAME_MODE_COLOR: int         = 2
+    KEYFRAME_MODE_SIZING: int        = 3
 
-    EXPORT_LUT_17PTCUBE: ExportType = ExportType.EXPORT_LUT_17PTCUBE
-    EXPORT_LUT_33PTCUBE: ExportType = ExportType.EXPORT_LUT_33PTCUBE
-    EXPORT_LUT_65PTCUBE: ExportType = ExportType.EXPORT_LUT_65PTCUBE
-    EXPORT_LUT_PANASONICVLUT: ExportType = ExportType.EXPORT_LUT_PANASONICVLUT
+    EXPORT_LUT_17PTCUBE: str         = "EXPORT_LUT_17PTCUBE"
+    EXPORT_LUT_33PTCUBE: str         = "EXPORT_LUT_33PTCUBE"
+    EXPORT_LUT_65PTCUBE: str         = "EXPORT_LUT_65PTCUBE"
+    EXPORT_LUT_PANASONICVLUT: str    = "EXPORT_LUT_PANASONICVLUT"
 
-    CLOUD_SYNC_DEFAULT: CloudSync = CloudSync.CLOUD_SYNC_DEFAULT
-    CLOUD_SYNC_DOWNLOAD_IN_QUEUE: CloudSync = CloudSync.CLOUD_SYNC_DOWNLOAD_IN_QUEUE
-    CLOUD_SYNC_DOWNLOAD_IN_PROGRESS: CloudSync = (
-        CloudSync.CLOUD_SYNC_DOWNLOAD_IN_PROGRESS
-    )
-    CLOUD_SYNC_DOWNLOAD_SUCCESS: CloudSync = CloudSync.CLOUD_SYNC_DOWNLOAD_SUCCESS
-    CLOUD_SYNC_DOWNLOAD_FAIL: CloudSync = CloudSync.CLOUD_SYNC_DOWNLOAD_FAIL
-    CLOUD_SYNC_DOWNLOAD_NOT_FOUND: CloudSync = CloudSync.CLOUD_SYNC_DOWNLOAD_NOT_FOUND
-    CLOUD_SYNC_DOWNLOAD_IN_QUEUE: CloudSync = CloudSync.CLOUD_SYNC_DOWNLOAD_IN_QUEUE
-    CLOUD_SYNC_UPLOAD_IN_PROGRESS: CloudSync = CloudSync.CLOUD_SYNC_UPLOAD_IN_PROGRESS
-    CLOUD_SYNC_UPLOAD_SUCCESS: CloudSync = CloudSync.CLOUD_SYNC_UPLOAD_SUCCESS
-    CLOUD_SYNC_UPLOAD_FAIL: CloudSync = CloudSync.CLOUD_SYNC_UPLOAD_FAIL
-    CLOUD_SYNC_UPLOAD_NOT_FOUND: CloudSync = CloudSync.CLOUD_SYNC_UPLOAD_NOT_FOUND
+    CLOUD_SYNC_DEFAULT: int               = -1
+    CLOUD_SYNC_DOWNLOAD_IN_QUEUE: int     = 0
+    CLOUD_SYNC_DOWNLOAD_IN_PROGRESS: int  = 1
+    CLOUD_SYNC_DOWNLOAD_SUCCESS: int      = 2
+    CLOUD_SYNC_DOWNLOAD_FAIL: int         = 3
+    CLOUD_SYNC_DOWNLOAD_NOT_FOUND: int    = 4
+    CLOUD_SYNC_UPLOAD_IN_QUEUE: int       = 5
+    CLOUD_SYNC_UPLOAD_IN_PROGRESS: int    = 6
+    CLOUD_SYNC_UPLOAD_SUCCESS: int        = 7
+    CLOUD_SYNC_UPLOAD_FAIL: int           = 8
+    CLOUD_SYNC_UPLOAD_NOT_FOUND: int      = 9
+    CLOUD_SYNC_SUCCESS: int               = 10
+
+    CLOUD_SYNC_NONE: str                  = "CLOUD_SYNC_NONE"
+    CLOUD_SYNC_PROXY_ONLY: str            = "CLOUD_SYNC_PROXY_ONLY"
+    CLOUD_SYNC_PROXY_AND_ORIG: str        = "CLOUD_SYNC_PROXY_AND_ORIG"
+
+    CLOUD_SETTING_PROJECT_NAME: str       = ""
+    CLOUD_SETTING_PROJECT_MEDIA_PATH: str = ""
+    CLOUD_SETTING_IS_COLLAB: bool         = False
+    CLOUD_SETTING_SYNC_MODE: SyncMode     = SyncMode.CLOUD_SYNC_PROXY_ONLY
+    CLOUD_SETTING_IS_CAMERA_ACCESS: bool  = False
+    # fmt: on
 
     @staticmethod
     def resolve_init() -> "Resolve":
@@ -1112,8 +1124,42 @@ class ProjectManager:
         """
         ...
 
+    def CreateCloudProject(self) -> "Project":
+        """
+        Creates and returns a cloud project.
 
-# Only supported by QuickTime and MP4 formats.
+        '{cloudSettings}': Check 'Cloud Projects Settings' subsection below for more
+        information.
+        """
+        ...
+
+    def ImportCloudProject(self, file_path: str, dict) -> bool:
+        """
+        Returns True if import cloud project is successful; False otherwise
+
+        Parameters
+        ----------
+        file_path
+            filePath of file to import.
+        {cloudSettings}
+            Check 'Cloud Projects Settings' subsection below for more information.
+
+        """
+        ...
+
+    def restoreCloudProject(self, folder_path: str, dict) -> bool:
+        """
+        Returns True if restore cloud project is successful; False otherwise.
+
+        Parameters
+        ----------
+        file_path
+            filePath of file to restore.
+        {cloudSettings}
+            Check 'Cloud Projects Settings' subsection below for more information.
+
+        """
+        ...
 
 
 class Project:
