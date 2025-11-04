@@ -10,15 +10,9 @@ from typing import Literal, Optional, TypedDict, Union
 def load_dynamic_lib() -> Optional[ModuleType]:
     try:
         if platform.system() == "Windows":
-            path = (
-                "C:\\Program Files\\Blackmagic Design\\DaVinci "
-                "Resolve\\fusionscript.dll"
-            )
+            path = "C:\\Program Files\\Blackmagic Design\\DaVinci Resolve\\fusionscript.dll"
         elif platform.system() == "Darwin":
-            path = (
-                "/Applications/DaVinci Resolve/DaVinci "
-                "Resolve.app/Contents/Libraries/Fusion/fusionscript.so"
-            )
+            path = "/Applications/DaVinci Resolve/DaVinci Resolve.app/Contents/Libraries/Fusion/fusionscript.so"
         elif platform.system() == "Linux":
             path = "/opt/resolve/libs/Fusion/fusionscript.so"
         else:
